@@ -7,7 +7,9 @@ aspects of the website
 
 /*Developer Cards*/
 .dev{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 210px);
+    grid-row-gap: 10px;
     justify-content: space-between;
 }
 
