@@ -7,12 +7,13 @@
 
 # Blow is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP
-2. SSH username
-3. SSH password or key.
-    <br> If a ssh key is used please upload the key to the credentials folder.
-4. Database URL or IP and port used.
-    <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
+1. http://ec2-52-14-195-91.us-east-2.compute.amazonaws.com:3000/FrontPage.html
+2. ubuntu@ec2-52-14-195-91.us-east-2.compute.amazonaws.com
+3. SSH .pem file required to access is uploaded onto branch.
+
+4a. IP Port: 3000
+4b. Database URL - need to be configured.
+
 5. Database username
 6. Database password
 7. Database name (basically the name that contains all your tables)
