@@ -31,8 +31,12 @@ http.createServer(function (req, res) {
 }).listen(3000);
 
 
+// prints log for current port
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+})
 
-console.log("Listening to port " + port + ".");
+
 
 
 //all logic here applies to all endpoints
@@ -41,12 +45,12 @@ app.use((req, res, next) =>{
   next();
 });
 
+//http://localhost:3000/FrontPage.html
+//Currently testing
+//app.get('/FrontPage.html', (req, res) => {
+//  res.send(FrontPage.html);
+//});
 
-//http://localhost:2001/kevin?hello=Kevin
-app.get('/kevin', (req, res) => {
-  res.send(`Hello , ${req.query.hello}`);
-});
-
-app.get('/about.html', function(req, res){
-  res.sendFile('about.html');
-});
+//app.get('/about.html', function(req, res){
+//  res.sendFile('about.html');
+//});
