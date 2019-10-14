@@ -12,11 +12,11 @@
 3. SSH .pem file required to access is uploaded onto branch.
 
 4a. IP Port: 3000
-4b. Database URL - need to be configured.
+4b. Database URL - 127.0.0.1
 
-5. Database username
-6. Database password
-7. Database name (basically the name that contains all your tables)
+5. Database username: ubuntu
+6. Database password: csc648.07!
+7. Database name: sfsu_posts
 8. Instruction. On your ssh please login into the Ubuntu hostname for our AWS server. Please select our provided .pem file or .ppk (for Putty users) for authentication. Thank you.
 
 # Most important things to Remember
