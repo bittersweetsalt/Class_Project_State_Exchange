@@ -26,8 +26,25 @@ let dataPull = {};
 dataPull.all = () => {
 
     return new Promise((resolve, reject) => {
-
+        
+        // returning the entire database 
         pool.query('SELECT * FROM postDatabase', (err, results) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(results);
+        });
+
+    });
+};
+
+let dataPull2 = {};
+
+dataPull2.all2 = () => {
+    return new Promise((resolve, reject) => {
+        //returning the database organized by category
+        pool.query('SELECT * FROM postDatabase ORDER by Price', (err, results) => {
+            
             if(err){
                 return reject(err);
             }
@@ -36,4 +53,9 @@ dataPull.all = () => {
     });
 };
 
+// search by category 
+
+module.exports = dataPull2;
+
 module.exports = dataPull;
+ 

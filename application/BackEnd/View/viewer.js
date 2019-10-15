@@ -23,37 +23,11 @@ router.get('/testmysql', async function(req, res){
 });
 
 
-/* Will probably reuse or Template on how to get request and resend html file
-router.get('/ChrisInfo',function(req,res){
-  res.sendFile(path.join(__dirname, '/ChrisInfo.html'));
-});
-
-router.get('/DeepInfo',function(req,res){
-  res.sendFile(path.join(__dirname, '/DeepInfo.html'));
-});
-
-
-router.get('/RodericInfo',function(req,res){
-  res.sendFile(path.join(__dirname, '/RodericInfo.html'));
-});
-*/
-
-router.get('/', async (req, res, next) => {
-
-    try{
-        let results = await db.all();
-        res.json(results);
-    } catch(e){
-        console.log(e);
-        res.sendStatus(500);
-    }
-
-});
 
 
 //add the router
 app.use('/', router, express.static(path.join(__dirname, '../public')));
-app.listen(process.env.port || 3000);
+app.listen(process.env.port || 3001);
 
 console.log('Running at Port 3000');
 
