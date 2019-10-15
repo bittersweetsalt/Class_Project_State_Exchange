@@ -4,9 +4,9 @@ const List = (props) => {
 
     const listItems = props.data.map( data => {
         return (
-            <div>
-                <h2>{data.name}</h2>
-                <p>{data.category}</p>
+            <div className="listItem">
+                <h3>Title: {data.name}</h3>
+                <p>Category: {data.category}</p>
             </div>
         );
     });

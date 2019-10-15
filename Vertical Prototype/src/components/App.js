@@ -19,15 +19,15 @@ class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <div className="banner"></div>
-                <h1>State Exchange</h1>
+                <div className="banner">
+                    <h1>CSC 648 Fall 2019 | Global Team #07</h1>
+                </div>
+                <h2>State Exchange</h2>
                 <form>
                     <input type="text" placeholder="X-box, Macbook"></input>
                     <button>Search</button>
                 </form>
-                <div className="list">
-                    <List data = {this.state.queryData}/>
-                </div>
+                <List data = {this.state.queryData}/>
             </div>
         );
     }   
