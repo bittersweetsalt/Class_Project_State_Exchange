@@ -42,6 +42,7 @@ h2{
 
 h3 {
     font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    color: rgba(247,212,18,1);
     padding: 0;
     margin: 0;
 }
@@ -49,6 +50,7 @@ h3 {
 p {
     padding: 0;
     margin: 0;
+    color: white;
 }
 
 input{
@@ -78,15 +80,13 @@ button{
 }
 
 .list{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 50px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid rgba(64,7,77,1);
 }
 
 .listItem{
-    background-color: rgb(238, 238, 238);
+    background-color: rgba(64,7,77,1);
     margin: 5px;
     padding: 5px;
     width: 350px;
