@@ -1,0 +1,94 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.app{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+}
+
+
+.banner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 200px;
+    background: rgb(254,203,69);
+    background: linear-gradient(326deg, rgba(254,203,69,1) 32%, rgba(50,2,50,1) 78%);
+}
+
+h1{
+    font-size: 60px;
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    color: white;
+}
+
+h2{
+    font-size: 50px;
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    color: rgba(247,212,18,1);
+
+    margin: 0;
+    padding: 5px;
+    margin-top: 100px;
+}
+
+h3 {
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    color: rgba(247,212,18,1);
+    padding: 0;
+    margin: 0;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+input{
+    width: 300px;
+    height: 20px;
+    margin: 10px;
+    padding: 10px;
+
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(238, 238, 238);
+}
+input:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+button{
+    height: 40px;
+    padding: 10px;
+
+    border: none;
+    background-color: rgba(64,7,77,1);
+    border-radius: 5px;
+
+    color: white;
+}
+
+.list{
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid rgba(64,7,77,1);
+}
+
+.listItem{
+    background-color: rgba(64,7,77,1);
+    margin: 5px;
+    padding: 5px;
+    width: 350px;
+    border-radius: 5px;
+}
