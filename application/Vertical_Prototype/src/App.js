@@ -18,15 +18,15 @@ class App extends React.Component {
         ]
     }
 
-    onQuerySubmit = async event => {
-        event.preventDefault();
+    //onQuerySubmit = async event => {
+        //event.preventDefault();
         
-        const response = await axios.get('http://ec2-52-14-195-91.us-east-2.compute.amazonaws.com:3000/',{
-            query: this.state.query
-        });
+        //const response = await axios.get('http://ec2-52-14-195-91.us-east-2.compute.amazonaws.com:3000/',{
+         //   query: this.state.query
+        //});
 
-        this.setState({ queryData: response});
-    }
+       // this.setState({ queryData: response});
+    //}
 
     render() {
         return (

@@ -12,13 +12,12 @@ const pool = mysql.createConnection({
 });
 
 pool.connect(function(err) {
-if (!err) {
-console.log('Connected to the MySQL server.');
-}
-else if (err)
-{
-return console.error('Timeout: ' + err.message);
-}
+    if (!err) {
+        console.log('Connected to the MySQL server.');
+    }
+    else if (err){
+        return console.error('Timeout: ' + err.message);
+    }
 });
 
 let dataPull = {};
@@ -38,24 +37,6 @@ dataPull.all = () => {
     });
 };
 
-let dataPull2 = {};
-
-dataPull2.all2 = () => {
-    return new Promise((resolve, reject) => {
-        //returning the database organized by category
-        pool.query('SELECT * FROM postDatabase ORDER by Price', (err, results) => {
-            
-            if(err){
-                return reject(err);
-            }
-            return resolve(results);
-        });
-    });
-};
-
-// search by category 
-
-module.exports = dataPull2;
 
 module.exports = dataPull;
  
