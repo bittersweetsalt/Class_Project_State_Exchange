@@ -2,25 +2,30 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import List from "./List";
+import { stringify } from 'querystring';
 
 class App extends React.Component {
     state = {
-        query: "",
+        query: false,
         queryData: []
     }
     componentDidMount(){
         this.getQuery();
     }
 
-    getQuery  = _=> {
+    getQuery  = _ => {
         
         fetch('http://ec2-52-14-195-91.us-east-2.compute.amazonaws.com:3001/testmysql', {mode: 'no-cors'})
         .then(response => {
             //this.setState({queryData: response})
-            console.log("this.state.queryData");
+            this.setState({
+                queryData:response,
+                query: true
+            })
+            console.log(response);
         }
         )
-         .then(({response}) => this.setState({query: "response.query"}))
+         //.then(({response}) => this.setState({query: "test"}))
         .catch(error => console.log(error));
     }
 
