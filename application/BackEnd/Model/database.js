@@ -37,6 +37,5 @@ dataPull.all = () => {
     });
 };
 
-
 module.exports = dataPull;
  

@@ -28,7 +28,7 @@ router.get('/testmysql', async function(req, res){
 
 //add the router
 app.use('/', router, express.static(path.join(__dirname, '../public')));
-app.listen(process.env.port || 3000);
+app.listen(process.env.port || 3003);
 
 console.log('Running at Port 3000');
 
