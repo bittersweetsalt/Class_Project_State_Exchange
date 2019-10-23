@@ -2,32 +2,69 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import List from "./List";
-import { stringify } from 'querystring';
 
 class App extends React.Component {
     state = {
         query: false,
         queryData: []
     }
-    componentDidMount(){
-        this.getQuery();
-    }
 
-    getQuery  = _ => {
-        
-        fetch('http://ec2-52-14-195-91.us-east-2.compute.amazonaws.com:3001/testmysql', {mode: 'no-cors'})
-        .then(response => {
-            //this.setState({queryData: response})
-            this.setState({
-                queryData:response,
-                query: true
+    // mounting data for the render function    
+    componentDidMount(){
+
+        //async function from fetch to fulfill promise that is being requested
+        async function catchFetch(){
+            
+            const response = await fetch('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql',{
+                // the request mode being used 
+                mode: 'no-cors',
+                method: 'GET',
             })
-            console.log(response);
+            
+            if(fetch){
+                 console.log("The data was grabbed");
+            }
+           
+;           const json = await response.json();
+            console.log(response.text());
+            return json;
+            
         }
-        )
-         //.then(({response}) => this.setState({query: "test"}))
-        .catch(error => console.log(error));
+        
+        catchFetch()
+        
+        // attempting to input data into state here
+        .then(json => {
+             console.log(json);
+        })
+        .then(res => res.json())
+        .then(response => response.json())
+         
+        .then((data) => {
+             this.setState({queryData: data, query: true});
+             console.log(this.state.queryData);
+         })
+
+         .catch(console.log);
     }
+    
+
+    // getQuery  = _ => {
+        
+    //     fetch('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {mode: 'no-cors'})
+    //     // .then(response => {
+    //     //     //this.setState({queryData: response})
+    //     //     this.setState({
+    //     //         queryData:response,
+    //     //         query: this.state.query,
+    //     //     })
+    //     //     console.log(response);
+    //     // }
+    //     .then(res)
+    //     )
+    //      //.then(({response}) => this.setState({query: "test"}))
+    //     .catch(error => console.log(error));
+    // }
 
     showQuery = query => <div key = {query.DTitle}>{query.DCategory}</div>;
 
