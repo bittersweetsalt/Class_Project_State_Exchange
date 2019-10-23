@@ -7,8 +7,8 @@
 
 # Blow is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. http://ec2-52-14-195-91.us-east-2.compute.amazonaws.com:3000/FrontPage.html
-2. ubuntu@ec2-52-14-195-91.us-east-2.compute.amazonaws.com
+1. http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3000/
+2. ubuntu@ec2-18-224-39-11.us-east-2.compute.amazonaws.com
 3. SSH .pem file required to access is uploaded onto branch.
 
 4a. IP Port: 3000
