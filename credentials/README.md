@@ -12,7 +12,7 @@
 3. SSH .pem file required to access is uploaded onto branch.
 
 4a. IP Port: 3000
-4b. Database URL - 127.0.0.1
+4b. Database URL - http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql
 
 5. Database username: ubuntu
 6. Database password: csc648.07!
