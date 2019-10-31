@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .app
+        .banner
+            h1 CSC 648 Fall 2019 | Global Team #07
+        h2 State Exchange
+        form(action="http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql" method="get")
+            input(type='text', placeholder="X-box, Macbook")
+            button(type="submit") Search
+        .list
+            each res in result
+                .list-item
+                    img(src=res.PhotoID)
+                    .list-item-data-container
+                        .list-item-header
+                            h3= res.Name
+                            p= res.Price
+                        .list-item-body
+                            p= res.Comment
+                            p= res.Category
