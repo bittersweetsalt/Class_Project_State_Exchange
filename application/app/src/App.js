@@ -4,11 +4,14 @@ import './App.css';
 import ListItem from './ListItem';
 
 class App extends React.Component {
+
+    // state for our json
     state = {
         query: "",
         queryData: []
     }
 
+    // funtion for retrieving data from our route created for our sql
     onQuerySubmit = async (event) => {
         event.preventDefault();
 
@@ -17,15 +20,19 @@ class App extends React.Component {
            query: this.state.query
         }).catch( e => console.log(e));
 
+        // setting the state for our data
         this.setState({ queryData: response.data});
-    }
+    }   
 
+
+    // render query data from our state to map
     renderQueryList = () => {
         return this.state.queryData.map( data => {
             return <ListItem data={data} key={data.ID} />
         })
     }
 
+    // create website 
     render() {
         return (
             <div className="app">
