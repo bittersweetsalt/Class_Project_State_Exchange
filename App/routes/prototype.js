@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+// const path = require('path');
 var db = require("../db/index");
 
 /* GET vertical prototype */
@@ -9,7 +10,7 @@ router.get('/testmysql', (req, res, next) => {
             if(error){
                 console.log(error);
             } else{
-                res.render('prototype', { res : results });
+                res.sendFile('../views/prototype.html');
             }
         })
     })
