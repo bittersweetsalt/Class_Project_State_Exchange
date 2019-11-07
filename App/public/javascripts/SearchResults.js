@@ -4,7 +4,6 @@ const databaseURL = 'http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:300
 searchQueryForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const searchQueryInput = document.getElementsByClassName("search-query-input")[0];
-    // renderHtml("Result Name", "100", "Result Comment", "Result Category");
     submitQuery(searchQueryInput.value);
 })
 
@@ -13,14 +12,14 @@ const submitQuery = async (query) => {
     const myJson = await response.json();
 
     myJson.map( res => {
-        renderHtml(res.Name, res.Price, res.Comment, res.Category);
+        renderListItems(res);
     })
 }
 
-const renderHtml = (resName, resPrice, resComment, resCategory) => {
+const renderListItems = (res) => {
     const list = document.getElementsByClassName("list")[0];
 
-    //create list-item div
+    //create list-item
     const newDiv = document.createElement('div');
     newDiv.classList.add("list-item");
 
@@ -37,11 +36,11 @@ const renderHtml = (resName, resPrice, resComment, resCategory) => {
     listItemHeader.classList.add('list-item-header');
 
     const header = document.createElement('h3');
-    const nameNode = document.createTextNode(resName);
+    const nameNode = document.createTextNode(res.Name);
     header.appendChild(nameNode);
 
     const paragraph = document.createElement('p');
-    const priceNode = document.createTextNode("$" + resPrice);
+    const priceNode = document.createTextNode("$" + res.Price);
     paragraph.appendChild(priceNode);
 
     listItemHeader.appendChild(header);
@@ -52,11 +51,11 @@ const renderHtml = (resName, resPrice, resComment, resCategory) => {
     listItemBody.classList.add('list-item-body');
 
     const comment = document.createElement('p');
-    const commentNode = document.createTextNode(resComment);
+    const commentNode = document.createTextNode(res.Comment);
     comment.appendChild(commentNode);
 
     const category = document.createElement('p');
-    const categoryNode = document.createTextNode(resCategory);
+    const categoryNode = document.createTextNode(res.Category);
     category.appendChild(categoryNode);
 
     listItemBody.appendChild(comment);

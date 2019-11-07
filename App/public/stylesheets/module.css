@@ -1,0 +1,92 @@
+/****************************************************************************
+This is for reusable, modular parts of the design. Similar to objects in
+OOP. This is one of the more important files and will hold styling for many
+aspects of the website
+*****************************************************************************/
+
+
+/************************************
+                index 
+ ************************************/
+
+.title{
+    margin: 0;
+    padding: 0;
+}
+
+.search{
+    align-self: center;
+}
+
+.search__input{
+    width: 300px;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.search__button{
+    height: 30px;
+    border: none;
+    outline: none;
+
+    background-color: white;
+    border-radius: 5px;
+}
+
+.nav{
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav__item{
+    padding: 7px;
+    border-radius: 5px;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.nav__item:hover{
+    background-color: white;
+    color: var(--main-color);
+}
+
+ /************************************
+                about 
+ ************************************/
+
+/*Developer Cards*/
+.dev{
+    display: grid;
+    grid-template-columns: repeat(4, 210px);
+    grid-row-gap: 10px;
+    justify-content: space-between;
+}
+
+.dev__card {
+    padding: 30px;
+    
+    background-color: var(--main-color);
+    border-radius: 5px;
+}
+
+.dev__card__img {
+    width: 150px;
+}
+
+.dev__card__body {
+    font-size: 20px;
+    color: white;
+}
+
+/*Developer Description*/
+.description {
+    border-top: 2px solid var(--body-text-color);
+    margin-top: 20px;
+}
+
+.description__body {
+    text-align: left;
+    color: var(--body-text-color);
+}

@@ -1,0 +1,9 @@
+/****************************************************************************
+Holds all main variables for easy configuration
+*****************************************************************************/
+
+:root {
+    --main-header-font: 'Arial Rounded MT Bold';
+    --main-color: rgb(230, 207, 230);
+    --body-text-color: #4d4d4d;
+}
