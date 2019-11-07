@@ -5,33 +5,33 @@
     <link rel='stylesheet' href='../public/stylesheets/global.css'>
 </head>
 <div class="layout-header">
-    <div class="topper layout-body">
-        <h1 class="topper__title">State Exchange</h1>
-        <div class="topper__links">
-            <p class="topper__links--login">login</p>
-            <p class="topper__links--signup">signup</p>
+        <div class="topper layout-body">
+                <a href="index.html"><h1 class="topper__title">State Exchange</h1></a>
+            <div class="topper__links">
+                <p class="topper__links--login">login</p>
+                <p class="topper__links--signup">signup</p>
+            </div>
+        </div>
+        <form class="form layout-body">
+            <input type="text" class="form__input">
+            <button type="submit" class="form__button">Search</button>
+        </form>
+        <div class="nav layout-body">
+            <a class="nav__item">About</a>
+            <a class="nav__item">For Sale</a>
+            <a class="nav__item">New Post</a>
+            <a class="nav__item">Dashboard</a>
         </div>
     </div>
-    <form class="form layout-body">
-        <input type="text" class="form__input">
-        <button type="submit" class="form__button">Search</button>
-    </form>
-    <div class="nav layout-body">
-        <div class="nav__item">About</div>
-        <div class="nav__item">For Sale</div>
-        <div class="nav__item">New Post</div>
-        <div class="nav__item">Dashboard</div>
-    </div>
-</div>
 
-<div class="layout-body--padded">
+<div class="layout-body">
     <form class="form newpost">
-        <div class="form__row--3">
+        <div class="grid__row--3">
             <label for="title" class="form__label">Title</label>
             <input type="input" class="title form__input--border">
             <button class="form__button--border">Add Image</button>
         </div>
-        <div class="form__row--2">
+        <div class="grid__row--2">
             <label for="desc" class="form__label">Description</label>
             <textarea class="desc form__textarea" form="newpost"></textarea>
         </div>

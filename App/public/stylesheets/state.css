@@ -5,5 +5,25 @@ different views, color variations, etc.
 *****************************************************************************/
 
 @media only screen and (max-width: 600px) {
+    /*-------------------------------------------------------------FORM ELEMENTS--*/
+    .form__input,
+    .form__input--border{
+        width: 200px;
+    }
+
+    /*----------------------------------------------------------------NAVIGATION--*/
+    .nav{
+        flex-direction: column;
+    }
     
+    .nav__item{
+        border-radius: 0;
+        transition: 0s;
+        align-self: center;
+    }
+
+    .nav__item:hover{
+        background-color: transparent;
+        color: white;
+    }
 }

@@ -10,20 +10,38 @@ into sections and holds modules together.
 
     width: 100%;
     height: 200px;
-    padding: 0 20px;
 
     background-color: var(--main-color);
     color: white;
 }
 
-.layout-body,
-.layout-body--padded{
+.layout-body{
     width: 100%;
     max-width: 1200px;
     align-self: center;
-    padding: 5px;
+    padding: 5px 35px;
 }
 
-.layout-body--padded{
-    padding: 30px;
+/* Horizontal containers displayed as grid (only one row) */
+.grid__row--2,
+.grid__row--3{
+    display: grid;
+    margin: 10px 0;
+}
+
+/* Grid row with 2 columns */
+.grid__row--2{
+    grid-template-columns: 100px 1fr;
+}
+
+/* Grid row with 3 columns */
+.grid__row--3{
+    grid-template-columns: 100px 1fr 1fr;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .layout-header{
+        height: 300px;
+    }
 }
