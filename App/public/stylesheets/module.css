@@ -4,10 +4,7 @@ OOP. This is one of the more important files and will hold styling for many
 aspects of the website
 *****************************************************************************/
 
-/************************************
-                index 
- ************************************/
-
+/*---------------------------------------------TOPPER-(title | login/signup)--*/
 .topper{
     display: flex;
     justify-content: space-between;
@@ -29,11 +26,12 @@ aspects of the website
     cursor: pointer;
 }
 
-.search{
+/*-------------------------------------------------------------FORM ELEMENTS--*/
+.form{
     text-align: center;
 }
 
-.search__input{
+.form__input{
     width: 350px;
     height: 40px;
     padding: 5px;
@@ -45,7 +43,7 @@ aspects of the website
     border-radius: 5px;
 }
 
-.search__button{
+.form__button{
     height: 40px;
     border: none;
     outline: none;
@@ -54,6 +52,7 @@ aspects of the website
     border-radius: 5px;
 }
 
+/*----------------------------------------------------------------NAVIGATION--*/
 .nav{
     display: flex;
     justify-content: space-between;
@@ -71,11 +70,7 @@ aspects of the website
     color: var(--main-color);
 }
 
- /************************************
-                about 
- ************************************/
-
-/*Developer Cards*/
+ /*---------------------------------------------DEVELOPER CARDS-(about pages)--*/
 .dev{
     display: grid;
     grid-template-columns: repeat(4, 210px);
@@ -99,7 +94,7 @@ aspects of the website
     color: white;
 }
 
-/*Developer Description*/
+/*---------------------------------------------------DESCRIPTION-(about page--*/
 .description {
     border-top: 2px solid var(--body-text-color);
     margin-top: 20px;
