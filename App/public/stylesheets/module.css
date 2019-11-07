@@ -31,25 +31,73 @@ aspects of the website
     text-align: center;
 }
 
-.form__input{
+.form__row,
+.form__row--2,
+.form__row--3{
+    display: grid;
+    margin: 10px 0;
+}
+
+.form__row--2{
+    grid-template-columns: 100px 1fr;
+}
+
+.form__row--3{
+    grid-template-columns: 100px 1fr 200px;
+}
+
+.form__input,
+.form__input--border{
     width: 350px;
     height: 40px;
     padding: 5px;
-
-    /* font-size: 15px; */
 
     border: none;
     outline: none;
     border-radius: 5px;
 }
 
-.form__button{
+.form__input--border{
+    border: 1px solid black;
+    height: 30px;
+    width: 100%;
+    max-width: 450px;
+}
+
+.form__textarea{
+    width: 100%;
+    height: 200px;
+    padding: 5px;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    outline: none;
+
+    resize: none;
+}
+
+.form__button,
+.form__button--border{
     height: 40px;
+    max-width: 70px;
     border: none;
     outline: none;
 
     background-color: white;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.form__button--border{
+    border: 1px solid black;
+    height: 30px;
+    place-self: end;
+    align-self: center;
+}
+
+.form__label{
+    font-family: var(--main-body-font);
+    text-align: left;
 }
 
 /*----------------------------------------------------------------NAVIGATION--*/

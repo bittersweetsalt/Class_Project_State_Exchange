@@ -23,64 +23,79 @@
         <div class="nav__item">Dashboard</div>
     </div>
 </div>
-<div class="form new-post-form">
-    <div class="form_title">
-        <h2>New Post</h2>
-    </div>
-    <form>
-        <div class="row">
-            <div class="col-25">
-                <label>Title</label>
-            </div>
-            <div class="col-75">
-                <input type="text" class="post_input" placeholder="Title for your Post...">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label>Description</label>
-            </div>
-            <div class="col-75">
-                <textarea class="post_input" placeholder="Short Description about Post"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label>Category</label>
-            </div>
-            <!--Modify Later to pull categories list from DB-->
-            <div class="col-75">
-                <select class="post_input">
-                    <option value="">Select Category</option>
-                    <option value="">Electronics</option>
-                    <option value="">Books</option>
-                    <option value="">Furniture</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label>Price</label>
-            </div>
-            <div class="col-75">
-                <input class="post_input" type="number" placeholder="$0.00">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
 
-            </div>
-            <div class="col-75">
-                <button id="submit_post" type="submit">Submit</button>
-                <button id="cancel_post" type="submit">
-                    Cancel
-                </button>
-            </div>
+<div class="layout-body--padded">
+    <form class="form newpost">
+        <div class="form__row--3">
+            <label for="title" class="form__label">Title</label>
+            <input type="input" class="title form__input--border">
+            <button class="form__button--border">Add Image</button>
         </div>
-        <div>
-
+        <div class="form__row--2">
+            <label for="desc" class="form__label">Description</label>
+            <textarea class="desc form__textarea" form="newpost"></textarea>
         </div>
     </form>
 </div>
+
+
+
+
+
+
+<form class = "form">
+    <div class="row">
+        <div class="col-25">
+            <label>Title</label>
+        </div>
+        <div class="col-75">
+            <input type="text" class="post_input" placeholder="Title for your Post...">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label>Description</label>
+        </div>
+        <div class="col-75">
+            <textarea class="post_input" placeholder="Short Description about Post"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label>Category</label>
+        </div>
+        <!--Modify Later to pull categories list from DB-->
+        <div class="col-75">
+            <select class="post_input">
+                <option value="">Select Category</option>
+                <option value="">Electronics</option>
+                <option value="">Books</option>
+                <option value="">Furniture</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label>Price</label>
+        </div>
+        <div class="col-75">
+            <input class="post_input" type="number" placeholder="$0.00">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+
+        </div>
+        <div class="col-75">
+            <button id="submit_post" type="submit">Submit</button>
+            <button id="cancel_post" type="submit">
+                Cancel
+            </button>
+        </div>
+    </div>
+    <div>
+
+    </div>
+</form>
 
 </html>

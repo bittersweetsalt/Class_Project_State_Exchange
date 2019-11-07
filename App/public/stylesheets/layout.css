@@ -16,9 +16,14 @@ into sections and holds modules together.
     color: white;
 }
 
-.layout-body{
+.layout-body,
+.layout-body--padded{
     width: 100%;
     max-width: 1200px;
     align-self: center;
     padding: 5px;
+}
+
+.layout-body--padded{
+    padding: 30px;
 }
