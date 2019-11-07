@@ -3,3 +3,7 @@ Styles for modules in different circumstances. Ex: how a module or layout
 looks on screens that are smaller or larger, or how a module might look in 
 different views, color variations, etc.
 *****************************************************************************/
+
+@media only screen and (max-width: 600px) {
+    
+}
