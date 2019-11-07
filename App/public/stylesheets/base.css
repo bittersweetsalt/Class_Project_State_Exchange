@@ -21,6 +21,7 @@ body{
 p {
     text-align: center;
     font-family: var(--main-body-font);
+    color: var(--body-text-color);
 }
 
 a {
@@ -32,6 +33,10 @@ a {
 h1 {
     justify-self: center;
     font-family: var(--main-header-font);
-    font-size: 20px;
-    color: var(--body-color);
+    font-size: 25px;
+    color: var(--body-text-color);
+}
+
+label{
+    color: var(--body-text-color);
 }
