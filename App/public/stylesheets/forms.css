@@ -1,0 +1,83 @@
+.new-post-form {
+    border: solid 2px rgb(230, 207, 230);
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form_title {
+    padding: 10px 20px;
+}
+
+label {
+    display: inline-block;
+    padding: 12px 12px 12px 0;
+}
+
+
+.post_input {
+    resize: none;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+    text-align: right;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#submit_post {
+    float: left;
+    padding: 8px 16px;
+    margin-right: 20px;
+    background-color: #4CAF50;
+    font-weight: bold;
+    border: none;
+}
+
+#cancel_post {
+    float: left;
+    padding: 8px 16px;
+    margin-left: 20px;
+    background-color: red;
+    font-weight: bold;
+    border: none;
+}
+
+#cancel_post:hover {
+    background-color: rgb(194, 5, 5);
+}
+
+#submit_post:hover {
+    background-color: #038e07;
+}
+
+@media screen and (max-width: 600px) {
+    .col-25, .col-75 {
+        width: 100%;
+        margin-top: 0;
+    }
+}
