@@ -33,7 +33,7 @@ aspects of the website
 
 .form__input,
 .form__input--border{
-    width: 350px;
+    width: 450px;
     height: 40px;
     padding: 5px;
 
@@ -76,7 +76,7 @@ aspects of the website
 .form__button--border{
     border: 1px solid black;
     height: 30px;
-    place-self: end;
+    justify-self: end;
     align-self: center;
 }
 

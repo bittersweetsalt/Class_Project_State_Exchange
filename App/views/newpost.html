@@ -25,16 +25,12 @@
     </div>
 
 <div class="layout-body">
-    <form class="form newpost">
-        <div class="grid__row--3">
-            <label for="title" class="form__label">Title</label>
-            <input type="input" class="title form__input--border">
-            <button class="form__button--border">Add Image</button>
-        </div>
-        <div class="grid__row--2">
-            <label for="desc" class="form__label">Description</label>
-            <textarea class="desc form__textarea" form="newpost"></textarea>
-        </div>
+    <form class="form newpost grid">
+        <label for="title" class="form__label grid__col--1">Title</label>
+        <input type="input" class="title form__input--border grid__col--8">
+        <button class="form__button--border grid__col--3">Add Image</button>
+        <label for="desc" class="form__label grid__col--1">Description</label>
+        <textarea class="desc form__textarea grid__col--11" form="newpost"></textarea>
     </form>
 </div>
 
