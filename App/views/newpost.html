@@ -32,75 +32,24 @@
         <button class="form__button--border grid__col--3">Add Image</button>
         <label for="desc" class="form__label grid__col--1">Description</label>
         <textarea class="desc form__textarea grid__col--11" form="newpost"></textarea>
+        <!--TODO: Pull list of categories from database-->
         <label class="form__label grid__col--1">Category</label>
-        <select class="form__input--border grid__col--8">
+        <select class="form__input--border grid__col--11">
             <option>Select</option>
             <option>Category 1</option>
             <option>Category 2</option>
             <option>Category 3</option>
             <option>Category 4</option>
         </select>
+        <label for="price" class="form__label grid__col--1">Price</label>
+        <input type="text" class="form__input--border grid__col--8">
+        <button type="button">
+            Cancel
+        </button>
+        <button type="submit">
+            Post
+        </button>
     </form>
 </div>
-
-
-
-
-
-
-<form class="form">
-    <div class="row">
-        <div class="col-25">
-            <label>Title</label>
-        </div>
-        <div class="col-75">
-            <input type="text" class="post_input" placeholder="Title for your Post...">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-25">
-            <label>Description</label>
-        </div>
-        <div class="col-75">
-            <textarea class="post_input" placeholder="Short Description about Post"></textarea>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-25">
-            <label>Category</label>
-        </div>
-        <!--Modify Later to pull categories list from DB-->
-        <div class="col-75">
-            <select class="post_input">
-                <option value="">Select Category</option>
-                <option value="">Electronics</option>
-                <option value="">Books</option>
-                <option value="">Furniture</option>
-            </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-25">
-            <label>Price</label>
-        </div>
-        <div class="col-75">
-            <input class="post_input" type="number" placeholder="$0.00">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-25">
-
-        </div>
-        <div class="col-75">
-            <button id="submit_post" type="submit">Submit</button>
-            <button id="cancel_post" type="submit">
-                Cancel
-            </button>
-        </div>
-    </div>
-    <div>
-
-    </div>
-</form>
 
 </html>
