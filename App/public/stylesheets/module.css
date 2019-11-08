@@ -93,13 +93,10 @@ aspects of the website
     text-align: left;
 }
 
-<<<<<<< HEAD
-=======
 /* This is a style specific to only newpost element, will try to find a better solution later */
 .newpost {
     margin-top: 30px;
 }
->>>>>>> 8afbfeae5424292208ec58261730f1fb75268a3a
 
 /*----------------------------------------------------------------NAVIGATION--*/
 .nav{
