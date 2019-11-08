@@ -61,6 +61,10 @@ aspects of the website
     resize: none;
 }
 
+.form__select{
+    text-align: left;
+}
+
 .form__button,
 .form__button--border{
     height: 40px;
@@ -84,6 +88,7 @@ aspects of the website
     font-family: var(--main-body-font);
     text-align: left;
 }
+
 
 /*----------------------------------------------------------------NAVIGATION--*/
 .nav{
