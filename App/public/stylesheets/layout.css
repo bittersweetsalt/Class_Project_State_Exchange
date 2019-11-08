@@ -22,23 +22,49 @@ into sections and holds modules together.
     padding: 5px 35px;
 }
 
-/* Horizontal containers displayed as grid (only one row) */
-.grid__row--2,
-.grid__row--3{
+/* Grid Layout Options */
+.grid{
     display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 10px;
     margin: 10px 0;
 }
-
-/* Grid row with 2 columns */
-.grid__row--2{
-    grid-template-columns: 100px 1fr;
+.grid__col--1{
+    grid-column: span 1;
 }
-
-/* Grid row with 3 columns */
-.grid__row--3{
-    grid-template-columns: 100px 1fr 1fr;
+.grid__col--2{
+    grid-column: span 2;
 }
-
+.grid__col--3{
+    grid-column: span 3;
+}
+.grid__col--4{
+    grid-column: span 4;
+}
+.grid__col--5{
+    grid-column: span 5;
+}
+.grid__col--6{
+    grid-column: span 6;
+}
+.grid__col--7{
+    grid-column: span 7;
+}
+.grid__col--8{
+    grid-column: span 8;
+}
+.grid__col--9{
+    grid-column: span 9;
+}
+.grid__col--10{
+    grid-column: span 10;
+}
+.grid__col--11{
+    grid-column: span 11;
+}
+.grid__col--12{
+    grid-column: span 12;
+}
 
 @media only screen and (max-width: 600px) {
     .layout-header{

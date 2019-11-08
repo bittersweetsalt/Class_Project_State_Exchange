@@ -8,16 +8,20 @@ aspects of the website
 .topper{
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .topper__title{
     margin: 0;
     padding: 0;
     font-size: 40px;
+    color: white;
 }
 
 .topper__links{
     display: flex;
+    margin-top: 5px;
+    font-size: 18px;
 }
 
 .topper__links--login,
@@ -33,7 +37,7 @@ aspects of the website
 
 .form__input,
 .form__input--border{
-    width: 350px;
+    width: 450px;
     height: 40px;
     padding: 5px;
 
@@ -68,7 +72,7 @@ aspects of the website
 .form__button,
 .form__button--border{
     height: 40px;
-    max-width: 80px;
+    max-width: 100%;
     border: none;
     outline: none;
 
@@ -80,7 +84,7 @@ aspects of the website
 .form__button--border{
     border: 1px solid black;
     height: 30px;
-    place-self: end;
+    justify-self: end;
     align-self: center;
 }
 
@@ -89,6 +93,13 @@ aspects of the website
     text-align: left;
 }
 
+<<<<<<< HEAD
+=======
+/* This is a style specific to only newpost element, will try to find a better solution later */
+.newpost {
+    margin-top: 30px;
+}
+>>>>>>> 8afbfeae5424292208ec58261730f1fb75268a3a
 
 /*----------------------------------------------------------------NAVIGATION--*/
 .nav{
