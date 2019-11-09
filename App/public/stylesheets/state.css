@@ -8,7 +8,7 @@ different views, color variations, etc.
     /*-------------------------------------------------------------FORM ELEMENTS--*/
     .form__input,
     .form__input--border{
-        width: 200px;
+        max-width: 200px;
     }
 
     /*----------------------------------------------------------------NAVIGATION--*/
