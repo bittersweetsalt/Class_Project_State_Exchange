@@ -5,23 +5,22 @@ aspects of the website
 *****************************************************************************/
 
 /*---------------------------------------------TOPPER-(title | login/signup)--*/
-.topper{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
 .topper__title{
     margin: 0;
     padding: 0;
-    font-size: 40px;
+    font-size: 30px;
     color: white;
+}
+
+.topper__img{
+    justify-self: end;
+    cursor: pointer;
 }
 
 .topper__links{
     display: flex;
-    margin-top: 5px;
     font-size: 18px;
+    justify-content: flex-end;
 }
 
 .topper__links--login,
@@ -33,18 +32,19 @@ aspects of the website
 /*-------------------------------------------------------------FORM ELEMENTS--*/
 .form{
     text-align: center;
+    margin-bottom: 0;;
 }
 
 .form__input,
 .form__input--border{
     width: 100%;
-    max-width: 450px;
+    max-width: 350px;
     height: 40px;
     padding: 5px;
 
     border: none;
     outline: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
 .form__input--border{
@@ -58,7 +58,7 @@ aspects of the website
     padding: 5px;
 
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     outline: none;
 
     resize: none;
@@ -70,7 +70,7 @@ aspects of the website
     height: 30px;
     width: 100%;
 
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     border: 1px solid black;
 
     -moz-appearance: none;
@@ -86,7 +86,7 @@ aspects of the website
     outline: none;
 
     background-color: white;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     cursor: pointer;
 }
 
@@ -111,11 +111,12 @@ aspects of the website
 /*----------------------------------------------------------------NAVIGATION--*/
 .nav{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .nav__item{
     padding: 5px 0;
+    margin-right: 30px;
     height: 30px;
     cursor: pointer;
 }
@@ -132,7 +133,7 @@ aspects of the website
     padding: 30px;
     
     background-color: var(--main-color);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
 .dev__card__img {

@@ -40,3 +40,7 @@ h1 {
 label{
     color: var(--body-text-color);
 }
+
+img{
+    width: 40px;
+}

@@ -5,25 +5,29 @@ different views, color variations, etc.
 *****************************************************************************/
 
 @media only screen and (max-width: 600px) {
+    /*---------------------------------------------TOPPER-(title | login/signup)--*/
+    .topper__img{
+        justify-self: start;
+    }
+
     /*-------------------------------------------------------------FORM ELEMENTS--*/
     .form__input,
     .form__input--border{
         max-width: 200px;
     }
 
+    .form__button--border{
+        justify-self: left;
+    }
+
     /*----------------------------------------------------------------NAVIGATION--*/
     .nav{
         flex-direction: column;
     }
-    
-    .nav__item{
-        border-radius: 0;
-        transition: 0s;
-        align-self: center;
-    }
+}
 
-    .nav__item:hover{
-        background-color: transparent;
-        color: white;
+@media only screen and (max-width: 1060px) {
+    .topper__title{
+        font-size: 25px;
     }
 }
