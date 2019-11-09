@@ -125,7 +125,7 @@ aspects of the website
 .dev{
     display: grid;
     grid-template-columns: repeat(4, 210px);
-    grid-row-gap: 10px;
+    grid-gap: 10px;
     justify-content: space-between;
 }
 
@@ -137,7 +137,7 @@ aspects of the website
 }
 
 .dev__card__img {
-    width: 150px;
+    width: 100%;
 }
 
 .dev__card__body {

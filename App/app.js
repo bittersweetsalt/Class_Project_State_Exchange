@@ -6,6 +6,8 @@ const logger = require('morgan');
 
 //routes import
 const indexRouter = require('./routes/index');
+const aboutRouter = require('./routes/about');
+const newPostRouter = require('./routes/newpost');
 const prototypeRouter = require('./routes/prototype');
 const testMySqlRouter = require('./routes/testmysql');
 
@@ -24,6 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //routes setup
 app.use('/', indexRouter);
+app.use('/', aboutRouter);
+app.use('/', newPostRouter);
 app.use('/', prototypeRouter);
 app.use('/', testMySqlRouter);
 
