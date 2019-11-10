@@ -4,7 +4,7 @@ const path = require('path');
 
 /* GET home page. */
 router.get('/about', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/about.html'));
+    res.sendFile(path.join(__dirname, '../views/about/about.html'));
 });
 
 router.get('/about/roderic', (req, res, next) => {

@@ -22,6 +22,13 @@ into sections and holds modules together.
     padding: 5px 35px;
 }
 
+.layout-container{
+    width: 100%;
+    border-top: 1px solid black;
+    padding: 10px 0;
+    overflow: scroll;
+}
+
 /* Grid Layout Options */
 .grid{
     display: grid;
