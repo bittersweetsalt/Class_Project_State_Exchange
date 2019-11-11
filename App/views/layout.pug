@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title State Exchange
+        link(rel='stylesheet', href='/stylesheets/global.css')
+    .layout-header
+        .layout-body.grid
+            a(href="index" class="grid__col--3")
+                h1.topper__title State Exchange
+            form(class="form grid__col--7 main-search-form" action="testmysql" method="get")
+                input(type="text" name='query' placeholder="Search" class="form__input search-query-input")
+                button(type="submit" class="form__button") Search
+            img(src="images/user.png" class="topper__img grid__col--2")
+        .nav.layout-body
+            a(href="index" class="nav__item") Home
+            a(href="about" class="nav__item") About
+            a(href="#" class="nav__item") For Sale
+            a(href="newpost" class="nav__item") New Post
+            a(href="#" class="nav__item") Dashboard
+
+    body
+        block content

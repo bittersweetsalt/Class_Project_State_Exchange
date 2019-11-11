@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const path = require('path');
+// const path = require('path');
 
 /* GET home page. */
 router.get('/about', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/about/about.html'));
+    res.render('about');
+    // res.sendFile(path.join(__dirname, '../views/about/about.html'));
 });
 
 router.get('/about/roderic', (req, res, next) => {
