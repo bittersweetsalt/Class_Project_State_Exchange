@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>New Post!</title>
+    <link rel='stylesheet' href='stylesheets/global.css'>
+</head>
+<div class="layout-header">
+    <div class="layout-body grid">
+        <a href="index" class="grid__col--3"><h1 class="topper__title">State Exchange</h1></a>
+        <form class="form grid__col--7">
+            <input type="text" placeholder="Search" class="form__input">
+            <button type="submit" class="form__button">Search</button>
+        </form>
+        <img src="images/user.png" class="topper__img grid__col--2">
+    </div>
+    <div class="nav layout-body">
+        <a href="index" class="nav__item">Home</a>
+        <a href="about" class="nav__item">About</a>
+        <a class="nav__item">For Sale</a>
+        <a href="newpost" class="nav__item">New Post</a>
+        <a class="nav__item">Dashboard</a>
+    </div>
+</div>
+
+<div class="layout-body">
+    <h1>Create a New Post</h1>
+    <form class="form newpost grid">
+        <label for="title" class="form__label grid__col--1">Title</label>
+        <input type="input" class="title form__input--border grid__col--8">
+        <button class="form__button--border grid__col--3">Add Image</button>
+        <label for="desc" class="form__label grid__col--1">Description</label>
+        <textarea class="desc form__textarea grid__col--11" form="newpost"></textarea>
+        <!--TODO: Pull list of categories from database-->
+        <label class="form__label grid__col--1">Category</label>
+        <select class="form__select grid__col--3">
+            <option>Category</option>
+            <option>Category 1</option>
+            <option>Category 2</option>
+            <option>Category 3</option>
+            <option>Category 4</option>
+        </select>
+        <div class="grid__col--8"></div>
+        <label for="price" class="form__label grid__col--1">Price</label>
+        <input type="text" class="form__input--border grid__col--2">
+        <button type="button" class="form__button--border grid__col--8">Cancel</button>
+        <button type="submit" class="form__button--border grid__col--1">Post</button>
+    </form>
+</div>
+
+</html>

@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    //- shorthand for creating a div with class layout-body
+    .layout-body
+        h1 Create a New Post
+
+        //- shorthand for adding multiple classes to an element
+        form.form.newpost.grid
+
+            //- standard method for adding attributes to an element
+            label(for="title" class="title form__label grid__col--1") Title
+            input(type="input" class="title form__input--border grid__col--8")
+            button(class="form__button--border grid__col--3") Add Image
+            label(for="desc" class="form__label grid__col--1") Description
+            textarea(class="desc form__textarea grid__col--11" form="newpost")
+            label.form__label.grid__col--1 Category
+            select.form__select.grid__col--3
+                option Category
+                option Category 1
+                option Category 2
+                option Category 3
+                option Category 4
+            .grid__col--8
+            label(for="price" class="form__label grid__col--1") Price
+            input(type="text" class="form__input--border grid__col--2")
+            button(type="button" class="form__button--border grid__col--8") Cancel
+            button(type="submit" class="form__button--border grid__col--1") Post
+
+    script(src="javascripts/SearchResults.js")

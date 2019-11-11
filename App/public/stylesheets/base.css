@@ -18,14 +18,35 @@ body{
     padding: 0;
 }
 
+p {
+    color: var(--body-text-color);
+}
+
+a {
+    font-family: var(--main-body-font);
+    text-decoration: none;
+    color: white;
+}
+
 h1 {
     justify-self: center;
     font-family: var(--main-header-font);
-    font-size: 50px;
-    color: var(--body-color);
+    font-size: 25px;
+    color: var(--body-text-color);
 }
 
-p {
-    text-align: center;
+h2 {
     font-family: var(--main-header-font);
+    color: var(--body-text-color);
+    border-top: 1px solid black;
+    padding: 20px 0 0 0;
+}
+
+label{
+    color: var(--body-text-color);
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%
 }

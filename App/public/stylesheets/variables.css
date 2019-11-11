@@ -4,6 +4,8 @@ Holds all main variables for easy configuration
 
 :root {
     --main-header-font: 'Arial Rounded MT Bold';
-    --main-color: rgb(219, 104, 84);
+    --main-body-font: 'helvetica';
+    --main-color: rgba(209, 0, 0, 0.63);
     --body-text-color: #4d4d4d;
+    --border-radius: 3px;
 }
