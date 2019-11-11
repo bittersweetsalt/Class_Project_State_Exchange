@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-content>
+
+          <template>
+              <div>
+                <v-toolbar  
+                >
+                  <v-toolbar-title>State Exchange</v-toolbar-title>
+            
+                  <v-spacer></v-spacer>
+
+                  <v-toolbar-items>
+                     
+                      <v-col>
+                          <v-text-field
+                            label="Search"
+                          ></v-text-field>
+                        </v-col>
+
+                    
+                    <v-btn text href="/"><v-icon>mdi-home-circle</v-icon> Home</v-btn>
+                  
+                    <v-btn text href="/add-post.html"><v-icon>mdi-plus-circle</v-icon> Add Post</v-btn>
+  
+                    <v-btn icon>
+                        <v-icon>mdi-dots-vertical</v-icon>
+                      </v-btn>
+
+                  </v-toolbar-items>
+            
+                   
+                </v-toolbar>
+              </div>
+            </template>
+
+
+        <v-container>
+
+         
+          <v-row>
+          
+            <v-card
+            max-width="344"
+            class="mx-auto"
+            style="margin-top:10px"
+            v-for="post in posts"
+          >
+            <v-list-item>
+              <v-list-item-avatar color="grey"></v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="headline">{{post.title}}</v-list-item-title>
+                <v-list-item-subtitle>ID {{post.id}}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+        
+            <v-img
+              src="https://www.lauriloewenberg.com/wp-content/uploads/2019/04/No_Image_Available.jpg"
+              height="194"
+            ></v-img>
+        
+            <v-card-text>
+              {{post.body}}
+            </v-card-text>
+        
+            <v-card-actions>
+              <v-btn
+                text
+                color="deep-purple accent-4"
+              >
+                Read
+              </v-btn>
+              <v-btn
+                text
+                color="deep-purple accent-4"
+              >
+                Bookmark
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn icon>
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+              <v-btn icon>
+                <v-icon>mdi-share-variant</v-icon>
+              </v-btn>
+            </v-card-actions>
+            </v-card>
+
+
+
+
+          </v-row>
+
+
+
+
+        </v-container>
+      </v-content>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+
+    
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+
+      data: () => ({
+        posts: []
+      }),
+
+      mounted () {
+
+        
+        axios
+          .get('https://jsonplaceholder.typicode.com/posts')
+          .then(response => (this.posts = response.data) )
+          //.then(response => (console.log(response.data)) )
+      }
+
+
+    })
+  </script>
+</body>
+</html>

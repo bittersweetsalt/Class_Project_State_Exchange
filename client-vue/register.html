@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-content>
+
+          <template>
+              <div>
+                <v-toolbar  
+                >
+                  <v-toolbar-title>State Exchange</v-toolbar-title>
+            
+                  
+                  
+                  
+                  <v-spacer></v-spacer>
+
+
+                  <v-toolbar-items>
+                     
+                      <v-col>
+                          <v-text-field
+                            label="Search"
+                          ></v-text-field>
+                        </v-col>
+
+                    
+
+                        <v-btn text href="/"><v-icon>mdi-home-circle</v-icon> Home</v-btn>
+                  
+                        <v-btn text href="/add-post.html"><v-icon>mdi-plus-circle</v-icon> Add Post</v-btn>
+      
+                    <v-btn icon>
+                        <v-icon>mdi-dots-vertical</v-icon>
+                      </v-btn>
+
+                  </v-toolbar-items>
+            
+                </v-toolbar>
+              </div>
+            </template>
+
+
+        <v-container>
+
+            <h1>Register</h1>
+            <form>
+
+                    <v-text-field
+                    v-model="name"
+                    label="Name"
+                    required
+                    
+                  ></v-text-field>
+
+                <v-text-field
+                  v-model="name"
+                  label="Email"
+                  required
+                  
+                ></v-text-field>
+
+                <v-text-field
+                v-model="password"
+                :type='password'
+                label="Password"
+                hint="At least 8 characters"
+                counter>
+
+
+            </v-text-field>
+
+                <v-text-field
+                v-model="cnfPassword"
+                :type='password'
+                label="Confirm Password"
+                hint="At least 8 characters"
+                counter>
+
+            </v-text-field>
+               
+
+                <v-btn class="mr-4" >Register</v-btn>
+                <v-btn href="login.html" text class="mr-4" >Already have an account, Login</v-btn>
+                
+              </form>
+
+
+
+
+        </v-container>
+      </v-content>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+    })
+  </script>
+</body>
+</html>

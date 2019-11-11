@@ -53,7 +53,7 @@ export default function Login() {
 		  
 		console.log("--- Login Response ---");
 		console.log(res.data);
-		setToken(res.data.token);
+		//setToken(res.data.token);
 		
 		//const persons = res.data;
         //this.setState({ persons });
