@@ -17,6 +17,8 @@ router.get('/testmysql', (req, res, next) => {
                 })
             }
         })
+
+        // connection.release();
     })
 });
 
