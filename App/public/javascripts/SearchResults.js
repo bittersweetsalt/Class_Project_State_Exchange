@@ -1,20 +1,20 @@
-const searchQueryForm = document.getElementsByClassName("search-query-form")[0];
-const databaseURL = 'http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql';
+// const searchQueryForm = document.getElementsByClassName("search-query-form")[0];
+// const databaseURL = 'http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql';
 
-searchQueryForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const searchQueryInput = document.getElementsByClassName("search-query-input")[0];
-    submitQuery(searchQueryInput.value);
-})
+// searchQueryForm.addEventListener("submit", (event) => {
+//     event.preventDefault();
+//     const searchQueryInput = document.getElementsByClassName("search-query-input")[0];
+//     submitQuery(searchQueryInput.value);
+// })
 
-const submitQuery = async (query) => {
-    const response = await fetch(databaseURL, params = {query: query});
-    const myJson = await response.json();
+// const submitQuery = async (query) => {
+//     const response = await fetch(databaseURL, params = {query: query});
+//     const myJson = await response.json();
 
-    myJson.map( res => {
-        renderListItems(res);
-    })
-}
+//     myJson.map( res => {
+//         renderListItems(res);
+//     })
+// }
 
 const renderListItems = (res) => {
     const list = document.getElementsByClassName("list")[0];
