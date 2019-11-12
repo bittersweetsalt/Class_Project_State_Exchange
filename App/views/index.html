@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel='stylesheet' href='stylesheets/global.css'>
     </head>
-    <div id="app">
+    <div id="index">
         <div class="layout-header">
             <div class="layout-body grid">
                 <a href="index" class="grid__col--3"><h1 class="topper__title">State Exchange</h1></a>
@@ -25,12 +25,12 @@
         </div>
 
         <div class="layout-body">
-            <h1>Recent Posts</h1>
             <div class="carousel">
+                <h1 class="carousel__title">Recent Posts</h1>
                 <img src="images/icons/arrow_left.png" class="carousel__button-left" v-on:click="previousPost"></img>
                 <div class="carousel__post-container">
                     <div class="carousel__post" v-for="post in nextFivePosts">
-                        <img src="https://www.lauriloewenberg.com/wp-content/uploads/2019/04/No_Image_Available.jpg">
+                        <img v-bind:src="post.image_name">
                         <div class="carousel__post-body">
                             <h2 class="carousel__post-title">{{ post.Name }}</h2>
                             <p class="carousel__post-comment">{{ post.Comment }}</p>
@@ -47,8 +47,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
-        var app = new Vue({
-            el: '#app',
+        var index = new Vue({
+            el: '#index',
             data: {
                 posts: [],
                 query: "",
@@ -59,7 +59,7 @@
                     axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
                         query: this.query
                     })
-                    // .then(res => {app.posts = res.data})
+                    // .then(res => {index.posts = res.data})
                 },
                 nextPost: function() {
                     if(this.recentPostsLength < (this.posts.length - 5)){

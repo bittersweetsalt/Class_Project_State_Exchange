@@ -124,9 +124,24 @@ aspects of the website
 
 /*-----------------------------------------------------------------------POST--*/
 .carousel{
-    display: flex;
-    justify-content: center;
-    border-top: 1px solid black;
+    display: grid;
+    grid-template-areas:
+        'title title title'
+        'arrow_l posts arrow_r'
+    ;
+    grid-column-gap: 10px;
+    margin-top: 20px;
+    /* max-width: 1400px; */
+}
+
+.carousel__title{
+    justify-self: start;
+    align-self: end;
+    grid-area: title;
+
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin-bottom: 0;
 }
 
 .carousel__button-left,
@@ -136,13 +151,15 @@ aspects of the website
     cursor: pointer;
 }
 .carousel__button-left{
-    margin-right: 15px;
+    grid-area: arrow_l;
+    justify-self: right;
 }
 .carousel__button-right{
-    margin-left: 15px;
+    grid-area: arrow_r;
 }
 
 .carousel__post-container{
+    grid-area: posts;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr;

@@ -3,7 +3,8 @@ This css file is used only for styling basic layout elemnts. It divides the page
 into sections and holds modules together.
 *****************************************************************************/
 
-#app{
+#index,
+#app-newpost{
     display: flex;
     flex-direction: column;
     align-items: center;

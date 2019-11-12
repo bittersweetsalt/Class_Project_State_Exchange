@@ -26,8 +26,14 @@ different views, color variations, etc.
     }
 }
 
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1156px) {
     .topper__title{
         font-size: 25px;
     }
+
+    .carousel__post-container{
+        grid-template-columns: repeat(3, 1fr);
+        overflow: hidden;
+    }
+
 }
