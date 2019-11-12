@@ -36,6 +36,17 @@ aspects of the website
     margin-bottom: 0;;
 }
 
+input[type='file'] {
+    display: none;
+}
+
+.form__image-input {
+    background-color: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    text-align: right;
+}
+
 .form__input,
 .form__input--border{
     width: 100%;

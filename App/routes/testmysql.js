@@ -5,8 +5,13 @@ var db = require("../db/connection");
 
 /* GET vertical prototype */
 router.get('/testmysql', (req, res, next) => {
+
     db.getConnection( (err, connection) => {
-        db.query('SELECT * FROM Posting', (error, results, fields) => {
+
+        var search_function = req.body.query;
+        var search_string = `SELECT Name, Category FROM Posting WHERE Name, Category LIKE '%${search_function}'`;
+
+        db.query(search_string, (error, results, fields) => {
             console.log(req.query.query);
             if(error){
                 console.log(error);
@@ -14,8 +19,7 @@ router.get('/testmysql', (req, res, next) => {
                 res.send(results);
             }
         })
-
-        // connection.release();
+        db.release();
     })
 });
 
