@@ -4,13 +4,11 @@ const path = require('path');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-    res.render('index');
-    // res.sendFile(path.join(__dirname, '../views/index.html'));
+    res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 router.get('/index', (req, res, next) => {
-    res.render('index');
-    // res.sendFile(path.join(__dirname, '../views/index.html'));
+    res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 module.exports = router;

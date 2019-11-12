@@ -123,11 +123,21 @@ aspects of the website
 }
 
 /*-----------------------------------------------------------------------POST--*/
+.post-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    grid-gap: 10px;
+
+    border-top: 1px solid black;
+    padding: 10px 0;
+}
+
 .post{
-    display: inline-block;
     padding: 10px;
+    /* margin: 5px 5px 5px 0; */
 
     width: 200px;
+    height: 300px;
 
     border: 1px solid black;
     border-radius: var(--border-radius);

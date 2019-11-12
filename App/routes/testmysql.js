@@ -11,10 +11,7 @@ router.get('/testmysql', (req, res, next) => {
             if(error){
                 console.log(error);
             } else{
-                res.render('search', searchResults = {
-                    query: req.query.query,
-                    posts: data 
-                })
+                res.send(results);
             }
         })
 

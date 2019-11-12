@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>State Exchange</title>
+        <meta name="viewport" content="width=device-width">  
+        <link rel='stylesheet' href='stylesheets/global.css'>
+    </head>
+    <div id="app">
+        <div class="layout-header">
+            <div class="layout-body grid">
+                <a href="index" class="grid__col--3"><h1 class="topper__title">State Exchange</h1></a>
+                <form class="form grid__col--7" v-on:submit.prevent="sendQuery">
+                    <input type="text" placeholder="Search" class="form__input" v-model="query">
+                    <button type="submit" class="form__button">Search</button>
+                </form>
+                <img src="images/user.png" class="topper__img grid__col--2">
+            </div>
+            <div class="nav layout-body">
+                <a href="index" class="nav__item">Home</a>
+                <a href="about" class="nav__item">About</a>
+                <a class="nav__item">For Sale</a>
+                <a href="newpost" class="nav__item">New Post</a>
+                <a class="nav__item">Dashboard</a>
+            </div>
+        </div>
+        <div class="layout-body">
+            <h1>Recent Posts</h1>
+            <div class="post-container">
+                <div class="post" v-for="post in posts">
+                    <img src="https://www.lauriloewenberg.com/wp-content/uploads/2019/04/No_Image_Available.jpg">
+                    <h2>{{ post.Name }}</h2>
+                    <p>{{ post.Comment }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="javascripts/SearchResults.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            // vuetify: new Vuetify(),
+            data: {
+                posts: [],
+                query: ""
+            },
+            // methods: {
+            //     sendQuery: (event) => {
+            //         axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
+            //             query: this.query
+            //         })
+            //         .then(res => {this.posts = res.data})
+            //     }
+            // },
+            mounted() {
+                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
+                .then(res => {this.posts = res.data})
+            }
+        })
+    </script>
+</html>
