@@ -30,10 +30,42 @@ different views, color variations, etc.
     .topper__title{
         font-size: 25px;
     }
+    
+    /*-------------------------------------------------------------------CAROUSEL--*/
+    .carousel{
 
+    }
+    
+    .carousel__title{
+
+    }
+    
+    .carousel__button-left,
+    .carousel__button-right{
+
+    }
+    .carousel__button-left{
+
+    }
+    .carousel__button-right{
+
+    }
+    
     .carousel__post-container{
         grid-template-columns: repeat(3, 1fr);
         overflow: hidden;
+    }
+    
+    .carousel__post{
+
+    }
+    
+    .carousel__post-body{
+
+    }
+    
+    .carousel__post-title{
+
     }
 
 }
