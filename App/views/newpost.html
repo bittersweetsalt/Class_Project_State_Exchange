@@ -31,7 +31,7 @@
             <label for="title" class="form__label grid__col--1">Title</label>
             <input v-model='title' type="input" class="title form__input--border grid__col--8">
             <label class="grid__col--3 form__input--border" for="addImage">Add Image</label>
-            <input style="cursor: pointer;" text="Add Image" id="addImage" type="file" class="form__image-input grid__col--3"></input>
+            <input accept="image/*" id="addImage" type="file" class="form__image-input grid__col--3"></input>
             <label for="desc" class="form__label grid__col--1">Description</label>
             <textarea v-model='desc' class="desc form__textarea grid__col--11" form="newpost"></textarea>
             <!--TODO: Pull list of categories from database-->
@@ -63,8 +63,8 @@
         data: {
             title: '',
             desc: '',
-            categorySelected: 'Default',
-            categories: ['Default','Cat1', 'Cat2', 'Cat3', 'Cat4', 'Cat5'],
+            categorySelected: 'Select Category',
+            categories: ['Select Category','Electronics', 'Books', 'Furniture', 'Toys'],
             price: '',
             img: '',
         },
