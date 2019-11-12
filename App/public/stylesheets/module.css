@@ -123,24 +123,51 @@ aspects of the website
 }
 
 /*-----------------------------------------------------------------------POST--*/
-.post-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
-    grid-gap: 10px;
-
+.carousel{
+    display: flex;
+    justify-content: center;
     border-top: 1px solid black;
-    padding: 10px 0;
 }
 
-.post{
-    padding: 10px;
-    /* margin: 5px 5px 5px 0; */
+.carousel__button-left,
+.carousel__button-right{
+    height: 40px;
+    align-self: center;
+    cursor: pointer;
+}
+.carousel__button-left{
+    margin-right: 15px;
+}
+.carousel__button-right{
+    margin-left: 15px;
+}
 
+.carousel__post-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 10px;
+
+    padding: 10px 0;
+    width: 100%;
+}
+
+.carousel__post{
     width: 200px;
     height: 300px;
 
+    justify-self: center;
+
     border: 1px solid black;
     border-radius: var(--border-radius);
+}
+
+.carousel__post-body{
+    padding: 5px;
+}
+
+.carousel__post-title{
+    font-size: 25px;
 }
 
  /*---------------------------------------------DEVELOPER CARDS-(about pages)--*/

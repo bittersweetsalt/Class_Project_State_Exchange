@@ -34,8 +34,6 @@ h1 {
 h2 {
     font-family: var(--main-header-font);
     color: var(--body-text-color);
-    border-top: 1px solid black;
-    padding: 20px 0 0 0;
 }
 
 label{

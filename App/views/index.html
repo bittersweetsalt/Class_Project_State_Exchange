@@ -1,7 +1,8 @@
 <html>
     <head>
         <title>State Exchange</title>
-        <meta name="viewport" content="width=device-width">  
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel='stylesheet' href='stylesheets/global.css'>
     </head>
     <div id="app">
@@ -22,40 +23,70 @@
                 <a class="nav__item">Dashboard</a>
             </div>
         </div>
+
         <div class="layout-body">
             <h1>Recent Posts</h1>
-            <div class="post-container">
-                <div class="post" v-for="post in posts">
-                    <img src="https://www.lauriloewenberg.com/wp-content/uploads/2019/04/No_Image_Available.jpg">
-                    <h2>{{ post.Name }}</h2>
-                    <p>{{ post.Comment }}</p>
+            <div class="carousel">
+                <img src="images/icons/arrow_left.png" class="carousel__button-left" v-on:click="previousPost"></img>
+                <div class="carousel__post-container">
+                    <div class="carousel__post" v-for="post in nextFivePosts">
+                        <img src="https://www.lauriloewenberg.com/wp-content/uploads/2019/04/No_Image_Available.jpg">
+                        <div class="carousel__post-body">
+                            <h2 class="carousel__post-title">{{ post.Name }}</h2>
+                            <p class="carousel__post-comment">{{ post.Comment }}</p>
+                        </div>
+                    </div>
                 </div>
+                <img src="images/icons/arrow_right.png" class="carousel__button-right" v-on:click="nextPost"></img>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="javascripts/SearchResults.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
         var app = new Vue({
             el: '#app',
-            // vuetify: new Vuetify(),
             data: {
                 posts: [],
-                query: ""
+                query: "",
+                recentPostsLength: 0
             },
-            // methods: {
-            //     sendQuery: (event) => {
-            //         axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
-            //             query: this.query
-            //         })
-            //         .then(res => {this.posts = res.data})
-            //     }
-            // },
+            methods: {
+                sendQuery: function(event){
+                    axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
+                        query: this.query
+                    })
+                    // .then(res => {app.posts = res.data})
+                },
+                nextPost: function() {
+                    if(this.recentPostsLength < (this.posts.length - 5)){
+                        this.recentPostsLength ++;
+                    }
+                },
+                previousPost: function() {
+                    if(this.recentPostsLength > 0){
+                        this.recentPostsLength--;
+                    }
+                    
+                }
+            },
+            computed: {
+                nextFivePosts: function() {
+                    return this.posts.filter( (value,index) => {
+                        if(index >= this.recentPostsLength && index < (this.recentPostsLength + 5)){
+                            return value;
+                        }
+                    })
+                }
+            },
             mounted() {
                 axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
-                .then(res => {this.posts = res.data})
+                .then(res => {
+                    this.posts = res.data;
+                })
             }
         })
     </script>
