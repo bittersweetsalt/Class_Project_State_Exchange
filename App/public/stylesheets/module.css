@@ -5,14 +5,43 @@ aspects of the website
 *****************************************************************************/
 
 /*---------------------------------------------TOPPER-(title | login/signup)--*/
+.topper{
+    display: grid;
+    grid-template-columns: 275px 1fr 100px;
+    grid-template-areas:
+        'title form links'
+        '. nav nav'
+    ;
+    padding-top: 5px;
+}
+
 .topper__title{
-    margin: 0;
+    grid-area: title;
+    margin: 0 20px 0 0;
     padding: 0;
     font-size: 30px;
-    color: white;
+    /* color: white; */
+}
+
+.topper__form{
+    grid-area: form;
+    width: 100%;
+    /* text-align: center; */
+}
+
+.topper__form-input{
+    width: 100%;
+    max-width: 450px;
+    height: 40px;
+    padding: 15px;
+
+    outline: none;
+    border: 1px solid var(--secondary-color);
+    border-radius: 50px;
 }
 
 .topper__img{
+    grid-area: links;
     justify-self: end;
     cursor: pointer;
     width: 40px;
@@ -20,14 +49,32 @@ aspects of the website
 
 .topper__links{
     display: flex;
-    font-size: 18px;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .topper__links--login,
 .topper__links--signup {
-    padding: 0 0 0 10px;
     cursor: pointer;
+    color: var(--secondary-color);
+}
+
+/*----------------------------------------------------------------NAVIGATION--*/
+.nav{
+    grid-area: nav;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 15px;
+}
+
+.nav__item{
+    padding: 5px 0;
+    margin-right: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: var(--secondary-color)
+    /* font-size: 17px; */
 }
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
@@ -120,19 +167,6 @@ input[type='file'] {
     margin-top: 30px;
 }
 
-/*----------------------------------------------------------------NAVIGATION--*/
-.nav{
-    display: flex;
-    justify-content: flex-start;
-}
-
-.nav__item{
-    padding: 5px 0;
-    margin-right: 30px;
-    height: 30px;
-    cursor: pointer;
-}
-
 /*-------------------------------------------------------------------CAROUSEL--*/
 .carousel{
     display: grid;
@@ -141,9 +175,12 @@ input[type='file'] {
         'title title title'
         'arrow_l posts arrow_r'
     ;
-    grid-column-gap: 10px;
+    grid-gap: 10px;
     margin-top: 20px;
     width: 100%;
+    background-color: rgb(231, 231, 231);
+    border-radius: var(--border-radius);
+    padding: 15px;
 }
 
 .carousel__title{
@@ -151,9 +188,9 @@ input[type='file'] {
     align-self: end;
     grid-area: title;
 
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--secondary-color);
     width: 100%;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 .carousel__button-left,
@@ -170,6 +207,13 @@ input[type='file'] {
     grid-area: arrow_r;
 }
 
+.carousel__button-up,
+.carousel__button-down{
+    width: 40px;
+    cursor:pointer;
+    display: none;
+}
+
 .carousel__post-container{
     grid-area: posts;
     display: grid;
@@ -179,18 +223,19 @@ input[type='file'] {
 
     justify-self: stretch;
 
-    padding: 10px 0;
     width: 100%;
 }
 
 .carousel__post{
     width: 200px;
     height: 300px;
+    padding: 7px;
 
     justify-self: center;
+    overflow: hidden;
 
-    border: 1px solid black;
     border-radius: var(--border-radius);
+    background-color: white;
 }
 
 .carousel__post-body{

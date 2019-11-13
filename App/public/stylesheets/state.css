@@ -4,7 +4,40 @@ looks on screens that are smaller or larger, or how a module might look in
 different views, color variations, etc.
 *****************************************************************************/
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1180px) {
+    /*---------------------------------------------------------------------TOPPER--*/
+    .topper__title{
+        /* font-size: 25px; */
+    }
+    
+    /*-------------------------------------------------------------------CAROUSEL--*/
+    .carousel__post-container{
+        grid-template-columns: repeat(2, 1fr);
+        overflow: hidden;
+    }
+
+    .carousel__post{
+        display: flex;
+
+        width: 100%;
+        height: 100px;
+    }
+
+    .carousel__img{
+
+    }
+    
+    .carousel__post-body{
+
+    }
+    
+    .carousel__post-title{
+
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
     /*---------------------------------------------TOPPER-(title | login/signup)--*/
     .topper__img{
         justify-self: start;
@@ -24,48 +57,41 @@ different views, color variations, etc.
     .nav{
         flex-direction: column;
     }
-}
 
-@media only screen and (max-width: 1156px) {
-    .topper__title{
-        font-size: 25px;
-    }
-    
     /*-------------------------------------------------------------------CAROUSEL--*/
     .carousel{
-
-    }
-    
-    .carousel__title{
-
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'title'
+            'arrow_u'
+            'posts'
+            'arrow_d'
+        ;
+        grid-column-gap: 10px;
+        margin-top: 20px;
+        width: 100%;
     }
     
     .carousel__button-left,
     .carousel__button-right{
-
+        display: none;
     }
-    .carousel__button-left{
 
+    .carousel__button-up,
+    .carousel__button-down{
+        display: inline-block;
+        justify-self: center;
     }
-    .carousel__button-right{
+    .carousel__button-up{
+        grid-area: arrow_u;
+    }
+    .carousel__button-down{
+        grid-area: arrow_d;
+    }
 
-    }
-    
+
     .carousel__post-container{
-        grid-template-columns: repeat(3, 1fr);
-        overflow: hidden;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
     }
-    
-    .carousel__post{
-
-    }
-    
-    .carousel__post-body{
-
-    }
-    
-    .carousel__post-title{
-
-    }
-
 }

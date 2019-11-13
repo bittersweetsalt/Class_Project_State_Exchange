@@ -23,13 +23,14 @@ into sections and holds modules together.
     width: 100%;
     /* height: 150px; */
 
-    background-color: var(--main-color);
+    /* background-color: var(--main-color); */
+    border-bottom: 1px solid var(--secondary-color);
     color: white;
 }
 
 .layout-body{
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     align-self: center;
     padding: 5px 35px;
 }
