@@ -29,16 +29,24 @@
     </div>
 
     <div id="app-dashboard">
-        <div class="layout-body grid">
-            <div>
+        <div class="layout-body">
                 <h1>{{ user }}'s Dasbhoard</h1>
-                <div v-for="post in posts">
-                    {{ post }}
+                <div>
+                    <!--TAB BUTTONS-->
+                    <div>
+                        <button>Posts</button>
+                        <button>Messages</button>
+                    </div>
+                    <div>
+                        <!--CONTENT-->
+                        <div v-for="message in messages">
+                            {{ message }}
+                        </div>
+                        <div v-for="post in posts">
+                            {{ post }}
+                        </div>
+                    </div>
                 </div>
-                <div v-for="message in messages">
-                    {{ message }}
-                </div>
-            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
@@ -53,6 +61,23 @@
                 user: 'testUser',
                 posts: ['Post1', 'Post2', 'Post3', 'Post4'],
                 messages: ['Message1', 'Message2', 'Message3'],
+            },
+            methods: {
+                getPosts: function() {
+                    //get user posts from db
+                },
+                getMessages: function() {
+                    //get user messages from db
+                },
+                deletePosts: function() {
+                    //delete post from users posts
+                },
+                makePost: function() {
+                    //create post from users dashboard
+                },
+                respond: function() {
+                    //respond to a users message
+                }
             }
         })
     </script>
