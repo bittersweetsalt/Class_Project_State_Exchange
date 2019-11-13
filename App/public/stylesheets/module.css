@@ -13,7 +13,9 @@ aspects of the website
         '. nav nav'
     ;
     padding-top: 5px;
-}
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+}::-webkit-scrollbar { height: 0 !important }
 
 .topper__title{
     grid-area: title;
@@ -53,7 +55,7 @@ aspects of the website
     height: 30px;
     margin-right: 5px;
 
-    background-color: rgb(240, 189, 49);
+    background-color: rgb(254, 203, 69);
     border-radius: 50px;
     border: none;
     cursor: pointer;
