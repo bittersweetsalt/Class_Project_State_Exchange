@@ -5,17 +5,19 @@
         <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
         <link rel='stylesheet' href='stylesheets/global.css'>
     </head>
-    <div id="index">
+
+
+    <div id="app">
+
+
         <div class="layout-header">
             <div class="layout-body">
                 <div class="topper">
                     <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-                    <div class="topper__form">
-                        <form class="" v-on:submit.prevent="sendQuery">
-                            <input type="text" placeholder="Search" class="topper__form-input" v-model="query">
-                            <!-- <button type="submit" class="form__button--border">Search</button> -->
+                        <form class="topper__form" v-on:submit.prevent="sendQuery">
+                            <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
+                            <button type="submit" class="topper__form--button">Go</button>
                         </form>
-                    </div>
                     <div class="topper__links">
                         <a href="#" class="topper__links--login">Login</a>
                         <a href="#" class="topper__links--signup">Signup</a>
@@ -31,72 +33,25 @@
             </div>
         </div>
 
+        
         <div class="layout-body">
-            <div class="carousel">
-                <h1 class="carousel__title">Recent Posts</h1>
-                <img src="images/icons/arrow_left.png" class="carousel__button-left" v-on:click="previousPost">
-                <img src="images/icons/arrow_up.png" class="carousel__button-up" v-on:click="previousPost">
-                <div class="carousel__post-container">
-                    <div class="carousel__post" v-for="post in renderPosts">
-                        <img class="carousel__img" v-bind:src="post.image_name">
-                        <div class="carousel__post-body">
-                            <h2 class="carousel__post-title">{{ post.Name }}</h2>
-                            <p class="carousel__post-comment">{{ post.Comment }}</p>
-                        </div>
+            <h1 class="slider__title">Recent Posts</h1>
+            <div class="slider">
+                <div class="slider__post" v-for="post in posts">
+                    <img class="slider__post--img" v-bind:src="post.image_name">
+                    <div class="slider__post--body">
+                        <h2 class="slider__post--title">{{post.Name}}</h2>
+                        <p class="slider__post--comment">{{post.Comment}}</p>
                     </div>
                 </div>
-                <img src="images/icons/arrow_down.png" class="carousel__button-down" v-on:click="nextPost">
-                <img src="images/icons/arrow_right.png" class="carousel__button-right" v-on:click="nextPost">
             </div>
         </div>
+
+
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        var index = new Vue({
-            el: '#index',
-            data: {
-                posts: [],
-                query: "",
-                recentPostsLength: 0
-            },
-            methods: {
-                sendQuery: function(event){
-                    axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
-                        query: this.query
-                    })
-                    // .then(res => {index.posts = res.data})
-                },
-                nextPost: function() {
-                    if(this.recentPostsLength < (this.posts.length - 5)){
-                        this.recentPostsLength ++;
-                    }
-                },
-                previousPost: function() {
-                    if(this.recentPostsLength > 0){
-                        this.recentPostsLength--;
-                    }
-                    
-                }
-            },
-            computed: {
-                renderPosts: function() {
-                    return this.posts.filter( (value,index) => {
-                        if(index >= this.recentPostsLength && index < (this.recentPostsLength + 5)){
-                            return value;
-                        }
-                    })
-                }
-            },
-            mounted() {
-                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
-                .then(res => {
-                    this.posts = res.data;
-                })
-            }
-        })
-    </script>
+    <script src="javascripts/index.js"></script>
 </html>

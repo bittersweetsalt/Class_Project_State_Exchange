@@ -16,6 +16,8 @@ body{
 
 p {
     color: var(--body-text-color);
+    margin: 0;
+    padding: 5px 0;
 }
 
 a {
@@ -38,6 +40,8 @@ h1 {
 h2 {
     font-family: var(--main-header-font);
     color: var(--body-text-color);
+    margin: 0;
+    padding: 0;
 }
 
 label{

@@ -25,19 +25,39 @@ aspects of the website
 
 .topper__form{
     grid-area: form;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     width: 100%;
+    max-width: 500px;
+
+    border-radius: 50px;
+    background-color: white;
     /* text-align: center; */
 }
 
-.topper__form-input{
+.topper__form--input{
     width: 100%;
     max-width: 450px;
     height: 40px;
     padding: 15px;
 
     outline: none;
-    border: 1px solid var(--secondary-color);
+    border: none;
+    background-color: transparent;
+}
+
+.topper__form--button{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+
+    background-color: rgb(240, 189, 49);
     border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    color: white;
 }
 
 .topper__img{
@@ -77,6 +97,44 @@ aspects of the website
     /* font-family: var(--main-header-font); */
     /* font-size: 17px; */
 }
+
+/*--------------------------------------------------------------------SLIDER--*/
+.slider {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .slider__title{
+      border-bottom: 1px solid black;
+  }
+
+  .slider__post{
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+
+    scroll-snap-align: start;
+    overflow: hidden;
+
+    width: 200px;
+    height: 300px;
+    max-height: 300px;
+    background-color: rgb(230, 230, 230);
+    margin: 5px;
+    border-radius: 5px;
+  }
+
+  .slider__post--img{
+      width: 100%;
+      min-height: 130px;
+      max-height: 130px;
+  }
+
+  .slider__post--body{
+      padding: 5px;
+  }
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
 .form{
@@ -166,85 +224,6 @@ input[type='file'] {
 /* This is a style specific to only newpost element, will try to find a better solution later */
 .newpost {
     margin-top: 30px;
-}
-
-/*-------------------------------------------------------------------CAROUSEL--*/
-.carousel{
-    display: grid;
-    grid-template-columns: 13px 1fr 13px;
-    grid-template-areas:
-        'title title title'
-        'arrow_l posts arrow_r'
-    ;
-    grid-gap: 10px;
-    margin-top: 20px;
-    width: 100%;
-    background-color: rgb(231, 231, 231);
-    border-radius: var(--border-radius);
-    padding: 15px;
-}
-
-.carousel__title{
-    justify-self: start;
-    align-self: end;
-    grid-area: title;
-
-    border-bottom: 1px solid var(--secondary-color);
-    width: 100%;
-    margin: 0;
-}
-
-.carousel__button-left,
-.carousel__button-right{
-    height: 40px;
-    align-self: center;
-    cursor: pointer;
-}
-.carousel__button-left{
-    grid-area: arrow_l;
-    justify-self: right;
-}
-.carousel__button-right{
-    grid-area: arrow_r;
-}
-
-.carousel__button-up,
-.carousel__button-down{
-    width: 40px;
-    cursor:pointer;
-    display: none;
-}
-
-.carousel__post-container{
-    grid-area: posts;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr;
-    grid-gap: 10px;
-
-    justify-self: stretch;
-
-    width: 100%;
-}
-
-.carousel__post{
-    width: 200px;
-    height: 300px;
-    padding: 7px;
-
-    justify-self: center;
-    overflow: hidden;
-
-    border-radius: var(--border-radius);
-    background-color: white;
-}
-
-.carousel__post-body{
-    padding: 5px;
-}
-
-.carousel__post-title{
-    font-size: 25px;
 }
 
  /*---------------------------------------------DEVELOPER CARDS-(about pages)--*/

@@ -3,8 +3,7 @@ This css file is used only for styling basic layout elemnts. It divides the page
 into sections and holds modules together.
 *****************************************************************************/
 
-#index,
-#app-newpost{
+#app{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,7 +31,7 @@ into sections and holds modules together.
 
 .layout-body{
     width: 100%;
-    max-width: 1400px;
+    max-width: 1330px;
     align-self: center;
     padding: 5px 35px;
 }
@@ -88,7 +87,29 @@ into sections and holds modules together.
     grid-column: span 12;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1330px){
+    .layout-body{
+        max-width: 1110px;
+    }
+}
+
+@media only screen and (max-width: 1125px){
+    .layout-body{
+        max-width: 910px;
+    }
+}
+
+@media only screen and (max-width: 910px){
+    .layout-body{
+        max-width: 695px;
+    }
+}
+
+@media only screen and (max-width: 695px){
+    .layout-body{
+        max-width: 480px;
+    }
+
     .layout-header{
         height: 300px;
     }
