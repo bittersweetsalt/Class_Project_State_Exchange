@@ -21,11 +21,11 @@ p {
 a {
     font-family: var(--main-body-font);
     text-decoration: none;
-    color: black;
+    color: white;
 }
 a:hover {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 h1 {

@@ -26,6 +26,8 @@ into sections and holds modules together.
     /* background-color: var(--main-color); */
     border-bottom: 1px solid var(--secondary-color);
     color: white;
+    background: URL("/images/Banner-Purple.png");
+    background-size: cover;
 }
 
 .layout-body{
