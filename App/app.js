@@ -10,6 +10,7 @@ const aboutRouter = require('./routes/about');
 const newPostRouter = require('./routes/newpost');
 const prototypeRouter = require('./routes/prototype');
 const testMySqlRouter = require('./routes/testmysql');
+const dashboardRouter = require('./routes/dashboard');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/', aboutRouter);
 app.use('/', newPostRouter);
 app.use('/', prototypeRouter);
 app.use('/', testMySqlRouter);
+app.use('/', dashboardRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

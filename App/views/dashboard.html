@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title>State Exchange</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' href='stylesheets/global.css'>
+</head>
+<div id="index">
+    <div class="layout-header">
+        <div class="layout-body grid">
+            <a href="index" class="grid__col--3">
+                <h1 class="topper__title">State Exchange</h1>
+            </a>
+            <form class="form grid__col--7" v-on:submit.prevent="sendQuery">
+                <input type="text" placeholder="Search" class="form__input" v-model="query">
+                <button type="submit" class="form__button">Search</button>
+            </form>
+            <img src="images/user.png" class="topper__img grid__col--2">
+        </div>
+        <div class="nav layout-body">
+            <a href="index" class="nav__item">Home</a>
+            <a href="about" class="nav__item">About</a>
+            <a class="nav__item">For Sale</a>
+            <a href="newpost" class="nav__item">New Post</a>
+            <a class="nav__item">Dashboard</a>
+        </div>
+    </div>
+
+    <div id="app-dashboard">
+        <div class="layout-body grid">
+            <div>
+                <h1>{{ user }}'s Dasbhoard</h1>
+                <div v-for="post in posts">
+                    {{ post }}
+                </div>
+                <div v-for="message in messages">
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="javascripts/SearchResults.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app-dashboard',
+            data: {
+                //
+                user: 'testUser',
+                posts: ['Post1', 'Post2', 'Post3', 'Post4'],
+                messages: ['Message1', 'Message2', 'Message3'],
+            }
+        })
+    </script>
+
+</html>
