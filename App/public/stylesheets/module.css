@@ -4,6 +4,12 @@ OOP. This is one of the more important files and will hold styling for many
 aspects of the website
 *****************************************************************************/
 
+.disclaimer{
+    text-align: center;
+    margin-top: 5px;
+    font-family: var(--main-body-font);
+}
+
 /*---------------------------------------------TOPPER-(title | login/signup)--*/
 .topper{
     display: grid;
@@ -128,13 +134,13 @@ aspects of the website
     scroll-snap-type: x mandatory;
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
-  }::-webkit-scrollbar { height: 0 !important}
+}::-webkit-scrollbar { height: 0 !important}
 
-  .slider__title{
-      border-bottom: 1px solid black;
-  }
+.slider__title{
+    border-bottom: 1px solid black;
+}
 
-  .slider__post{
+.slider__post{
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -148,24 +154,26 @@ aspects of the website
     margin: 5px;
     padding: 5px;
 
-    background-color: rgb(230, 230, 230);
-    border-radius: 5px;
-  }
+    background-color: rgb(236, 236, 236);
+    border-radius: var(--border-radius);
+}
 
-  .slider__post--img{
-      width: 100%;
-      min-height: 130px;
-      max-height: 130px;
-      border-radius: var(--border-radius);
-  }
+.slider__post--img{
+    width: 100%;
+    min-height: 130px;
+    max-height: 130px;
+    padding: 5px;
+    background-size: cover;
+    border-radius: var(--border-radius);
+}
 
-  .slider__post--title{
+.slider__post--title{
 
-  }
+}
 
-  .slider__post--body{
-      padding-top: 5px;
-  }
+.slider__post--body{
+    padding: 5px;
+}
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
 .form{

@@ -20,6 +20,7 @@ into sections and holds modules together.
     justify-content: space-between;
 
     width: 100%;
+    min-height: 100px;
     /* height: 150px; */
 
     /* background-color: var(--main-color); */

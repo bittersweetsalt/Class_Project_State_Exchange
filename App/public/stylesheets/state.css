@@ -44,8 +44,24 @@ different views, color variations, etc.
 
 @media only screen and (max-width: 695px){
     /*---------------------------------------------------------------------TOPPER--*/
+    .topper{
+        grid-template-columns: 1fr 80px;
+    }
+    
+    .topper__title{
+        font-size: 19px;
+    }
+
+    .topper__form{
+        max-width: 100%;
+    }
+    
     .topper__img{
         justify-self: start;
+    }
+
+    .topper__links{
+        font-size: 13px;
     }
 
     /*-------------------------------------------------------------FORM ELEMENTS--*/
