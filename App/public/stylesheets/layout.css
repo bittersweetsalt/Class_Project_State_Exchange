@@ -110,10 +110,6 @@ into sections and holds modules together.
         max-width: 480px;
     }
 
-    .layout-header{
-        height: 300px;
-    }
-
     .grid{
         grid-template-columns: 1fr;
         justify-items: left;

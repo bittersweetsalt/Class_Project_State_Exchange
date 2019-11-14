@@ -60,6 +60,11 @@ different views, color variations, etc.
 
     /*----------------------------------------------------------------NAVIGATION--*/
     .nav{
+        display: none;
         flex-direction: column;
+    }
+
+    .nav--burger{
+        display: flex;
     }
 }
