@@ -7,17 +7,17 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel='stylesheet' href='stylesheets/global.css'>
 </head>
-<div id="index">
+
+    <div id="app">
+
         <div class="layout-header">
             <div class="layout-body">
                 <div class="topper">
                     <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-                    <div class="topper__form">
-                        <form class="" v-on:submit.prevent="sendQuery">
-                            <input type="text" placeholder="Search" class="topper__form-input" v-model="query">
-                            <!-- <button type="submit" class="form__button--border">Search</button> -->
+                        <form class="topper__form" v-on:submit.prevent="sendQuery">
+                            <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
+                            <button type="submit" class="topper__form--button">GO</button>
                         </form>
-                    </div>
                     <div class="topper__links">
                         <a href="#" class="topper__links--login">Login</a>
                         <a href="#" class="topper__links--signup">Signup</a>
@@ -27,13 +27,13 @@
                         <a href="about" class="nav__item">About</a>
                         <a href="#" class="nav__item">For Sale</a>
                         <a href="newpost" class="nav__item">New Post</a>
-                        <a class="nav__item">Dashboard</a>
+                        <a href="dashboard" class="nav__item">Dashboard</a>
                     </div>
                 </div>
             </div>
         </div>
 
-    <div id="app-dashboard">
+
         <div class="layout-body">
                 <h1>{{ user }}'s Dasbhoard</h1>
                 <div>
@@ -60,7 +60,7 @@
     <script src="javascripts/SearchResults.js"></script>
     <script>
         var app = new Vue({
-            el: '#app-dashboard',
+            el: '#app',
             data: {
                 //
                 user: 'testUser',

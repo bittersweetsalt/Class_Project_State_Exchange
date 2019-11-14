@@ -4,32 +4,32 @@
     <title>New Post!</title>
     <link rel='stylesheet' href='stylesheets/global.css'>
 </head>
-<div class="layout-header">
-    <div class="layout-body">
-        <div class="topper">
-            <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-            <div class="topper__form">
-                <form class="" v-on:submit.prevent="sendQuery">
-                    <input type="text" placeholder="Search" class="topper__form-input" v-model="query">
-                    <!-- <button type="submit" class="form__button--border">Search</button> -->
-                </form>
-            </div>
-            <div class="topper__links">
-                <a href="#" class="topper__links--login">Login</a>
-                <a href="#" class="topper__links--signup">Signup</a>
-            </div>
-            <div class="nav">
-                <a href="index" class="nav__item">Home</a>
-                <a href="about" class="nav__item">About</a>
-                <a href="#" class="nav__item">For Sale</a>
-                <a href="newpost" class="nav__item">New Post</a>
-                <a class="nav__item">Dashboard</a>
+
+<div id="app">
+
+    <div class="layout-header">
+        <div class="layout-body">
+            <div class="topper">
+                <a href="index"><h1 class="topper__title">State Exchange</h1></a>
+                    <form class="topper__form" v-on:submit.prevent="sendQuery">
+                        <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
+                        <button type="submit" class="topper__form--button">GO</button>
+                    </form>
+                <div class="topper__links">
+                    <a href="#" class="topper__links--login">Login</a>
+                    <a href="#" class="topper__links--signup">Signup</a>
+                </div>
+                <div class="nav">
+                    <a href="index" class="nav__item">Home</a>
+                    <a href="about" class="nav__item">About</a>
+                    <a href="#" class="nav__item">For Sale</a>
+                    <a href="newpost" class="nav__item">New Post</a>
+                    <a href="dashboard" class="nav__item">Dashboard</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="app-newpost">
     <div class="layout-body">
         <h1>Create a New Post</h1>
         <form class="form newpost grid">
@@ -64,7 +64,7 @@
 <script src="javascripts/SearchResults.js"></script>
 <script>
     var app = new Vue({
-        el: '#app-newpost',
+        el: '#app',
         data: {
             title: '',
             desc: '',

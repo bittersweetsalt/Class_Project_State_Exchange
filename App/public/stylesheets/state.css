@@ -4,29 +4,46 @@ looks on screens that are smaller or larger, or how a module might look in
 different views, color variations, etc.
 *****************************************************************************/
 
-@media only screen and (max-width: 1180px) {
-    /*---------------------------------------------------------------------TOPPER--*/
-    .topper__title{
-        /* font-size: 25px; */
-    }
-    
-    /*-------------------------------------------------------------------CAROUSEL--*/
-    .carousel__post-container{
-        grid-template-columns: repeat(2, 1fr);
-        overflow: hidden;
-    }
-
-    .carousel__post{
-        display: flex;
-
-        width: 100%;
-        height: 100px;
-    }
+@media only screen and (max-width: 1330px){
 
 }
 
-@media only screen and (max-width: 700px) {
-    /*---------------------------------------------TOPPER-(title | login/signup)--*/
+@media only screen and (max-width: 1125px){
+    .topper__form{
+        max-width: 400px;
+    }
+}
+
+@media only screen and (max-width: 910px){
+    /*---------------------------------------------------------------------TOPPER--*/
+    .topper{
+        grid-template-columns: 1fr 100px;
+        grid-template-areas:
+            'title links'
+            'form form'
+            'nav nav'
+        ;
+        padding-top: 5px;
+    }
+
+    .topper__links{
+        align-items: flex-end;
+    }
+
+    .topper__form{
+        margin-top: 10px;
+    }
+
+    /*----------------------------------------------------------------NAVIGATION--*/
+    .nav__item{
+        text-align: center;
+    }
+
+
+}
+
+@media only screen and (max-width: 695px){
+    /*---------------------------------------------------------------------TOPPER--*/
     .topper__img{
         justify-self: start;
     }
@@ -44,42 +61,5 @@ different views, color variations, etc.
     /*----------------------------------------------------------------NAVIGATION--*/
     .nav{
         flex-direction: column;
-    }
-
-    /*-------------------------------------------------------------------CAROUSEL--*/
-    .carousel{
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            'title'
-            'arrow_u'
-            'posts'
-            'arrow_d'
-        ;
-        grid-column-gap: 10px;
-        margin-top: 20px;
-        width: 100%;
-    }
-    
-    .carousel__button-left,
-    .carousel__button-right{
-        display: none;
-    }
-
-    .carousel__button-up,
-    .carousel__button-down{
-        display: inline-block;
-        justify-self: center;
-    }
-    .carousel__button-up{
-        grid-area: arrow_u;
-    }
-    .carousel__button-down{
-        grid-area: arrow_d;
-    }
-
-
-    .carousel__post-container{
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 1fr);
     }
 }
