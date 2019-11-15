@@ -5,9 +5,7 @@
         <link rel='stylesheet' href='stylesheets/global.css'>
     </head>
 
-
     <div id="app">
-
 
         <div class="layout-header">
             <div class="layout-body">
@@ -38,41 +36,13 @@
         </div>
 
         <div class="layout-body">
-            <div class="disclaimer">
-                <p>SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only</p>
+            <div class="search_post" v-for="post in posts">
+                <h1>{{post.Name}}</h1>
+                <p>{{post.Comment}}</p>
             </div>
         </div>
-
-        
-        <div class="layout-body">
-            <h1 class="slider__title">Recent Posts</h1>
-            <div class="slider">
-                <div class="slider__post" v-for="post in posts">
-                    <div class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
-                    <div class="slider__post--body">
-                        <h2 class="slider__post--title">{{post.Name}}</h2>
-                        <p class="slider__post--comment">{{post.Comment}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layout-body">
-                <h1 class="slider__title">Popular Posts</h1>
-                <div class="slider">
-                    <div class="slider__post" v-for="post in posts">
-                            <div class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
-                        <div class="slider__post--body">
-                            <h2 class="slider__post--title">{{post.Name}}</h2>
-                            <p class="slider__post--comment">{{post.Comment}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -90,12 +60,12 @@
             },
             mounted() {
                 this.query = sessionStorage.getItem('query');
-
-                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
-                .then(res => {
-                    this.posts = res.data;
+                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
+                    query: this.query
                 })
+                .then(res => {index.posts = res.data})
             }
         })
     </script>
+
 </html>

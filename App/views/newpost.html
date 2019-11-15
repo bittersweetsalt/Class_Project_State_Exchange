@@ -11,7 +11,7 @@
         <div class="layout-body">
             <div class="topper">
                 <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-                    <form class="topper__form" v-on:submit.prevent="setQuery">
+                    <form class="topper__form" v-on:submit="setQuery" action="search">
                         <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
                         <button type="submit" class="topper__form--button">GO</button>
                     </form>
