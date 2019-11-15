@@ -3,11 +3,12 @@ var router = express.Router();
 const path = require('path');
 var connection = require("../db/connection");
 
-/* GET vertical prototype */
-router.get('/testmysql', (req, res, next) => {
+/*Simple parameter mysql query fetch.*/
+/*Able to only grab from Posting via ID only.*/
+router.get('/testmysql/:id', (req, res, next) => {
 
     const userID = req.params.id;
-    const queryString = 'SELECT * FROM posting WHERE id = ?'
+    const queryString = 'SELECT * FROM Posting WHERE id = ?'
     connection.query(queryString, [userID], (err, rows, fields) => {
         if (err){
             console.log("Failed: " + err);
