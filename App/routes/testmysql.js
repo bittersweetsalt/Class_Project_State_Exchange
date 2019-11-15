@@ -1,26 +1,28 @@
 var express = require('express');
 var router = express.Router();
 const path = require('path');
+//const mysql = require('mysql');
 var db = require("../db/connection");
 
+
 /* GET vertical prototype */
-router.get('/testmysql', (req, res, next) => {
+router.get('/testmysql/:id', (req, res, next) => {
+    console.log("fetching user with id: " + req.params.id);
 
-    db.getConnection( (err, connection) => {
+    const userID = req.params.id;
+    const queryString = 'SELECT * FROM Posting WHERE ID = ?'
+    db.query(queryString, [userID], (err, rows, fields) => {
+        if (err){
+            console.log("Failed: " + err);
+            res.end();
+            return;
+        }
+      
+        console.log('Found database fetch');
+        res.send(rows);
 
-        var search_function = req.body.query;
-        var search_string = `SELECT Name, Category FROM Posting WHERE Name, Category LIKE '%${search_function}'`;
-
-        db.query(search_string, (error, results, fields) => {
-            console.log(req.query.query);
-            if(error){
-                console.log(error);
-            } else{
-                res.send(results);
-            }
-        })
-        db.release();
     })
+    //res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 module.exports = router;

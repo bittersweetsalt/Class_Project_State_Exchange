@@ -1,12 +1,11 @@
 const mysql = require('mysql');
 
-const db = mysql.createPool({
-    connectionLimit: 10,        //Limits connection towards mysql
-    user: 'ubuntu',
-    password: 'csc648.07!',
-    database: 'sfsuDatabase',
-    host: 'localhost',
+const db = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    database: 'database',
+    password: 'csc648.07',
     port: '3306'
-});
+})
 
 module.exports = db;
