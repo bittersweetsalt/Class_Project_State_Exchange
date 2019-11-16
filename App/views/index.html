@@ -2,7 +2,6 @@
     <head>
         <title>State Exchange</title>
         <meta name="viewport" content="width=device-width">
-        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
         <link rel='stylesheet' href='stylesheets/global.css'>
     </head>
 
@@ -14,13 +13,18 @@
             <div class="layout-body">
                 <div class="topper">
                     <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-                        <form class="topper__form" v-on:submit.prevent="sendQuery">
+                        <form class="topper__form" v-on:submit="setQuery" action="search">
                             <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
                             <button type="submit" class="topper__form--button">GO</button>
                         </form>
                     <div class="topper__links">
                         <a href="#" class="topper__links--login">Login</a>
                         <a href="#" class="topper__links--signup">Signup</a>
+                    </div>
+                    <div class="nav--burger">
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
                     </div>
                     <div class="nav">
                         <a href="index" class="nav__item">Home</a>
@@ -33,12 +37,18 @@
             </div>
         </div>
 
+        <div class="layout-body">
+            <div class="disclaimer">
+                <p>SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only</p>
+            </div>
+        </div>
+
         
         <div class="layout-body">
             <h1 class="slider__title">Recent Posts</h1>
             <div class="slider">
                 <div class="slider__post" v-for="post in posts">
-                    <img class="slider__post--img" v-bind:src="post.image_name">
+                    <div class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
                     <div class="slider__post--body">
                         <h2 class="slider__post--title">{{post.Name}}</h2>
                         <p class="slider__post--comment">{{post.Comment}}</p>
@@ -47,11 +57,45 @@
             </div>
         </div>
 
+        <div class="layout-body">
+                <h1 class="slider__title">Popular Posts</h1>
+                <div class="slider">
+                    <div class="slider__post" v-for="post in posts">
+                            <div class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
+                        <div class="slider__post--body">
+                            <h2 class="slider__post--title">{{post.Name}}</h2>
+                            <p class="slider__post--comment">{{post.Comment}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="javascripts/index.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                posts: [],
+                query: ""
+            },
+            methods: {
+                setQuery: function(event){
+                    sessionStorage.setItem('query', this.query);
+                }
+            },
+            mounted() {
+                this.query = sessionStorage.getItem('query');
+
+                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
+                .then(res => {
+                    this.posts = res.data;
+                })
+            }
+        })
+    </script>
 </html>
