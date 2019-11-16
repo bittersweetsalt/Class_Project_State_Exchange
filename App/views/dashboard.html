@@ -12,7 +12,7 @@
         <div class="layout-body">
             <div class="topper">
                 <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-                    <form class="topper__form" v-on:submit="setQuery" action="search">
+                    <form class="topper__form" action="search">
                         <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
                         <button type="submit" class="topper__form--button">GO</button>
                     </form>
@@ -72,10 +72,12 @@
             posts: [],
             messages: ['Message1', 'Message2', 'Message3'],
         },
+        watch: {
+            query: function(newQuery, oldQuery){
+                sessionStorage.setItem('query', newQuery);
+            }
+        },
         methods: {
-            setQuery: function (event) {
-                sessionStorage.setItem('query', this.query);
-            },
             getPosts: function () {
                 const userPosts = axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
                     posts: this.posts,

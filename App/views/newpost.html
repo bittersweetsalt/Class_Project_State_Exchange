@@ -11,7 +11,7 @@
         <div class="layout-body">
             <div class="topper">
                 <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-                    <form class="topper__form" v-on:submit="setQuery" action="search">
+                    <form class="topper__form" action="search">
                         <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
                         <button type="submit" class="topper__form--button">GO</button>
                     </form>
@@ -82,9 +82,6 @@
             query: ''
         },
         methods: {
-            setQuery: function(event){
-                sessionStorage.setItem('query', this.query);
-            },
             sendData: function() {
                 axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', formData = {
                     postTitle: app.title,
@@ -93,6 +90,11 @@
                     postCat: app.categorySelected,
                 });
                 console.log(formData);
+            }
+        },
+        watch: {
+            query: function(newQuery, oldQuery){
+                sessionStorage.setItem('query', newQuery);
             }
         },
         mounted() {
