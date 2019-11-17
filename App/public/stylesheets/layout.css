@@ -20,18 +20,17 @@ into sections and holds modules together.
     justify-content: space-between;
 
     width: 100%;
-    /* height: 150px; */
+    min-height: 100px;
+    padding-top: 5px;
 
-    /* background-color: var(--main-color); */
-    border-bottom: 1px solid var(--secondary-color);
     color: white;
-    background: URL("/images/Banner-Purple.png");
+    background: URL("/images/Banner-wide.png");
     background-size: cover;
 }
 
 .layout-body{
     width: 100%;
-    max-width: 1330px;
+    max-width: 1295px;
     align-self: center;
     padding: 5px 35px;
 }
@@ -101,6 +100,12 @@ into sections and holds modules together.
 
 @media only screen and (max-width: 910px){
     .layout-body{
+        max-width: 800px;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .layout-body{
         max-width: 695px;
     }
 }
@@ -108,10 +113,6 @@ into sections and holds modules together.
 @media only screen and (max-width: 695px){
     .layout-body{
         max-width: 480px;
-    }
-
-    .layout-header{
-        height: 300px;
     }
 
     .grid{
@@ -132,5 +133,11 @@ into sections and holds modules together.
     .grid__col--11,
     .grid__col--12{
         grid-column: span 1;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .layout-body{
+        max-width: 315px;
     }
 }

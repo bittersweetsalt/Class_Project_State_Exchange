@@ -3,88 +3,111 @@
 <head>
     <title>State Exchange</title>
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel='stylesheet' href='stylesheets/global.css'>
 </head>
 
-    <div id="app">
+<div id="app">
 
-        <div class="layout-header">
-            <div class="layout-body">
-                <div class="topper">
-                    <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-                        <form class="topper__form" v-on:submit.prevent="sendQuery">
-                            <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
-                            <button type="submit" class="topper__form--button">GO</button>
-                        </form>
-                    <div class="topper__links">
-                        <a href="#" class="topper__links--login">Login</a>
-                        <a href="#" class="topper__links--signup">Signup</a>
-                    </div>
-                    <div class="nav">
-                        <a href="index" class="nav__item">Home</a>
-                        <a href="about" class="nav__item">About</a>
-                        <a href="#" class="nav__item">For Sale</a>
-                        <a href="newpost" class="nav__item">New Post</a>
-                        <a href="dashboard" class="nav__item">Dashboard</a>
-                    </div>
+    <div class="layout-header">
+        <div class="layout-body">
+            <div class="topper">
+                <a href="index"><h1 class="topper__title">State Exchange</h1></a>
+                    <form class="topper__form" action="search">
+                        <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
+                        <button type="submit" class="topper__form--button">GO</button>
+                    </form>
+                <div class="topper__links">
+                    <a href="#" class="topper__links--login">Login</a>
+                    <a href="#" class="topper__links--signup">Signup</a>
+                </div>
+                <div class="nav--burger">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </div>
+                <div class="nav">
+                    <a href="index" class="nav__item">Home</a>
+                    <a href="about" class="nav__item">About</a>
+                    <a href="#" class="nav__item">For Sale</a>
+                    <a href="newpost" class="nav__item">New Post</a>
+                    <a href="dashboard" class="nav__item">Dashboard</a>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <div class="layout-body">
-                <h1>{{ user }}'s Dasbhoard</h1>
-                <div>
-                    <!--TAB BUTTONS-->
-                    <div>
-                        <button>Posts</button>
-                        <button>Messages</button>
-                    </div>
-                    <div>
-                        <!--CONTENT-->
-                        <div v-for="message in messages">
-                            {{ message }}
-                        </div>
-                        <div v-for="post in posts">
-                            {{ post }}
-                        </div>
-                    </div>
+    <div class="layout-body">
+        <h1>{{ user }}'s Dasbhoard</h1>
+        <div>
+            <!--TAB BUTTONS-->
+            <div>
+                <button v-on:click="getPosts">Posts</button>
+                <button v-on:click="getMessages">Messages</button>
+            </div>
+            <div>
+                <!--CONTENT-->
+                <div v-for="message in messages">
+                    {{  }}
                 </div>
+                <div v-for="post in posts">
+                    <h2>{{ post.Name }}</h2>
+                    <p>{{ post.Comment }}</p>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="javascripts/SearchResults.js"></script>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                //
-                user: 'testUser',
-                posts: ['Post1', 'Post2', 'Post3', 'Post4'],
-                messages: ['Message1', 'Message2', 'Message3'],
-            },
-            methods: {
-                getPosts: function() {
-                    
-                },
-                getMessages: function() {
-                    
-                },
-                deletePosts: function() {
-                    //delete post from users posts
-                },
-                makePost: function() {
-                    //create post from users dashboard
-                },
-                respond: function() {
-                    //respond to a users message
-                }
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="javascripts/SearchResults.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            //
+            query: '',
+            user: 'testUser',
+            posts: [],
+            messages: ['Message1', 'Message2', 'Message3'],
+        },
+        watch: {
+            query: function(newQuery, oldQuery){
+                sessionStorage.setItem('query', newQuery);
             }
-        })
-    </script>
+        },
+        methods: {
+            getPosts: function () {
+                const userPosts = axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
+                    posts: this.posts,
+                })
+                    .then((res) => {
+                        app.posts = res.data;
+                    })
+            },
+            getMessages: function () {
+                return messages;
+            },
+            deletePosts: function () {
+                //delete post from users posts
+            },
+            makePost: function () {
+                //create post from users dashboard
+            },
+            respond: function () {
+                //respond to a users message
+            }
+        },
+
+        mounted() {
+            const sessionQuery = sessionStorage.getItem('query');
+                if(sessionQuery != null){
+                    this.query = sessionQuery;
+                }
+        }
+
+    })
+</script>
 
 </html>

@@ -4,13 +4,19 @@ OOP. This is one of the more important files and will hold styling for many
 aspects of the website
 *****************************************************************************/
 
+.disclaimer{
+    text-align: center;
+    margin-top: 5px;
+    font-family: var(--main-body-font);
+}
+
 /*---------------------------------------------TOPPER-(title | login/signup)--*/
 .topper{
     display: grid;
     grid-template-columns: 275px 1fr 100px;
     grid-template-areas:
         'title form links'
-        '. nav nav'
+        'title nav  nav'
     ;
     padding-top: 5px;
 }
@@ -25,39 +31,94 @@ aspects of the website
 
 .topper__form{
     grid-area: form;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 40px 1fr 46px;
+    grid-template-areas:
+        "select input button"
+    ;
     align-items: center;
 
     width: 100%;
     max-width: 500px;
+    margin-bottom: 16px;
+    padding: 5px;
 
-    border-radius: 50px;
+    /* border-radius: 50px; */
     background-color: white;
     /* text-align: center; */
 }
 
+.topper__form--select{
+    grid-area: 2 / 1 / 2 / 4;
+    display: flex;
+    /* display: none; */
+    color: black;
+
+    padding-top: 10px;
+    margin-top: 10px;
+
+    border-top: 1px solid var(--secondary-color);
+}
+
+.topper__form--select-radio{
+    opacity: 0;
+    width: 0;
+    margin: 0;
+    position: fixed;
+}
+
+.topper__form--select-radio:checked + label {
+    background-color: rgb(233, 233, 233);
+}
+
+.topper__form--select-label{
+    display: inline-block;
+
+    padding: 5px 10px;
+    margin: 0 5px;
+
+    border-radius: 5px;
+    font-size: 16px;
+}
+
 .topper__form--input{
+    grid-area: input;
     width: 100%;
     max-width: 450px;
-    height: 40px;
+    height: 30px;
     padding: 15px;
 
     outline: none;
     border: none;
     background-color: transparent;
+
+    font-size: 15px;
 }
 
-.topper__form--button{
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
+.topper__form--button-go,
+.topper__form--button-select{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    background-color: rgb(254, 203, 69);
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    padding: 10px;
+
     border-radius: 50px;
     border: none;
     cursor: pointer;
-    color: white;
+}
+
+.topper__form--button-go{
+    grid-area: button;
+    background-color: var(--yellow);
+}
+.topper__form--button-select{
+    grid-area: select;
+    background-color: rgb(226, 226, 226);
 }
 
 .topper__img{
@@ -94,8 +155,27 @@ aspects of the website
     height: 30px;
     cursor: pointer;
     color: white;
-    /* font-family: var(--main-header-font); */
-    /* font-size: 17px; */
+}
+
+.nav--burger{
+    display: none;
+    flex-direction: column;
+    grid-area: nav;
+    justify-self: center;
+    cursor: pointer;
+    
+    margin-bottom: 5px;
+    background-color: var(--yellow);
+    border-radius: var(--border-radius);
+    padding: 5px;
+}
+
+.burger-line{
+    width: 20px;
+    height: 2px;
+    border-radius: 10px;
+    background-color: white;
+    margin: 2px 0;
 }
 
 /*--------------------------------------------------------------------SLIDER--*/
@@ -106,13 +186,13 @@ aspects of the website
     scroll-snap-type: x mandatory;
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
-  }::-webkit-scrollbar { height: 0 !important}
+}::-webkit-scrollbar { height: 0 !important}
 
-  .slider__title{
-      border-bottom: 1px solid black;
-  }
+.slider__title{
+    border-bottom: 1px solid black;
+}
 
-  .slider__post{
+.slider__post{
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -120,23 +200,32 @@ aspects of the website
     scroll-snap-align: start;
     overflow: hidden;
 
-    width: 200px;
+    width: 235px;
     height: 300px;
-    max-height: 300px;
-    background-color: rgb(230, 230, 230);
+    /* max-height: 300px; */
     margin: 5px;
-    border-radius: 5px;
-  }
+    padding: 5px;
 
-  .slider__post--img{
-      width: 100%;
-      min-height: 130px;
-      max-height: 130px;
-  }
+    background-color: rgb(236, 236, 236);
+    border-radius: var(--border-radius);
+}
 
-  .slider__post--body{
-      padding: 5px;
-  }
+.slider__post--img{
+    width: 100%;
+    min-height: 130px;
+    max-height: 130px;
+    padding: 5px;
+    background-size: cover;
+    border-radius: var(--border-radius);
+}
+
+.slider__post--title{
+
+}
+
+.slider__post--body{
+    padding: 5px;
+}
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
 .form{

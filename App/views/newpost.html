@@ -11,13 +11,18 @@
         <div class="layout-body">
             <div class="topper">
                 <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-                    <form class="topper__form" v-on:submit.prevent="sendQuery">
+                    <form class="topper__form" action="search">
                         <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
                         <button type="submit" class="topper__form--button">GO</button>
                     </form>
                 <div class="topper__links">
                     <a href="#" class="topper__links--login">Login</a>
                     <a href="#" class="topper__links--signup">Signup</a>
+                </div>
+                <div class="nav--burger">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
                 </div>
                 <div class="nav">
                     <a href="index" class="nav__item">Home</a>
@@ -57,6 +62,8 @@
             <button v-on:click.prevent='sendData' type="submit" class="form__button--border grid__col--1">Post</button>
         </form>
     </div>
+
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
@@ -81,6 +88,7 @@
             categories: ['Select Category','Electronics', 'Books', 'Furniture', 'Toys'],
             price: '',
             img: '',
+            query: ''
         },
 
         
@@ -104,6 +112,21 @@
                 .catch(console.log(error));
             
                 
+                });
+                console.log(formData);
+            }
+        },
+        watch: {
+            query: function(newQuery, oldQuery){
+                sessionStorage.setItem('query', newQuery);
+            }
+        },
+        mounted() {
+            const sessionQuery = sessionStorage.getItem('query');
+                if(sessionQuery != null){
+                    this.query = sessionQuery;
+                }
+
         }
     }
         

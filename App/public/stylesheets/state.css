@@ -5,13 +5,17 @@ different views, color variations, etc.
 *****************************************************************************/
 
 @media only screen and (max-width: 1330px){
-
+    /*--------------------------------------------------------------------SLIDER--*/
+    .slider__post{
+        width: 200px;
+    }
 }
 
 @media only screen and (max-width: 1125px){
     .topper__form{
         max-width: 400px;
     }
+    
 }
 
 @media only screen and (max-width: 910px){
@@ -39,13 +43,39 @@ different views, color variations, etc.
         text-align: center;
     }
 
+    /*--------------------------------------------------------------------SLIDER--*/
+    .slider__post{
+        width: 235px;
+    }
+}
 
+@media only screen and (max-width: 800px){
+    /*--------------------------------------------------------------------SLIDER--*/
+    .slider__post{
+        width: 200px;
+    }
 }
 
 @media only screen and (max-width: 695px){
     /*---------------------------------------------------------------------TOPPER--*/
+    .topper{
+        grid-template-columns: 1fr 80px;
+    }
+    
+    .topper__title{
+        font-size: 19px;
+    }
+
+    .topper__form{
+        max-width: 100%;
+    }
+    
     .topper__img{
         justify-self: start;
+    }
+
+    .topper__links{
+        font-size: 13px;
     }
 
     /*-------------------------------------------------------------FORM ELEMENTS--*/
@@ -60,6 +90,17 @@ different views, color variations, etc.
 
     /*----------------------------------------------------------------NAVIGATION--*/
     .nav{
+        display: none;
         flex-direction: column;
+    }
+
+    .nav--burger{
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .slider__post{
+        width: 235px;
     }
 }
