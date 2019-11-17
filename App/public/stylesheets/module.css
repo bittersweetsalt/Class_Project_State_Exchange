@@ -16,7 +16,7 @@ aspects of the website
     grid-template-columns: 275px 1fr 100px;
     grid-template-areas:
         'title form links'
-        '. nav nav'
+        'title nav  nav'
     ;
     padding-top: 5px;
 }
@@ -31,40 +31,94 @@ aspects of the website
 
 .topper__form{
     grid-area: form;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 40px 1fr 46px;
+    grid-template-areas:
+        "select input button"
+    ;
     align-items: center;
 
     width: 100%;
     max-width: 500px;
     margin-bottom: 16px;
+    padding: 5px;
 
-    border-radius: 50px;
+    /* border-radius: 50px; */
     background-color: white;
     /* text-align: center; */
 }
 
+.topper__form--select{
+    grid-area: 2 / 1 / 2 / 4;
+    display: flex;
+    /* display: none; */
+    color: black;
+
+    padding-top: 10px;
+    margin-top: 10px;
+
+    border-top: 1px solid var(--secondary-color);
+}
+
+.topper__form--select-radio{
+    opacity: 0;
+    width: 0;
+    margin: 0;
+    position: fixed;
+}
+
+.topper__form--select-radio:checked + label {
+    background-color: rgb(233, 233, 233);
+}
+
+.topper__form--select-label{
+    display: inline-block;
+
+    padding: 5px 10px;
+    margin: 0 5px;
+
+    border-radius: 5px;
+    font-size: 16px;
+}
+
 .topper__form--input{
+    grid-area: input;
     width: 100%;
     max-width: 450px;
-    height: 40px;
+    height: 30px;
     padding: 15px;
 
     outline: none;
     border: none;
     background-color: transparent;
+
+    font-size: 15px;
 }
 
-.topper__form--button{
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
+.topper__form--button-go,
+.topper__form--button-select{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    background-color: var(--yellow);
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    padding: 10px;
+
     border-radius: 50px;
     border: none;
     cursor: pointer;
-    color: white;
+}
+
+.topper__form--button-go{
+    grid-area: button;
+    background-color: var(--yellow);
+}
+.topper__form--button-select{
+    grid-area: select;
+    background-color: rgb(226, 226, 226);
 }
 
 .topper__img{
@@ -101,8 +155,6 @@ aspects of the website
     height: 30px;
     cursor: pointer;
     color: white;
-    /* font-family: var(--main-header-font); */
-    /* font-size: 17px; */
 }
 
 .nav--burger{

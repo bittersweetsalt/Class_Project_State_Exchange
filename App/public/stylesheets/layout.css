@@ -21,8 +21,8 @@ into sections and holds modules together.
 
     width: 100%;
     min-height: 100px;
+    padding-top: 5px;
 
-    border-bottom: 1px solid var(--secondary-color);
     color: white;
     background: URL("/images/Banner-wide.png");
     background-size: cover;
