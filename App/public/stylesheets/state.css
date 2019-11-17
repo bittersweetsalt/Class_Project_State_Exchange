@@ -5,13 +5,17 @@ different views, color variations, etc.
 *****************************************************************************/
 
 @media only screen and (max-width: 1330px){
-
+    /*--------------------------------------------------------------------SLIDER--*/
+    .slider__post{
+        width: 200px;
+    }
 }
 
 @media only screen and (max-width: 1125px){
     .topper__form{
         max-width: 400px;
     }
+    
 }
 
 @media only screen and (max-width: 910px){
@@ -39,7 +43,17 @@ different views, color variations, etc.
         text-align: center;
     }
 
+    /*--------------------------------------------------------------------SLIDER--*/
+    .slider__post{
+        width: 235px;
+    }
+}
 
+@media only screen and (max-width: 800px){
+    /*--------------------------------------------------------------------SLIDER--*/
+    .slider__post{
+        width: 200px;
+    }
 }
 
 @media only screen and (max-width: 695px){
@@ -82,5 +96,11 @@ different views, color variations, etc.
 
     .nav--burger{
         display: flex;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .slider__post{
+        width: 235px;
     }
 }

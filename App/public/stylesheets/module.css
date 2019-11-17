@@ -148,9 +148,9 @@ aspects of the website
     scroll-snap-align: start;
     overflow: hidden;
 
-    width: 200px;
+    width: 235px;
     height: 300px;
-    max-height: 300px;
+    /* max-height: 300px; */
     margin: 5px;
     padding: 5px;
 
