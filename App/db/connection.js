@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 
 const db = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    database: 'database',
+    user: 'ubuntu',
     password: 'csc648.07',
+    database: 'sfsuDatabase',
+    host: 'localhost',
     port: '3306'
 })
 
