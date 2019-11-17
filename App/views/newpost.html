@@ -10,11 +10,25 @@
     <div class="layout-header">
         <div class="layout-body">
             <div class="topper">
-                <a href="index"><h1 class="topper__title">State Exchange</h1></a>
-                    <form class="topper__form" action="search">
-                        <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
-                        <button type="submit" class="topper__form--button">GO</button>
-                    </form>
+                <a href="index">
+                    <h1 class="topper__title">State Exchange</h1>
+                </a>
+                <form class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}">
+                    <div class="topper__form--button-select" v-on:click.prevent="changeSelectState"><img
+                            src="/images/icons/arrow-down.png"></div>
+                    <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
+                    <button type="submit" class="topper__form--button-go"><img src="images/icons/arrow.png"></button>
+                    <div class="topper__form--select" v-if="select">
+                        <input type="radio" class="topper__form--select-radio" id="electronics">
+                        <label for="electronics" class="topper__form--select-label">Electronics</label>
+
+                        <input type="radio" class="topper__form--select-radio" id="textbooks">
+                        <label for="textbooks" class="topper__form--select-label">Textbooks</label>
+
+                        <input type="radio" class="topper__form--select-radio" id="other">
+                        <label for="other" class="topper__form--select-label">Other</label>
+                    </div>
+                </form>
                 <div class="topper__links">
                     <a href="#" class="topper__links--login">Login</a>
                     <a href="#" class="topper__links--signup">Signup</a>
@@ -27,7 +41,7 @@
                 <div class="nav">
                     <a href="index" class="nav__item">Home</a>
                     <a href="about" class="nav__item">About</a>
-                    <a href="#" class="nav__item">For Sale</a>
+                    <!-- <a href="#" class="nav__item">For Sale</a> -->
                     <a href="newpost" class="nav__item">New Post</a>
                     <a href="dashboard" class="nav__item">Dashboard</a>
                 </div>
@@ -76,33 +90,45 @@
             title: '',
             desc: '',
             categorySelected: 'Select Category',
-            categories: ['Select Category','Electronics', 'Books', 'Furniture', 'Toys'],
+            categories: ['Select Category', 'Electronics', 'Books', 'Furniture', 'Toys'],
             price: '',
             img: '',
-            query: ''
+            query: '',
+            radius: 50,
+            select: false
         },
         methods: {
-            sendData: function() {
-                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', formData = {
-                    postTitle: app.title,
-                    postDesc: app.desc,
-                    postPrice: app.price,
-                    postCat: app.categorySelected,
-                });
+            sendData: function () {
+                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql',
+                    formData = {
+                        postTitle: app.title,
+                        postDesc: app.desc,
+                        postPrice: app.price,
+                        postCat: app.categorySelected,
+                    });
                 console.log(formData);
+            },
+            changeSelectState: function () {
+                this.select = !this.select;
+                if (this.radius == 50) {
+                    this.radius = 20;
+                } else {
+                    this.radius = 50;
+                }
             }
         },
         watch: {
-            query: function(newQuery, oldQuery){
+            query: function (newQuery, oldQuery) {
                 sessionStorage.setItem('query', newQuery);
             }
         },
         mounted() {
             const sessionQuery = sessionStorage.getItem('query');
-                if(sessionQuery != null){
-                    this.query = sessionQuery;
-                }
+            if (sessionQuery != null) {
+                this.query = sessionQuery;
+            }
         }
     })
 </script>
+
 </html>

@@ -14,7 +14,7 @@
                 <div class="topper">
                     <a href="index"><h1 class="topper__title">State Exchange</h1></a>
                     <form class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}">
-                        <div class="topper__form--button-select"><img src="/images/icons/arrow-down.png" v-on:click.prevent="changeSelectState"></div>
+                        <div class="topper__form--button-select" v-on:click.prevent="changeSelectState"><img src="/images/icons/arrow-down.png"></div>
                         <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
                         <button type="submit" class="topper__form--button-go"><img src="images/icons/arrow.png"></button>
                         <div class="topper__form--select" v-if="select">

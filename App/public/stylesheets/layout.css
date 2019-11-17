@@ -21,6 +21,7 @@ into sections and holds modules together.
 
     width: 100%;
     min-height: 100px;
+    max-height: 120px;
     padding-top: 5px;
 
     color: white;
@@ -99,6 +100,10 @@ into sections and holds modules together.
 }
 
 @media only screen and (max-width: 910px){
+    .layout-header{
+        max-height: 164px;
+    }
+    
     .layout-body{
         max-width: 800px;
     }
@@ -111,6 +116,11 @@ into sections and holds modules together.
 }
 
 @media only screen and (max-width: 695px){
+    .layout-header{
+        max-height: 157px;
+        overflow: hidden;
+    }
+    
     .layout-body{
         max-width: 480px;
     }

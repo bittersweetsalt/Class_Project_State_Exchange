@@ -43,9 +43,8 @@ aspects of the website
     margin-bottom: 16px;
     padding: 5px;
 
-    /* border-radius: 50px; */
     background-color: white;
-    /* text-align: center; */
+    border: 1px solid var(--grey);
 }
 
 .topper__form--select{
@@ -55,9 +54,9 @@ aspects of the website
     color: black;
 
     padding-top: 10px;
-    margin-top: 10px;
+    margin: 10px 0 5px 0;
 
-    border-top: 1px solid var(--secondary-color);
+    border-top: 1px solid var(--grey);
 }
 
 .topper__form--select-radio{
@@ -68,7 +67,8 @@ aspects of the website
 }
 
 .topper__form--select-radio:checked + label {
-    background-color: rgb(233, 233, 233);
+    background-color: var(--grey);
+    color: white;
 }
 
 .topper__form--select-label{
@@ -79,6 +79,8 @@ aspects of the website
 
     border-radius: 5px;
     font-size: 16px;
+
+    cursor: pointer;
 }
 
 .topper__form--input{
@@ -118,7 +120,7 @@ aspects of the website
 }
 .topper__form--button-select{
     grid-area: select;
-    background-color: rgb(226, 226, 226);
+    background-color: var(--grey);
 }
 
 .topper__img{
