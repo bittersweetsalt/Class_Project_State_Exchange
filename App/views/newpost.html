@@ -110,16 +110,6 @@
         
 
         methods: {
-<<<<<<< HEAD
-            sendData: function () {
-                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql',
-                    formData = {
-                        postTitle: app.title,
-                        postDesc: app.desc,
-                        postPrice: app.price,
-                        postCat: app.categorySelected,
-                    });
-=======
             
             sendData: function() {
                 let id = Math.random() * 100;
@@ -135,11 +125,7 @@
                 .then(function(response){
                     console.log(response);
                 })
-                .catch(console.log(error));
-            
-                
-                });
->>>>>>> 215f9e97395c2c48349a53620c9468c65bd62d6b
+                .catch( err => {console.log(err)})
                 console.log(formData);
             },
             changeSelectState: function () {
