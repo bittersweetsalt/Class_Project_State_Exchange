@@ -139,7 +139,10 @@
                 }
             },
             mounted() {
-                this.query = sessionStorage.getItem('query');
+                const sessionQuery = sessionStorage.getItem('query');
+                if(sessionQuery != null){
+                    this.query = sessionQuery;
+                }
 
                 axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
                 .then(res => {

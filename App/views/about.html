@@ -93,7 +93,10 @@
                 }
             },
             mounted() {
-                this.query = sessionStorage.getItem('query');
+                const sessionQuery = sessionStorage.getItem('query');
+                if(sessionQuery != null){
+                    this.query = sessionQuery;
+                }
             }
         })
     </script>
