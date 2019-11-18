@@ -53,7 +53,8 @@
         <h1>Results for: {{showing}}</h1>
         <div class="results">
             <div class="results__post" v-for="post in posts">
-                <div class="results__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
+                <div class="results__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }">
+                </div>
                 <div class="results__post--body">
                     <h2 class="results__post--title">{{post.Name}}</h2>
                     <p class="results__post--category">{{post.Category}}</p>
@@ -98,11 +99,11 @@
                     this.radius = 50;
                 }
             },
-            trimComment: function(post){
+            trimComment: function (post) {
                 const length = 200;
                 let comment = post;
 
-                if(post.length > length){
+                if (post.length > length) {
                     comment = post.substring(0, length) + "...";
                 }
 
@@ -121,12 +122,12 @@
                 this.showing = sessionQuery;
             }
 
-            axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
-                    query: this.query
-                })
-                .then(res => {
-                    app.posts = res.data
-                })
+            axios.post('/testmysql', {
+                query: this.query
+            })
+            .then(res => {
+                app.posts = res.data
+            })
         }
     })
 </script>

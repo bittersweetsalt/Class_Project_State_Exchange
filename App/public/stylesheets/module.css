@@ -236,9 +236,15 @@ aspects of the website
     border-radius: var(--border-radius);
 }
 
+.slider__post--title{
+    color: black;
+    margin-bottom: 3px;
+}
+
 .slider__post--body{
     grid-area: content;
     padding: 5px;
+    color: var(--secondary-color);
 }
 
 .slider__post--button{
@@ -260,6 +266,13 @@ aspects of the website
     color: var(--secondary-color);
     font-family: var(--main-body-font);
     cursor: pointer;
+
+    transition: .1s;
+}
+.slider__post--button:hover{
+    background-color: var(--yellow);
+    border: 1px solid var(--yellow);
+    color: white;
 }
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
@@ -414,7 +427,7 @@ input[type='file'] {
     text-align: right;
 }
 .results__post--title{
-    font-size: 25px;
+    font-size: 21px;
     margin: 0;
 }
 .results__post--category{
@@ -455,6 +468,8 @@ input[type='file'] {
 
 .dev__card--img {
     width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 
 .dev__card--title {
