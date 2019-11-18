@@ -75,7 +75,7 @@
                 <div class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
                 <div class="slider__post--body">
                     <h3 class="slider__post--title">{{post.Name}}</h3>
-                    <p class="slider__post--comment">{{post.Comment}}</p>
+                    <p class="slider__post--comment">{{trimComment(post.Comment)}}...</p>
                 </div>
                 <div class="slider__post--button">Contact Seller</div>
             </div>
@@ -119,6 +119,10 @@
                 } else {
                     this.radius = 50;
                 }
+            },
+            trimComment: function(post){
+                const length = 75;
+                return post.substring(0, length);
             }
         },
         watch: {

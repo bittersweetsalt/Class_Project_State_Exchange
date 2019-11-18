@@ -57,7 +57,7 @@
                 <div class="results__post--body">
                     <h2 class="results__post--title">{{post.Name}}</h2>
                     <p class="results__post--category">{{post.Category}}</p>
-                    <p class="results__post--comment">{{post.Comment}}</p>
+                    <p class="results__post--comment">{{trimComment(post.Comment)}}...</p>
                 </div>
                 <div class="results__post--data">
                     <p class="results__post--price">${{post.Price}}</p>
@@ -97,6 +97,10 @@
                 } else {
                     this.radius = 50;
                 }
+            },
+            trimComment: function(post){
+                const length = 200;
+                return post.substring(0, length);
             }
         },
         watch: {

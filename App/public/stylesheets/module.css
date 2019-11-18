@@ -394,6 +394,7 @@ input[type='file'] {
 }
 .results__post--body{
     grid-area: body;
+    overflow: hidden;
 }
 .results__post--data{
     grid-area: data;
