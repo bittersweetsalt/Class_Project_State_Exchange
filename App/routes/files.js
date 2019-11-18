@@ -22,6 +22,13 @@ router.get('/search', (req, res, next) => {
 
 
 
+/*------------------------------------------------ GET login page. */
+router.get('/login', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../views/loginpage.html'))
+});
+
+
+
 
 /*------------------------------------------------ GET newpost page. */
 router.get('/newpost', (req, res, next) => {
