@@ -380,8 +380,14 @@ input[type='file'] {
 
     border-top: 1px solid rgb(219, 219, 219);
     height: 150px;
-    margin: 3px 0;
+    /* margin: 3px 0; */
     padding: 20px 10px;
+
+    transition: .1s;
+    cursor: pointer;
+}
+.results__post:hover{
+    background-color: rgb(245, 245, 245);
 }
 
 .results__post--img{
