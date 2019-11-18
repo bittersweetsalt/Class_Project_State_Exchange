@@ -2,7 +2,6 @@
 Links all CSS files together for easy import in HTML
 *****************************************************************************/
 
-@import url("fonts.css");
 @import url("variables.css");
 @import url("base.css");
 @import url("layout.css");
