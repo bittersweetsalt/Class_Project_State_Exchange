@@ -56,8 +56,13 @@
             <div class="results__post" v-for="post in posts">
                 <div class="results__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
                 <div class="results__post--body">
-                    <h2>{{post.Name}}</h2>
-                    <p>{{post.Comment}}</p>
+                    <h2 class="results__post--title">{{post.Name}}</h2>
+                    <p class="results__post--comment">{{post.Comment}}</p>
+                </div>
+                <div class="results__post--data">
+                    <p class="results__post--price">${{post.Price}}</p>
+                    <p class="results__post--category">{{post.Category}}</p>
+                    <div class="results__post--button">Contact Seller</div>
                 </div>
             </div>
         </div>

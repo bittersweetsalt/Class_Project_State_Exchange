@@ -373,18 +373,56 @@ input[type='file'] {
 }
 
 .results__post{
-    display: flex;
-    border-top: 1px solid var(--grey);
-    height: 100px;
-    margin: 10px 0;
-    padding: 10px 0;
+    display: grid;
+    grid-template-columns: 175px 1fr 100px;
+    grid-template-areas: "image body data";
+    grid-column-gap: 10px;;
+
+    background-color: rgb(243, 243, 243);
+    height: 150px;
+    margin: 3px 0;
+    padding: 10px;
 }
 
 .results__post--img{
+    grid-area: image;
     height: 100%;
-    width: 150px;
+    width: 100%;
     background-size: cover;
     margin-right: 10px;
+    border-radius: 5px;
+}
+.results__post--body{
+    grid-area: body;
+}
+.results__post--data{
+    grid-area: data;
+    justify-self: end;
+    align-self: end;
+
+    text-align: right;
+}
+.results__post--title{
+    font-size: 25px;
+}
+.results__post--price{
+    font-family: var(--main-header-font);
+}
+.results__post--category{
+    color: var(--secondary-color);
+}
+
+.results__post--button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+    padding: 5px;
+    margin: 0;
 }
 
  /*---------------------------------------------DEVELOPER CARDS-(about pages)--*/

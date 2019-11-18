@@ -16,6 +16,7 @@ body{
 
 p {
     color: var(--body-text-color);
+    font-family: var(--main-body-font);
     margin: 0;
     padding: 5px 0;
 }
