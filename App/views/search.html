@@ -51,9 +51,15 @@
     </div>
 
     <div class="layout-body">
-        <div class="search_post" v-for="post in posts">
-            <h1>{{post.Name}}</h1>
-            <p>{{post.Comment}}</p>
+        <h1>Results</h1>
+        <div class="results">
+            <div class="results__post" v-for="post in posts">
+                <div class="results__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
+                <div class="results__post--body">
+                    <h2>{{post.Name}}</h2>
+                    <p>{{post.Comment}}</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -103,7 +109,7 @@
                     query: this.query
                 })
                 .then(res => {
-                    index.posts = res.data
+                    app.posts = res.data
                 })
         }
     })

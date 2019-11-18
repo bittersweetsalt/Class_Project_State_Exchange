@@ -15,6 +15,8 @@ into sections and holds modules together.
 }
 
 .layout-header{
+    flex-shrink: 0;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -30,6 +32,7 @@ into sections and holds modules together.
 }
 
 .layout-body{
+    flex-shrink: 0;
     width: 100%;
     max-width: 1295px;
     align-self: center;
