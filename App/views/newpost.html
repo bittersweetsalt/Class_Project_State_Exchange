@@ -96,40 +96,49 @@
         methods: {
             
             sendData: function() {
-                let id = Math.random() * 100;
-                Math.round.ciel(id);
 
-                axios.post(`localhost:3000/newpost/id:${id}`, formData = {
+               
+                axios.post(`/newpost/12`, formData = {
                     postTitle: app.title,
                     postDesc: app.desc,
                     postPrice: app.price,
                     postCat: app.categorySelected,
+                    
+                   
                 })
-                console.log(formData)
-                .then(function(response){
-                    console.log(response);
+                .then((res) => {
+                    console.log(res);
+                    formdata = res.data;
+                    if (res.data.status === 'success'){
+                        console.log("data was posted successfully")
+                    }
                 })
-                .catch(console.log(error));
-            
+                
+                .catch((error) =>{
+                    console.log("This error was caught trying to send data" + error);
                 
                 });
                 console.log(formData);
-            }
-        },
-        watch: {
-            query: function(newQuery, oldQuery){
-                sessionStorage.setItem('query', newQuery);
-            }
-        },
-        mounted() {
-            const sessionQuery = sessionStorage.getItem('query');
-                if(sessionQuery != null){
-                    this.query = sessionQuery;
-                }
+                
+                
+        
+            
+        
+        // watch: {
+        //     query: function(newQuery, oldQuery){
+        //         sessionStorage.setItem('query', newQuery);
+        //     }
+        
+        // mounted() {
+        //     const sessionQuery = sessionStorage.getItem('query');
+        //         if(sessionQuery != null){
+        //             this.query = sessionQuery;
+        //         }
 
+        
         }
     }
         
-    })
+})
 </script>
 </html>
