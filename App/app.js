@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-var cors = require('cors');
+// var cors = require('cors');
 var db = require("./db/connection");
 
 //routes import
