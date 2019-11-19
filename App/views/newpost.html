@@ -51,16 +51,19 @@
 
     <div class="layout-body">
         <h1>Create a New Post</h1>
-        <form class="form newpost grid" method="POST">
-            <label for="title" class="form__label grid__col--1">Title</label>
-            <input v-model='formData.title' id="title" type="input" class="title form__input--border grid__col--8">
-            <label class="grid__col--3 form__input--border" for="addImage">Add Image</label>
-            <input accept="image/*" id="addImage" type="file" class="form__image-input grid__col--3"></input>
-            <label for="desc" class="form__label grid__col--1">Description</label>
-            <textarea v-model='formData.desc' class="desc form__textarea grid__col--11" form="newpost"></textarea>
+        <form class="form">
+            <label for="title" class="form__label">Title</label>
+            <input v-model='formData.title' id="title" type="input" class="title form__input">
+
+            <label class="form__image--input" for="addImage">Add Image</label>
+            <input accept="image/*" id="addImage" type="file"></input>
+
+            <label for="desc" class="form__label">Description</label>
+            <textarea v-model='formData.desc' class="desc form__textarea" form="newpost"></textarea>
+
             <!--TODO: Pull list of categories from database-->
-            <label class="form__label grid__col--1">Category</label>
-            <select v-model='formData.categorySelected' class="form__select grid__col--3">
+            <label class="form__label">Category</label>
+            <select v-model='formData.categorySelected' class="form__select">
                 <option v-for='category in categories'>{{ category }}</option>
                 <!--
                 <option>Category 1</option>
@@ -69,11 +72,14 @@
                 <option>Category 4</option>
                 -->
             </select>
-            <div class="grid__col--8"></div>
-            <label for="price" class="form__label grid__col--1">Price</label>
-            <input v-model='formData.price' type="number" class="form__input--border grid__col--2">
-            <button type="button" class="form__button--border grid__col--8">Cancel</button>
-            <button v-on:click.prevent='sendData' type="submit" class="form__button--border grid__col--1">Post</button>
+
+            <label for="price" class="form__label ">Price</label>
+            <input v-model='formData.price' type="number" class="form__input">
+
+            <div class="form__submit">
+                <button type="button" class="form__submit--cancel">Cancel</button>
+                <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Post</button>
+            </div>
         </form>
     </div>
 

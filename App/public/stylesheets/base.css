@@ -54,6 +54,7 @@ h3{
 
 label{
     color: var(--body-text-color);
+    font-family: var(--main-body-font);
 }
 
 img{

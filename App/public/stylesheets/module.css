@@ -277,47 +277,39 @@ aspects of the website
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
 .form{
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-bottom: 0;;
+    padding: 10px 40px;
+
+    border-radius: 5px;
+    background-color: rgb(245, 245, 245);
 }
 
-input[type='file'] {
-    display: none;
-}
-
-.form__image-input {
-    background-color: none;
-    border-radius: var(--border-radius);
-    outline: none;
-    text-align: right;
-}
-
-.form__input,
-.form__input--border{
+.form__input{
     width: 100%;
-    max-width: 350px;
-    height: 40px;
+    max-width: 250px;
+    height: 30px;
     padding: 5px;
 
     border: none;
     outline: none;
     border-radius: var(--border-radius);
-}
-
-.form__input--border{
     border: 1px solid black;
-    height: 30px;
 }
 
 .form__textarea{
     width: 100%;
+    max-width: 400px;
     height: 200px;
-    padding: 5px;
+    padding: 10px;
 
     border: 1px solid black;
     border-radius: var(--border-radius);
     outline: none;
 
+    font-size: 15px;
     resize: none;
 }
 
@@ -326,44 +318,59 @@ input[type='file'] {
     padding: 5px;
     height: 30px;
     width: 100%;
+    max-width: 120px;
 
     border-radius: var(--border-radius);
     border: 1px solid black;
+    outline: none;
 
     -moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
 }
 
-.form__button,
-.form__button--border{
-    height: 40px;
-    min-width: 35px;
+.form__submit{
+    margin: 10px 0;
+}
+
+.form__submit--cancel,
+.form__submit--post{
+    height: 30px;
+    max-width: 70px;
     border: none;
     outline: none;
 
-    background-color: white;
+    border: 1px solid black;
     border-radius: var(--border-radius);
+    background-color: white;
+
     cursor: pointer;
 }
 
-.form__button--border{
-    border: 1px solid black;
-    height: 30px;
-    min-width: 70px;
-    justify-self: end;
-    align-self: center;
-}
-
 .form__label{
+    margin: 15px 0 5px 0;
     font-family: var(--main-body-font);
     text-align: left;
 }
 
-/* These styles are specific to only one element, will try to find a better solution later */
-.newpost {
-    margin-top: 30px;
+input[type='file'] {
+    display: none;
 }
+
+.form__image--input {
+    background-color: white;
+    border-radius: var(--border-radius);
+    border: 1px solid black;
+    outline: none;
+
+    max-width: 100px;
+    padding: 7px;
+    margin-top: 10px;
+
+    cursor: pointer;
+}
+
+/* These styles are specific to only one element, will try to find a better solution later */
 .signin{
     display: flex;
     flex-direction: column;
