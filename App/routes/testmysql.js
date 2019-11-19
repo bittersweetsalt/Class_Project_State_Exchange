@@ -1,17 +1,19 @@
 var express = require('express');
 var router = express.Router();
+const bodyParser = require('body-parser');
 const path = require('path');
-//const mysql = require('mysql');
 var db = require("../db/connection");
 
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: false}));
 
 /*Simple parameter mysql query fetch.*/
 /*Able to only grab from Posting via ID only.*/
-router.get('/testmysql/:id', (req, res, next) => {
-
-    const userID = req.params.id;
-    const queryString = 'SELECT * FROM Posting WHERE id = ?'
-    connection.query(queryString, [userID], (err, rows, fields) => {
+router.post('/testmysql', (req, res, next) => {
+    console.log('Log of body: ', req.body.query);
+    //const userID = req.params.id;
+    const queryString = `SELECT * FROM Posting WHERE Name LIKE '%${req.body.query}%'`
+    db.query(queryString, (err, rows, fields) => {
         if (err){
             console.log("Failed: " + err);
             res.end();
@@ -43,7 +45,7 @@ router.get('/insertPost', (req, res) => {
     }
 
     let sql = "INSERT INTO Posting SET ?";
-    connection.query(sql, [data], (err, rows, fields) => {
+    db.query(sql, [data], (err, rows, fields) => {
         if (err){
             console.log("Failed: " + err);
             res.end();
@@ -56,7 +58,6 @@ router.get('/insertPost', (req, res) => {
         // Setup Date: 11/14/2019
         res.send(rows);
     })
-    connection.release();
 })
 
 module.exports = router;

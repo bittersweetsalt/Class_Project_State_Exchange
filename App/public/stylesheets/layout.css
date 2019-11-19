@@ -15,12 +15,15 @@ into sections and holds modules together.
 }
 
 .layout-header{
+    flex-shrink: 0;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     width: 100%;
     min-height: 100px;
+    max-height: 115px;
     padding-top: 5px;
 
     color: white;
@@ -29,17 +32,11 @@ into sections and holds modules together.
 }
 
 .layout-body{
+    flex-shrink: 0;
     width: 100%;
     max-width: 1295px;
     align-self: center;
     padding: 5px 35px;
-}
-
-.layout-container{
-    width: 100%;
-    border-top: 1px solid black;
-    padding: 10px 0;
-    overflow: scroll;
 }
 
 /* Grid Layout Options */
@@ -99,6 +96,10 @@ into sections and holds modules together.
 }
 
 @media only screen and (max-width: 910px){
+    .layout-header{
+        max-height: 159px;
+    }
+    
     .layout-body{
         max-width: 800px;
     }
@@ -111,6 +112,11 @@ into sections and holds modules together.
 }
 
 @media only screen and (max-width: 695px){
+    .layout-header{
+        max-height: 150px;
+        /* overflow: hidden; */
+    }
+    
     .layout-body{
         max-width: 480px;
     }
