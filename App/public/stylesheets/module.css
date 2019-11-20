@@ -277,26 +277,25 @@ aspects of the website
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
 .form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 0;;
-    padding: 10px 40px;
+    margin-bottom: 0;
+    border: 1px solid var(--secondary-color);
+    max-width: 900px;
+}
 
-    border-radius: 5px;
-    background-color: rgb(245, 245, 245);
+.form__devider{
+    border-bottom: 1px solid var(--secondary-color);
+    padding: 40px;
 }
 
 .form__input{
     width: 100%;
-    max-width: 250px;
-    height: 30px;
-    padding: 5px;
+    padding: 10px;
 
     border: none;
     outline: none;
     border-radius: var(--border-radius);
-    border: 1px solid black;
+    border: 1px solid var(--secondary-color);
+    font-size: 13px;
 }
 
 .form__textarea{
@@ -305,7 +304,7 @@ aspects of the website
     height: 200px;
     padding: 10px;
 
-    border: 1px solid black;
+    border: 1px solid var(--secondary-color);
     border-radius: var(--border-radius);
     outline: none;
 
@@ -321,7 +320,7 @@ aspects of the website
     max-width: 120px;
 
     border-radius: var(--border-radius);
-    border: 1px solid black;
+    border: 1px solid var(--secondary-color);
     outline: none;
 
     -moz-appearance: none;
@@ -340,7 +339,7 @@ aspects of the website
     border: none;
     outline: none;
 
-    border: 1px solid black;
+    border: 1px solid var(--secondary-color);
     border-radius: var(--border-radius);
     background-color: white;
 
@@ -348,26 +347,54 @@ aspects of the website
 }
 
 .form__label{
-    margin: 15px 0 5px 0;
     font-family: var(--main-body-font);
+    /* color: var(--secondary-color); */
+    font-size: 20px;
     text-align: left;
 }
 
-input[type='file'] {
-    display: none;
+.form__descriptor{
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+}
+
+.form__image-select{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 300px;
+    border: 1px dashed var(--secondary-color);
+    border-radius: var(--border-radius);
+
+    cursor: pointer;
+    transition: .1s;
+}
+
+.form__image-select:hover{
+    background-color: rgb(245, 245, 245);
 }
 
 .form__image--input {
-    background-color: white;
-    border-radius: var(--border-radius);
-    border: 1px solid black;
-    outline: none;
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
 
-    max-width: 100px;
-    padding: 7px;
+    padding: 7px 15px;
     margin-top: 10px;
 
+    color: var(--secondary-color);
+
     cursor: pointer;
+}
+
+.form__image--text{
+    text-align: center;
+    color: var(--secondary-color);
 }
 
 /* These styles are specific to only one element, will try to find a better solution later */

@@ -2,6 +2,7 @@
 
 <head>
     <title>New Post!</title>
+    <meta name="viewport" content="width=device-width">
     <link rel='stylesheet' href='stylesheets/global.css'>
 </head>
 
@@ -51,30 +52,37 @@
 
     <div class="layout-body">
         <h1>Create a New Post</h1>
-        <form class="form">
-            <label for="title" class="form__label">Title</label>
-            <input v-model='formData.title' id="title" type="input" class="title form__input">
+        <form class="form" enctype="multipart/form-data">
+            <div class="form__devider">
+                <label for="title" class="form__label">Title</label>
+                <p class="form__descriptor">Use words people would search for when looking for your item</p>
+                <input v-model='formData.title' id="title" type="input" class="title form__input">
+            </div>
 
-            <label class="form__image--input" for="addImage">Add Image</label>
-            <input accept="image/*" id="addImage" type="file"></input>
+            <div class="form__devider">
+                <div class="form__image-select">
+                    <input type="file" accept="image/*" multiple id="addImage" class="form__image--input"></input>
+                    <p v-if="isInitial" class="form__image--text">Drag your file(s) here to begin<br> or click to browse
+                    </p>
+                    <p v-if="isSaving" class="form__image--text">Uploading {{ fileCount }} files...</p>
+                </div>
+            </div>
 
-            <label for="desc" class="form__label">Description</label>
-            <textarea v-model='formData.desc' class="desc form__textarea" form="newpost"></textarea>
+            <div class="form__devider">
+                <label for="desc" class="form__label">Description</label>
+                <textarea v-model='formData.desc' class="desc form__textarea" form="newpost"></textarea>
+            </div>
 
-            <!--TODO: Pull list of categories from database-->
-            <label class="form__label">Category</label>
-            <select v-model='formData.categorySelected' class="form__select">
-                <option v-for='category in categories'>{{ category }}</option>
-                <!--
-                <option>Category 1</option>
-                <option>Category 2</option>
-                <option>Category 3</option>
-                <option>Category 4</option>
-                -->
-            </select>
+            <div class="form__devider">
+                <!--TODO: Pull list of categories from database-->
+                <label class="form__label">Details</label>
+                <select v-model='formData.categorySelected' class="form__select">
+                    <option v-for='category in categories'>{{ category }}</option>
+                </select>
+                <label for="price" class="form__label ">Price</label>
+                <input v-model='formData.price' type="number" class="form__input">
+            </div>
 
-            <label for="price" class="form__label ">Price</label>
-            <input v-model='formData.price' type="number" class="form__input">
 
             <div class="form__submit">
                 <button type="button" class="form__submit--cancel">Cancel</button>
@@ -104,15 +112,16 @@
         data: {
             formData: {
                 title: '',
+                uploadedFiles: [],
                 desc: '',
                 price: '',
                 categorySelected: 'Select Category'
             },
             categories: ['Select Category', 'Electronics', 'Books', 'Furniture', 'Toys'],
-            img: '',
             query: '',
             radius: 50,
-            select: false
+            select: false,
+            fileCount: 0
         },
         methods: {
             sendData: function () {
@@ -120,16 +129,16 @@
                 Math.round.ciel(id);
 
                 axios.post(`/newpost/12`, this.formData)
-                .then(function (response) {
-                    console.log(response);
-                     if (res.data.status === 'success'){
-                        console.log("data was posted successfully")
-                    }
-                })
-                .catch(err => {
-                
-                    console.log("This error was caught trying to send data" + err);
-                })
+                    .then(function (response) {
+                        console.log(response);
+                        if (res.data.status === 'success') {
+                            console.log("data was posted successfully")
+                        }
+                    })
+                    .catch(err => {
+
+                        console.log("This error was caught trying to send data" + err);
+                    })
             },
             changeSelectState: function () {
                 this.select = !this.select;
@@ -145,6 +154,20 @@
                 sessionStorage.setItem('query', newQuery);
             }
         },
+        computed: {
+            isInitial() {
+                return this.currentStatus === STATUS_INITIAL;
+            },
+            isSaving() {
+                return this.currentStatus === STATUS_SAVING;
+            },
+            isSuccess() {
+                return this.currentStatus === STATUS_SUCCESS;
+            },
+            isFailed() {
+                return this.currentStatus === STATUS_FAILED;
+            }
+        },
         mounted() {
             const sessionQuery = sessionStorage.getItem('query');
             if (sessionQuery != null) {
@@ -152,7 +175,6 @@
             }
         }
     })
-
 </script>
 
 </html>
