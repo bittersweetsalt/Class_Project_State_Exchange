@@ -39,6 +39,14 @@ into sections and holds modules together.
     padding: 5px 35px;
 }
 
+.layout-form{
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 1000px;
+    align-self: center;
+    padding: 5px 35px;
+}
+
 @media only screen and (max-width: 1330px){
     .layout-body{
         max-width: 1115px;
@@ -46,7 +54,8 @@ into sections and holds modules together.
 }
 
 @media only screen and (max-width: 1125px){
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 910px;
     }
 }
@@ -56,13 +65,15 @@ into sections and holds modules together.
         max-height: 159px;
     }
     
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 800px;
     }
 }
 
 @media only screen and (max-width: 800px){
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 695px;
     }
 }
@@ -73,7 +84,8 @@ into sections and holds modules together.
         /* overflow: hidden; */
     }
     
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 480px;
     }
 }

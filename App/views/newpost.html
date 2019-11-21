@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <div class="layout-body">
+    <div class="layout-form">
         <h1>Create a New Post</h1>
         <form class="form" enctype="multipart/form-data">
             <div class="form__devider">
@@ -68,22 +68,20 @@
                             type="file"
                             accept="image/*"
                             multiple
-                            :name="uploadFieldName"
                             :disabled="isSaving"
                             id="addImage"
-                            @change="filesChange($event.target.files); fileCount = $event.target.files.length"
+                            @change="filesChange($event.target.files)"
                             class="form__image--input">
                         </input>
-                        <p v-if="isInitial" class="form__image--text">Drag your file(s) here to upload<br> or click to browse
+                        <p class="form__image--text">Drag your file(s) here to upload<br> or click to browse
                         </p>
-                        <p v-if="isSaving" class="form__image--text">Uploading {{ fileCount }} files...</p>
                     </div>
                     <div class="form__image--container">
                         <div class="form__image" v-for="path in photoFilePaths">
                             <img v-bind:src="path">
                         </div>
                         <div class="form__image--default">
-                            <img src="images/icons/plus.png">
+                            <img src="images/icons/plus-yellow.png">
                         </div>
                     </div>
                 </div>
@@ -106,7 +104,8 @@
                 <textarea v-model='formData.desc' class="desc form__textarea" form="newpost"></textarea>
             </div>
 
-            <div class="form__submit">
+
+            <div class="form__devider--submit">
                 <button type="button" class="form__submit--cancel">Cancel</button>
                 <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Post</button>
             </div>
@@ -134,7 +133,6 @@
         data: {
             formData: {
                 title: '',
-                uploadedFiles: [],
                 desc: '',
                 price: '',
                 categorySelected: 'Select Category'
@@ -143,11 +141,7 @@
             categories: ['Select Category', 'Electronics', 'Books', 'Furniture', 'Toys'],
             query: '',
             radius: 50,
-            select: false,
-            uploadFieldName: "photos",
-            fileCount: 0,
-            isInitial: true,
-            isSaving: false
+            select: false
         },
         methods: {
             sendData: function () {
@@ -162,8 +156,7 @@
                         }
                     })
                     .catch(err => {
-
-                        console.log("This error was caught trying to send data" + err);
+                        console.log("This error was caught trying to send data: " + err);
                     })
             },
             changeSelectState: function () {
@@ -178,26 +171,30 @@
                 if(!fileList.length) return;
                 const formData = new FormData();
 
+                //create a new form object and append all the files to be uploaded
                 for(let i = 0; i < fileList.length; i++){
                     formData.append(`photo${i}`, fileList[i], fileList[i].name)
                 }
 
+                //send form object to server for upload
                 axios.post('/newpost', formData)
-                .then( res => {
-                    console.log(res.data)
-                    this.photoFilePaths = this.photoFilePaths.concat(res.data);
-                })
-                .catch( err => {
-                    console.log(err)
-                })
+                    .then( res => {
+                        console.log(res.data)
+                        this.photoFilePaths = this.photoFilePaths.concat(res.data);
+                    })
+                    .catch( err => {
+                        console.log(err)
+                    })
             }
         },
         watch: {
+            //set query variable in sessionStorage when search field onChange event is fired
             query: function (newQuery, oldQuery) {
                 sessionStorage.setItem('query', newQuery);
             }
         },
         mounted() {
+            //set search bar field to previously typed query if it exists
             const sessionQuery = sessionStorage.getItem('query');
             if (sessionQuery != null) {
                 this.query = sessionQuery;

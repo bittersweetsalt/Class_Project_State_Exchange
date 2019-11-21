@@ -278,15 +278,22 @@ aspects of the website
 /*-------------------------------------------------------------FORM ELEMENTS--*/
 .form{
     margin-bottom: 40px;
-    border: 1px solid var(--secondary-color);
-    max-width: 900px;
+    /* border: 1px solid var(--secondary-color); */
+    background-color: rgb(240, 240, 240);
 }
 
-.form__devider{
-    border-bottom: 1px solid var(--secondary-color);
+.form__devider,
+.form__devider--submit{
+    border-bottom: 3px solid white;
     padding: 40px;
     display: flex;
     flex-direction: column;
+}
+.form__devider--submit{
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: white;
+    padding: 20px 0;
 }
 
 .form__input{
@@ -296,8 +303,13 @@ aspects of the website
     border: none;
     outline: none;
     border-radius: var(--border-radius);
-    border: 1px solid var(--secondary-color);
+    border: 1px solid white;
     font-size: 13px;
+    color: var(--secondary-color);
+}
+.form__input:focus{
+    border: 1px solid var(--yellow);
+    border-radius: var(--border-radius);
 }
 
 .form__textarea{
@@ -306,12 +318,17 @@ aspects of the website
     height: 200px;
     padding: 10px;
 
-    border: 1px solid var(--secondary-color);
+    /* border: 1px solid var(--secondary-color); */
+    border: none;
     border-radius: var(--border-radius);
     outline: none;
 
     font-size: 15px;
     resize: none;
+}
+.form__textarea:focus{
+    border: 1px solid var(--yellow);
+    border-radius: var(--border-radius);
 }
 
 .form__select{
@@ -322,7 +339,8 @@ aspects of the website
     max-width: 120px;
 
     border-radius: var(--border-radius);
-    border: 1px solid var(--secondary-color);
+    /* border: 1px solid var(--secondary-color); */
+    border: none;
     outline: none;
 
     -moz-appearance: none;
@@ -330,22 +348,26 @@ aspects of the website
 	appearance: none;
 }
 
-.form__submit{
-    margin: 10px 0;
-}
-
 .form__submit--cancel,
 .form__submit--post{
-    height: 30px;
-    max-width: 70px;
-    border: none;
-    outline: none;
+    height: 40px;
+    width: 150px;
+    margin-left: 20px;
 
-    border: 1px solid var(--secondary-color);
+    font-size: 14px;
+
+    /* border: 1px solid var(--secondary-color); */
+    border: none;
     border-radius: var(--border-radius);
-    background-color: white;
+    outline: none;
+    background-color: rgb(240, 240, 240);
+    color: var(--secondary-color);
 
     cursor: pointer;
+}
+.form__submit--post{
+    background-color: var(--yellow);
+    color: white;
 }
 
 .form__label{
@@ -377,13 +399,10 @@ aspects of the website
     height: 300px;
     border: 1px dashed var(--secondary-color);
     border-radius: var(--border-radius);
+    background-color: white;
 
     cursor: pointer;
     transition: .1s;
-}
-
-.form__image-select:hover{
-    background-color: rgb(245, 245, 245);
 }
 
 .form__image--container{
@@ -403,11 +422,13 @@ aspects of the website
     padding: 5px;
     border: 1px solid var(--secondary-color);
     border-radius: var(--border-radius);
+    background-color: white;
 }
 
 .form__image--default{
     padding: 30px;
     border: 1px dashed var(--secondary-color);
+    background-color: white;
 }
 
 .form__image--input {
