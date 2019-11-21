@@ -277,7 +277,7 @@ aspects of the website
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
 .form{
-    margin-bottom: 0;
+    margin-bottom: 40px;
     border: 1px solid var(--secondary-color);
     max-width: 900px;
 }
@@ -285,6 +285,8 @@ aspects of the website
 .form__devider{
     border-bottom: 1px solid var(--secondary-color);
     padding: 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 .form__input{
@@ -300,7 +302,7 @@ aspects of the website
 
 .form__textarea{
     width: 100%;
-    max-width: 400px;
+    /* max-width: 400px; */
     height: 200px;
     padding: 10px;
 

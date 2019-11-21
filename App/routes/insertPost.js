@@ -6,14 +6,19 @@ const db = require("../db/connection");
 
 // we are going to generate the ids of the post  by passing parameters here in the future
 router.post('/newpost', (req, res) => {
+    let pathNames = [];
+
     if(!req.files){
         console.log("missing files")
         res.status(409).send({error: "missing files"});
-    }else{
-        let photo = req.files.photos;
-        photo.mv(path.join(__dirname, '../', 'public', 'images', 'post_img', photo.name));
-        res.send(path.join('images', 'post_img', photo.name));
     }
+    
+    for(var key in req.files){
+        let photo = req.files[key];
+        photo.mv(path.join(__dirname, '../', 'public', 'images', 'post_img', photo.name));
+        pathNames.push(path.join('images', 'post_img', photo.name));
+    }
+    res.send(pathNames);
 })
 
 router.post(`/newpost/12` ,(req, res) => {

@@ -71,10 +71,10 @@
                             :name="uploadFieldName"
                             :disabled="isSaving"
                             id="addImage"
-                            @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
+                            @change="filesChange($event.target.files); fileCount = $event.target.files.length"
                             class="form__image--input">
                         </input>
-                        <p v-if="isInitial" class="form__image--text">Drag your file here to upload<br> or click to browse
+                        <p v-if="isInitial" class="form__image--text">Drag your file(s) here to upload<br> or click to browse
                         </p>
                         <p v-if="isSaving" class="form__image--text">Uploading {{ fileCount }} files...</p>
                     </div>
@@ -90,17 +90,19 @@
             </div>
 
             <div class="form__devider">
-                    <!--TODO: Pull list of categories from database-->
-                    <label class="form__label">Details</label>
-                    <select v-model='formData.categorySelected' class="form__select">
-                        <option v-for='category in categories'>{{ category }}</option>
-                    </select>
-                    <label for="price" class="form__label ">Price</label>
-                    <input v-model='formData.price' type="number" class="form__input">
-                </div>
+                <!--TODO: Pull list of categories from database-->
+                <label class="form__label">Details</label>
+                <p class="form__descriptor">Select a category for your item</p>
+                <select v-model='formData.categorySelected' class="form__select">
+                    <option v-for='category in categories'>{{ category }}</option>
+                </select>
+                <p class="form__descriptor">Set an amount that buyers can purchase your item for</p>
+                <input v-model='formData.price' type="number" class="form__input">
+            </div>
 
             <div class="form__devider">
                 <label for="desc" class="form__label">Description</label>
+                <p class="form__descriptor">Tell buyers about unique features, flaws, or why you are selling it!</p>
                 <textarea v-model='formData.desc' class="desc form__textarea" form="newpost"></textarea>
             </div>
 
@@ -172,19 +174,18 @@
                     this.radius = 50;
                 }
             },
-            filesChange(fieldName, fileList){
+            filesChange(fileList){
                 if(!fileList.length) return;
                 const formData = new FormData();
 
-
                 for(let i = 0; i < fileList.length; i++){
-                    formData.append(fieldName, fileList[i])
+                    formData.append(`photo${i}`, fileList[i], fileList[i].name)
                 }
 
                 axios.post('/newpost', formData)
                 .then( res => {
                     console.log(res.data)
-                    this.photoFilePaths.push(res.data);
+                    this.photoFilePaths = res.data;
                 })
                 .catch( err => {
                     console.log(err)
