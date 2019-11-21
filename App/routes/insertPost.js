@@ -1,12 +1,20 @@
-var express = require('express');
-var app = express();
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const path = require('path');
-var db = require("../db/connection");
-const axios = require('axios');
+const db = require("../db/connection");
+
 
 // we are going to generate the ids of the post  by passing parameters here in the future
-
+router.post('/newpost', (req, res) => {
+    if(!req.files){
+        console.log("missing files")
+        res.status(409).send({error: "missing files"});
+    }else{
+        let photo = req.files.photos;
+        photo.mv(path.join(__dirname, '../', 'public', 'images', 'post_img', photo.name));
+        res.send(path.join('images', 'post_img', photo.name));
+    }
+})
 
 router.post(`/newpost/12` ,(req, res) => {
 

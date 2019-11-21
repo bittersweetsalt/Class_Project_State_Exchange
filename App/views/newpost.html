@@ -60,29 +60,49 @@
             </div>
 
             <div class="form__devider">
-                <div class="form__image-select">
-                    <input type="file" accept="image/*" multiple id="addImage" class="form__image--input"></input>
-                    <p v-if="isInitial" class="form__image--text">Drag your file(s) here to begin<br> or click to browse
-                    </p>
-                    <p v-if="isSaving" class="form__image--text">Uploading {{ fileCount }} files...</p>
+                <label for="addImage" class="form__label">Add a photo</label>
+                <p class="form__descriptor">Improve your buyer’s confidence by including as many as possible.</p>
+                <div class="form__image--select-container">
+                    <div class="form__image-select">
+                        <input 
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            :name="uploadFieldName"
+                            :disabled="isSaving"
+                            id="addImage"
+                            @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
+                            class="form__image--input">
+                        </input>
+                        <p v-if="isInitial" class="form__image--text">Drag your file here to upload<br> or click to browse
+                        </p>
+                        <p v-if="isSaving" class="form__image--text">Uploading {{ fileCount }} files...</p>
+                    </div>
+                    <div class="form__image--container">
+                        <div class="form__image" v-for="path in photoFilePaths">
+                            <img v-bind:src="path">
+                        </div>
+                        <div class="form__image--default">
+                            <img src="images/icons/plus.png">
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div class="form__devider">
+                    <!--TODO: Pull list of categories from database-->
+                    <label class="form__label">Details</label>
+                    <select v-model='formData.categorySelected' class="form__select">
+                        <option v-for='category in categories'>{{ category }}</option>
+                    </select>
+                    <label for="price" class="form__label ">Price</label>
+                    <input v-model='formData.price' type="number" class="form__input">
+                </div>
 
             <div class="form__devider">
                 <label for="desc" class="form__label">Description</label>
                 <textarea v-model='formData.desc' class="desc form__textarea" form="newpost"></textarea>
             </div>
-
-            <div class="form__devider">
-                <!--TODO: Pull list of categories from database-->
-                <label class="form__label">Details</label>
-                <select v-model='formData.categorySelected' class="form__select">
-                    <option v-for='category in categories'>{{ category }}</option>
-                </select>
-                <label for="price" class="form__label ">Price</label>
-                <input v-model='formData.price' type="number" class="form__input">
-            </div>
-
 
             <div class="form__submit">
                 <button type="button" class="form__submit--cancel">Cancel</button>
@@ -117,10 +137,12 @@
                 price: '',
                 categorySelected: 'Select Category'
             },
+            photoFilePaths: [],
             categories: ['Select Category', 'Electronics', 'Books', 'Furniture', 'Toys'],
             query: '',
             radius: 50,
             select: false,
+            uploadFieldName: "photos",
             fileCount: 0,
             isInitial: true,
             isSaving: false
@@ -149,25 +171,29 @@
                 } else {
                     this.radius = 50;
                 }
+            },
+            filesChange(fieldName, fileList){
+                if(!fileList.length) return;
+                const formData = new FormData();
+
+
+                for(let i = 0; i < fileList.length; i++){
+                    formData.append(fieldName, fileList[i])
+                }
+
+                axios.post('/newpost', formData)
+                .then( res => {
+                    console.log(res.data)
+                    this.photoFilePaths.push(res.data);
+                })
+                .catch( err => {
+                    console.log(err)
+                })
             }
         },
         watch: {
             query: function (newQuery, oldQuery) {
                 sessionStorage.setItem('query', newQuery);
-            }
-        },
-        computed: {
-            isInitial() {
-                return this.currentStatus === STATUS_INITIAL;
-            },
-            isSaving() {
-                return this.currentStatus === STATUS_SAVING;
-            },
-            isSuccess() {
-                return this.currentStatus === STATUS_SUCCESS;
-            },
-            isFailed() {
-                return this.currentStatus === STATUS_FAILED;
             }
         },
         mounted() {

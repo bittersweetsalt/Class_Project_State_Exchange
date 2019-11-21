@@ -48,7 +48,7 @@ h3{
     padding: 0;
 
     font-size: 20px;
-    font-family: var(--main-header-font);
+    font-family: var(--main-body-font);
     color: var(--body-text-color);
 }
 

@@ -5,11 +5,13 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 var cors = require('cors');
 var db = require("./db/connection");
+const fileUpload = require('express-fileupload')
 
 //routes import
 const fileRouter = require('./routes/files');
 const prototypeRouter = require('./routes/prototype');
 const testMySqlRouter = require('./routes/testmysql');
+const newPostRouter = require('./routes/insertPost');
 
 
 const app = express();
@@ -40,14 +42,17 @@ app.set('view engine', 'html');
 // app.use(cors); // npm install --save cors
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use(formidable());
+app.use(fileUpload({ createParentPath: true}));
 
 //routes setup
 app.use('/', fileRouter);
 app.use('/', prototypeRouter);
 app.use('/', testMySqlRouter);
+app.use('/', newPostRouter);
 
 
 //making a new post
