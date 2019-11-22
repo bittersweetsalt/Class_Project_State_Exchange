@@ -1,13 +1,29 @@
-var express = require('express');
-var app = express();
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const path = require('path');
-var db = require("../db/connection");
-const axios = require('axios');
+const db = require("../db/connection");
+
+router.post('/newpost', (req, res) => {
+    let pathNames = [];
+
+    //check to make sure files are not empty
+    if(!req.files){
+        console.log("missing files")
+        res.status(409).send({error: "missing files"});
+    }
+    
+    //loop through keys in req.files obj and move each file to public directory, push filepath to pathnames array
+    for(var key in req.files){
+        let photo = req.files[key];
+        photo.mv(path.join(__dirname, '../', 'public', 'images', 'post_img', photo.name));
+        pathNames.push(path.join('images', 'post_img', photo.name));
+    }
+
+    //send pathnames of all uploaded images back to client
+    res.send(pathNames);
+})
 
 // we are going to generate the ids of the post  by passing parameters here in the future
-
-
 router.post(`/newpost/12` ,(req, res) => {
 
         

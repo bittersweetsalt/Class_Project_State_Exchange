@@ -2,6 +2,7 @@
 
 <head>
     <title>New Post!</title>
+    <meta name="viewport" content="width=device-width">
     <link rel='stylesheet' href='stylesheets/global.css'>
 </head>
 
@@ -49,31 +50,65 @@
         </div>
     </div>
 
-    <div class="layout-body">
+    <div class="layout-form">
         <h1>Create a New Post</h1>
-        <form class="form newpost grid" method="POST">
-            <label for="title" class="form__label grid__col--1">Title</label>
-            <input v-model='formData.title' id="title" type="input" class="title form__input--border grid__col--8">
-            <label class="grid__col--3 form__input--border" for="addImage">Add Image</label>
-            <input accept="image/*" id="addImage" type="file" class="form__image-input grid__col--3"></input>
-            <label for="desc" class="form__label grid__col--1">Description</label>
-            <textarea v-model='formData.desc' class="desc form__textarea grid__col--11" form="newpost"></textarea>
-            <!--TODO: Pull list of categories from database-->
-            <label class="form__label grid__col--1">Category</label>
-            <select v-model='formData.categorySelected' class="form__select grid__col--3">
-                <option v-for='category in categories'>{{ category }}</option>
-                <!--
-                <option>Category 1</option>
-                <option>Category 2</option>
-                <option>Category 3</option>
-                <option>Category 4</option>
-                -->
-            </select>
-            <div class="grid__col--8"></div>
-            <label for="price" class="form__label grid__col--1">Price</label>
-            <input v-model='formData.price' type="number" class="form__input--border grid__col--2">
-            <button type="button" class="form__button--border grid__col--8">Cancel</button>
-            <button v-on:click.prevent='sendData' type="submit" class="form__button--border grid__col--1">Post</button>
+        <form class="form" enctype="multipart/form-data">
+            <div class="form__devider">
+                <label for="title" class="form__label">Title</label>
+                <p class="form__descriptor">Use words people would search for when looking for your item</p>
+                <input v-model='formData.title' id="title" type="input" class="title form__input">
+            </div>
+
+            <div class="form__devider">
+                <label for="addImage" class="form__label">Add a photo</label>
+                <p class="form__descriptor">Improve your buyer’s confidence by including as many as possible.</p>
+                <div class="form__image--select-container">
+                    <div class="form__image-select">
+                        <input 
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            :disabled="isSaving"
+                            id="addImage"
+                            @change="filesChange($event.target.files)"
+                            class="form__image--input">
+                        </input>
+                        <p class="form__image--text">Drag your file(s) here to upload<br> or click to browse
+                        </p>
+                    </div>
+                    <div class="form__image--container">
+                        <div class="form__image" v-for="path in photoFilePaths">
+                            <img v-bind:src="path">
+                        </div>
+                        <div class="form__image--default">
+                            <img src="images/icons/plus-yellow.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form__devider">
+                <!--TODO: Pull list of categories from database-->
+                <label class="form__label">Details</label>
+                <p class="form__descriptor">Select a category for your item</p>
+                <select v-model='formData.categorySelected' class="form__select">
+                    <option v-for='category in categories'>{{ category }}</option>
+                </select>
+                <p class="form__descriptor">Set an amount that buyers can purchase your item for</p>
+                <input v-model='formData.price' type="number" class="form__input">
+            </div>
+
+            <div class="form__devider">
+                <label for="desc" class="form__label">Description</label>
+                <p class="form__descriptor">Tell buyers about unique features, flaws, or why you are selling it!</p>
+                <textarea v-model='formData.desc' class="desc form__textarea" form="newpost"></textarea>
+            </div>
+
+
+            <div class="form__devider--submit">
+                <button type="button" class="form__submit--cancel">Cancel</button>
+                <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Post</button>
+            </div>
         </form>
     </div>
 
@@ -102,8 +137,8 @@
                 price: '',
                 categorySelected: 'Select Category'
             },
+            photoFilePaths: [],
             categories: ['Select Category', 'Electronics', 'Books', 'Furniture', 'Toys'],
-            img: '',
             query: '',
             radius: 50,
             select: false
@@ -113,6 +148,7 @@
                 
 
                 axios.post(`/newpost/12`, this.formData)
+
                 .then((response) =>  {
 
                     console.log(response);
@@ -122,6 +158,15 @@
             
                     console.log("This error was caught trying to send data" + err);
                 })
+                    .then(function (response) {
+                        console.log(response);
+                        if (res.data.status === 'success') {
+                            console.log("data was posted successfully")
+                        }
+                    })
+                    .catch(err => {
+                        console.log("This error was caught trying to send data: " + err);
+                    })
             },
             changeSelectState: function () {
                 this.select = !this.select;
@@ -130,27 +175,41 @@
                 } else {
                     this.radius = 50;
                 }
+            },
+            filesChange(fileList){
+                if(!fileList.length) return;
+                const formData = new FormData();
+
+                //create a new form object and append all the files to be uploaded
+                for(let i = 0; i < fileList.length; i++){
+                    formData.append(`photo${i}`, fileList[i], fileList[i].name)
+                }
+
+                //send form object to server for upload
+                axios.post('/newpost', formData)
+                    .then( res => {
+                        console.log(res.data)
+                        this.photoFilePaths = this.photoFilePaths.concat(res.data);
+                    })
+                    .catch( err => {
+                        console.log(err)
+                    })
             }
         },
         watch: {
+            //set query variable in sessionStorage when search field onChange event is fired
             query: function (newQuery, oldQuery) {
                 sessionStorage.setItem('query', newQuery);
             }
         },
         mounted() {
+            //set search bar field to previously typed query if it exists
             const sessionQuery = sessionStorage.getItem('query');
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
         }
     })
-             
-        
-    
-        
-
-           
-
 </script>
 
 </html>

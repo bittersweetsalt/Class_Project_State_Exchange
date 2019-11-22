@@ -277,48 +277,58 @@ aspects of the website
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
 .form{
-    text-align: center;
-    margin-bottom: 0;;
+    margin-bottom: 40px;
+    /* border: 1px solid var(--secondary-color); */
+    background-color: rgb(240, 240, 240);
 }
 
-input[type='file'] {
-    display: none;
+.form__devider,
+.form__devider--submit{
+    border-bottom: 3px solid white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.form__devider--submit{
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: white;
+    padding: 20px 0;
 }
 
-.form__image-input {
-    background-color: none;
-    border-radius: var(--border-radius);
-    outline: none;
-    text-align: right;
-}
-
-.form__input,
-.form__input--border{
+.form__input{
     width: 100%;
-    max-width: 350px;
-    height: 40px;
-    padding: 5px;
+    padding: 10px;
 
     border: none;
     outline: none;
     border-radius: var(--border-radius);
+    border: 1px solid white;
+    font-size: 13px;
+    color: var(--secondary-color);
 }
-
-.form__input--border{
-    border: 1px solid black;
-    height: 30px;
+.form__input:focus{
+    border: 1px solid var(--yellow);
+    border-radius: var(--border-radius);
 }
 
 .form__textarea{
     width: 100%;
+    /* max-width: 400px; */
     height: 200px;
-    padding: 5px;
+    padding: 10px;
 
-    border: 1px solid black;
+    /* border: 1px solid var(--secondary-color); */
+    border: none;
     border-radius: var(--border-radius);
     outline: none;
 
+    font-size: 15px;
     resize: none;
+}
+.form__textarea:focus{
+    border: 1px solid var(--yellow);
+    border-radius: var(--border-radius);
 }
 
 .form__select{
@@ -326,44 +336,121 @@ input[type='file'] {
     padding: 5px;
     height: 30px;
     width: 100%;
+    max-width: 120px;
 
     border-radius: var(--border-radius);
-    border: 1px solid black;
+    /* border: 1px solid var(--secondary-color); */
+    border: none;
+    outline: none;
 
     -moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
 }
 
-.form__button,
-.form__button--border{
+.form__submit--cancel,
+.form__submit--post{
     height: 40px;
-    min-width: 35px;
-    border: none;
-    outline: none;
+    width: 150px;
+    margin-left: 20px;
 
-    background-color: white;
+    font-size: 14px;
+
+    /* border: 1px solid var(--secondary-color); */
+    border: none;
     border-radius: var(--border-radius);
+    outline: none;
+    background-color: rgb(240, 240, 240);
+    color: var(--secondary-color);
+
     cursor: pointer;
 }
-
-.form__button--border{
-    border: 1px solid black;
-    height: 30px;
-    min-width: 70px;
-    justify-self: end;
-    align-self: center;
+.form__submit--post{
+    background-color: var(--yellow);
+    color: white;
 }
 
 .form__label{
     font-family: var(--main-body-font);
+    /* color: var(--secondary-color); */
+    font-size: 24px;
     text-align: left;
 }
 
-/* These styles are specific to only one element, will try to find a better solution later */
-.newpost {
-    margin-top: 30px;
+.form__descriptor{
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
 }
+
+.form__image--select-container{
+    display: flex;
+    margin-top: 20px;
+}
+
+.form__image-select{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 40px;
+    width: 300px;
+    height: 300px;
+    border: 1px dashed var(--secondary-color);
+    border-radius: var(--border-radius);
+    background-color: white;
+
+    cursor: pointer;
+    transition: .1s;
+}
+
+.form__image--container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px
+}
+
+.form__image,
+.form__image--default{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--border-radius);
+    background-color: white;
+}
+
+.form__image--default{
+    padding: 30px;
+    border: 1px dashed var(--secondary-color);
+    background-color: white;
+}
+
+.form__image--input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+
+    padding: 7px 15px;
+    margin-top: 10px;
+
+    color: var(--secondary-color);
+
+    cursor: pointer;
+}
+
+.form__image--text{
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+/* These styles are specific to only one element, will try to find a better solution later */
 .signin{
     display: flex;
     flex-direction: column;

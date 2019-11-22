@@ -39,48 +39,12 @@ into sections and holds modules together.
     padding: 5px 35px;
 }
 
-/* Grid Layout Options */
-.grid{
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: 10px;
-    margin: 10px 0;
-}
-.grid__col--1{
-    grid-column: span 1;
-}
-.grid__col--2{
-    grid-column: span 2;
-}
-.grid__col--3{
-    grid-column: span 3;
-}
-.grid__col--4{
-    grid-column: span 4;
-}
-.grid__col--5{
-    grid-column: span 5;
-}
-.grid__col--6{
-    grid-column: span 6;
-}
-.grid__col--7{
-    grid-column: span 7;
-}
-.grid__col--8{
-    grid-column: span 8;
-}
-.grid__col--9{
-    grid-column: span 9;
-}
-.grid__col--10{
-    grid-column: span 10;
-}
-.grid__col--11{
-    grid-column: span 11;
-}
-.grid__col--12{
-    grid-column: span 12;
+.layout-form{
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 1000px;
+    align-self: center;
+    padding: 5px 35px;
 }
 
 @media only screen and (max-width: 1330px){
@@ -90,7 +54,8 @@ into sections and holds modules together.
 }
 
 @media only screen and (max-width: 1125px){
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 910px;
     }
 }
@@ -100,13 +65,15 @@ into sections and holds modules together.
         max-height: 159px;
     }
     
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 800px;
     }
 }
 
 @media only screen and (max-width: 800px){
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 695px;
     }
 }
@@ -117,28 +84,9 @@ into sections and holds modules together.
         /* overflow: hidden; */
     }
     
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 480px;
-    }
-
-    .grid{
-        grid-template-columns: 1fr;
-        justify-items: left;
-    }
-
-    .grid__col--1,
-    .grid__col--2,
-    .grid__col--3,
-    .grid__col--4,
-    .grid__col--5,
-    .grid__col--6,
-    .grid__col--7,
-    .grid__col--8,
-    .grid__col--9,
-    .grid__col--10,
-    .grid__col--11,
-    .grid__col--12{
-        grid-column: span 1;
     }
 }
 
