@@ -9,7 +9,6 @@ const fileUpload = require('express-fileupload')
 
 //routes import
 const fileRouter = require('./routes/files');
-const prototypeRouter = require('./routes/prototype');
 const testMySqlRouter = require('./routes/testmysql');
 const newPostRouter = require('./routes/insertPost');
 
@@ -50,7 +49,6 @@ app.use(fileUpload({ createParentPath: true}));
 
 //routes setup
 app.use('/', fileRouter);
-app.use('/', prototypeRouter);
 app.use('/', testMySqlRouter);
 app.use('/', newPostRouter);
 
