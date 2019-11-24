@@ -11,26 +11,15 @@ const fileRouter = require('./routes/files');
 const prototypeRouter = require('./routes/prototype');
 const testMySqlRouter = require('./routes/testmysql');
 
+var usersRouter = require('./routes/users');
+
+const passport    = require('passport');
+require('./auth/passport');
 
 const app = express();
 
-
-// var allowCrossDomain = function(req, res, next) {
-//   // Website you wish to allow to connect
-// res.setHeader('Access-Control-Allow-Origin', '*');
-
-// // Request methods you wish to allow
-// res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-// // Request headers you wish to allow
-// res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-// // Set to true if you need the website to include cookies in the requests sent
-// // to the API (e.g. in case you use sessions)
-// res.setHeader('Access-Control-Allow-Credentials', true);
-// next();
-// }
-
+const auth = require('./routes/auth');
+app.use('/auth', auth);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,6 +37,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', fileRouter);
 app.use('/', prototypeRouter);
 app.use('/', testMySqlRouter);
+
+app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
+
 
 
 //making a new post

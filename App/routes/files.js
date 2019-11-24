@@ -28,7 +28,10 @@ router.get('/login', (req, res, next) => {
 });
 
 
-
+/*------------------------------------------------ GET register page. */
+router.get('/register', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../views/registerpage.html'))
+});
 
 /*------------------------------------------------ GET newpost page. */
 router.get('/newpost', (req, res, next) => {

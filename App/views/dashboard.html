@@ -31,8 +31,9 @@
                     </div>
                 </form>
                 <div class="topper__links">
-                    <a href="login" class="topper__links--login">Login</a>
-                    <a href="#" class="topper__links--signup">Signup</a>
+                    <a href="login" class="topper__links--login" v-if="isLoggedin === false">Login</a>
+                    <a href="register" class="topper__links--signup" v-if="isLoggedin === false">Signup</a>
+                    <a href="#" v-on:click="logout()" class="topper__links" v-if="isLoggedin === true">Signout</a>
                 </div>
                 <div class="nav--burger">
                     <div class="burger-line"></div>
@@ -43,8 +44,8 @@
                     <a href="index" class="nav__item">Home</a>
                     <a href="about" class="nav__item">About</a>
                     <!-- <a href="#" class="nav__item">For Sale</a> -->
-                    <a href="newpost" class="nav__item">New Post</a>
-                    <a href="dashboard" class="nav__item">Dashboard</a>
+                    <a href="newpost" class="nav__item" v-if="isLoggedin === true">New Post</a>
+                    <a href="dashboard" class="nav__item" v-if="isLoggedin === true">Dashboard</a>
                 </div>
             </div>
         </div>
@@ -94,7 +95,8 @@
             posts: [],
             messages: ['Message1', 'Message2', 'Message3'],
             select: false,
-            radius: 50
+            radius: 50,
+            isLoggedin: false
         },
         watch: {
             query: function (newQuery, oldQuery) {
@@ -130,10 +132,22 @@
                 } else {
                     this.radius = 50;
                 }
+            },
+            logout: function() {
+                
+                //alert("ji");
+                localStorage.removeItem("__token");
+                this.isLoggedin = false;
             }
         },
 
         mounted() {
+
+            if(localStorage.getItem("__token") != null) {
+                this.isLoggedin = true;
+                //alert("logged in");
+            } 
+
             const sessionQuery = sessionStorage.getItem('query');
             if (sessionQuery != null) {
                 this.query = sessionQuery;

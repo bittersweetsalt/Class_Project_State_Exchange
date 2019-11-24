@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <link rel='stylesheet' href='stylesheets/global.css'>
 </head>
 
@@ -31,8 +31,8 @@
                     </div>
                 </form>
                 <div class="topper__links">
-                    <!-- <a href="login" class="topper__links--login">Login</a> -->
-                    <a href="register" class="topper__links--signup">Signup</a>
+                    <a href="login" class="topper__links--login">Login</a>
+                    <!-- <a href="#" class="topper__links--signup">Signup</a> -->
                 </div>
                 <div class="nav--burger">
                     <div class="burger-line"></div>
@@ -51,22 +51,27 @@
     </div>
 
     <div class="layout-body">
-        <h1>Login</h1>
-        <form class="form signin">
+        <h1>Signup</h1>
+        <form class="form signin" v-if="isRegistered === false">
+            <label for="name" class="form__label">Name</label>
+            <input v-model='name' type="input" class="title form__input">
             <label for="email" class="form__label">Email</label>
-            <input v-model='email' type="input" class="title form__input" >
+            <input v-model='email' type="input" class="title form__input">
             <label for="password" class="form__label">Password</label>
             <input v-model='password' type="password" class="title form__input">
-            
-            <!-- <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Submit</button> -->
-        
+            <label for="confirm_password" class="form__label">Confirm Password</label>
+            <input v-model='confirm_password' type="password" class="title form__input">
+
             <div class="form__submit">
                 <button type="button" class="form__submit--cancel">Cancel</button> 
-                <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Login</button>
+                <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Signup</button>
             </div>
+            
             <label class="form__label">{{message}}</label>
-
+            <!-- <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Submit</button> -->
+        
         </form>
+        <div v-if="isRegistered === true">Registration successfull. <a href="login" style="color: blue;">Click here to login</a></div>
     </div>
 
 
@@ -79,36 +84,44 @@
     var app = new Vue({
         el: '#app',
         data: {
+            name: '',
             email: '',
             password: '',
-            message: ''
-           
+            confirm_password: '',
+            message: '',
+            isRegistered: false
+    
         },
         methods: {
             sendData: function () {
-                //'http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql'
-                axios.post('http://127.0.0.1:3000/auth/login?email=' + app.email + '&password=' + app.password
-                    /*{
-                        email: app.email,
-                        password: app.password
-                    }*/
-                    )
+                //ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql
+                axios.post('http://127.0.0.1:3000/users/register',
+                    {
+                        name: this.name,
+                        email: this.email,
+                        password: this.password,
+                        confirm_password: this.confirm_password
+                    }
+                )
                 .then(function (response) {
-                    
-                    //alert(response.data.token);
-                    localStorage.setItem("__token", response.data.token); //response.data.success.token
-					//alert( localStorage.getItem("__token") );
-                    window.location.href = "/"
+                    // handle success
+                    console.log(response.data);
+                    if(response.data.status == "error") {
+                        
+                        app.message = response.data.message;
+                    } else {
+                        app.isRegistered = true;
+                    }
                 })
                 .catch(function (error) {
                     // handle error
-                    //console.log(error);
-                    app.message = "Invalid credentias!";
+                    console.log(error);
                 })
                 .finally(function () {
                     // always executed
                 });
-              
+
+                //console.log(formData);
             },
             changeSelectState: function () {
                 this.select = !this.select;
@@ -117,6 +130,12 @@
                 } else {
                     this.radius = 50;
                 }
+            },
+            logout: function() {
+                
+                //alert("ji");
+                localStorage.removeItem("__token");
+                this.isLoggedin = false;
             }
         },
         watch: {
