@@ -91,7 +91,8 @@
             },
             sendQuery: function () {
                 axios.post('/testmysql', {
-                        query: this.query
+                        query: this.query,
+                        category: this.selectedCategory
                     })
                     .then(res => {
                         index.posts = res.data
@@ -121,7 +122,8 @@
             }
 
             axios.post('/testmysql', {
-                    query: this.query
+                    query: this.query,
+                    category: this.selectedCategory
                 })
                 .then(res => {
                     app.posts = res.data
