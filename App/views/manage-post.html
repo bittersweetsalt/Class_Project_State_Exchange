@@ -9,7 +9,6 @@
 
 <div id="app">
 
-
     <div class="layout-header">
         <div class="layout-body">
             <div class="topper">
@@ -71,33 +70,17 @@
 
 
     <div class="layout-body">
-        <h2 class="slider__title">Recent Posts</h2>
-        <div class="slider">
-            <div class="slider__post" v-for="post in posts">
-                <div class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
-                <div class="slider__post--body">
-                    <h3 class="slider__post--title">{{trimTitle(post.Name)}}</h3>
-                    <p class="slider__post--comment">{{trimComment(post.Comment)}}</p>
-                </div>
-                <div class="slider__post--button">Contact Seller</div>
-            </div>
-        </div>
+        <h2>Manage Posts</h2>
+        <table class="table">
+                <tr v-for="post in posts">
+                         <td> {{post.ID}} </td>
+                         <td> {{post.Name}} </td>
+                         <td> {{post.Category}} </td>
+                         <td> {{post.Price}} </td>
+                         <td style="width: 15%"> <button>Approve</button> <button>Disapprove</button></td>
+                         </tr>  
+        </table>
     </div>
-
-    <div class="layout-body">
-        <h2 class="slider__title">Popular Posts</h2>
-        <div class="slider">
-            <div class="slider__post" v-for="post in posts">
-                <div class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
-                <div class="slider__post--body">
-                    <h3 class="slider__post--title">{{trimTitle(post.Name)}}</h3>
-                    <p class="slider__post--comment">{{trimComment(post.Comment)}}</p>
-                </div>
-                <div class="slider__post--button">Contact Seller</div>
-            </div>
-        </div>
-    </div>
-
 
 </div>
 
@@ -143,8 +126,8 @@
 
                 return title;
             },
-            logout: function() {
-                
+            logout: function () {
+
                 //alert("ji");
                 localStorage.removeItem("__token");
                 this.isLoggedin = false;
@@ -158,10 +141,10 @@
         mounted() {
 
             //alert( localStorage.getItem("__token") + " --- " + this.isLoggedin );
-            if(localStorage.getItem("__token") != null) {
+            if (localStorage.getItem("__token") != null) {
                 this.isLoggedin = true;
                 //alert("logged in");
-            } 
+            }
 
             const sessionQuery = sessionStorage.getItem('query');
             if (sessionQuery != null) {

@@ -46,6 +46,11 @@ router.get('/dashboard', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../views/dashboard.html'));
 });
 
+/*------------------------------------------------ GET Manage post */
+router.get('/manage-post', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../views/manage-post.html'));
+});
+
 
 
 
