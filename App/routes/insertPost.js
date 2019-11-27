@@ -56,12 +56,4 @@ router.post(`/newpost/12` ,(req, res) => {
             })
 
   })    
-        
-
-//grabbing th endpoint created by vue 
-// app.post('', function(req,res){
-//     console.log(req.body);
-//     res.send('POST request received successfully');
-// })
-
 module.exports = router;
