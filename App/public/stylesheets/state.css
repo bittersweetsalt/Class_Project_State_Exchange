@@ -12,8 +12,13 @@ different views, color variations, etc.
 }
 
 @media only screen and (max-width: 1125px){
-    .topper__form{
-        max-width: 400px;
+    /*-------------------------------------------------------------POP_CATEGORIES--*/
+    .pop__category-container{
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .topper__title{
+        font-size: 30px;
     }
     
 }
@@ -21,31 +26,40 @@ different views, color variations, etc.
 @media only screen and (max-width: 910px){
     /*---------------------------------------------------------------------TOPPER--*/
     .topper{
-        grid-template-columns: 1fr 100px;
+        grid-template-columns: auto auto;
         grid-template-areas:
-            'title links'
-            'form form'
-            'nav nav'
+            'title title'
+            'form links'
         ;
         padding-top: 5px;
     }
 
+    .topper__title{
+        font-size: 40px;
+    }
+
     .topper__links{
-        align-items: flex-end;
+        justify-content: flex-start;
+    }
+    .topper__links--login,
+    .topper__links--signup{
+        display: none;
     }
 
-    .topper__form{
-        margin-top: 10px;
-    }
-
-    /*----------------------------------------------------------------NAVIGATION--*/
-    .nav__item{
-        text-align: center;
+    /*-------------------------------------------------------------POP_CATEGORIES--*/
+    .pop__category-container{
+        grid-template-columns: repeat(3, 1fr);
     }
 
     /*--------------------------------------------------------------------SLIDER--*/
     .slider__post{
         width: 235px;
+    }
+
+    .nav--burger{
+        align-self: center;
+        height: auto;
+        width: auto;
     }
 }
 
@@ -59,48 +73,41 @@ different views, color variations, etc.
 @media only screen and (max-width: 695px){
     /*---------------------------------------------------------------------TOPPER--*/
     .topper{
-        grid-template-columns: 1fr 80px;
+        grid-template-columns: 1fr;
+        align-items: center;
+        grid-template-areas:
+            'title'
+            'form'
+            'links'
+        ;
     }
     
     .topper__title{
-        font-size: 19px;
+        font-size: 50px;
+        text-align: center;
+    }
+
+    .topper__links{
+        justify-content: center;
     }
 
     .topper__form{
         max-width: 100%;
     }
-    
-    .topper__img{
-        justify-self: start;
-    }
 
-    .topper__links{
-        font-size: 13px;
-    }
-
-    /*-------------------------------------------------------------FORM ELEMENTS--*/
-    .form__input,
-    .form__input--border{
-        max-width: 200px;
-    }
-
-    .form__button--border{
-        justify-self: left;
-    }
-
-    /*----------------------------------------------------------------NAVIGATION--*/
-    .nav{
-        display: none;
-        flex-direction: column;
-    }
-
-    .nav--burger{
-        display: flex;
+    /*-------------------------------------------------------------POP_CATEGORIES--*/
+    .pop__category-container{
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media only screen and (max-width: 480px){
     .slider__post{
         width: 235px;
+    }
+
+    /*-------------------------------------------------------------POP_CATEGORIES--*/
+    .pop__category-container{
+        grid-template-columns: 1fr;
     }
 }
