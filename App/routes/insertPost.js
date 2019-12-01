@@ -1,49 +1,59 @@
-var express = require('express');
-var app = express();
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const path = require('path');
-var db = require("../db/connection");
+const db = require("../db/connection");
 
-// we are going to generate the ids of the post  by passing parameters here in the future
+router.post('/newpost', (req, res) => {
+    let pathNames = [];
 
-let id = 5;
-router.post(`/insertPost/id:${id}` ,(req, res) => {
-
-    // this is the data we are going to be sending 
-    let data = { 
-        Title: req.body.Title, 
-        Category: req.body.Category,
-        Price: req.body.price,
-        Desc: req.body.desc
-        
+    //check to make sure files are not empty
+    if(!req.files){
+        console.log("missing files")
+        res.status(409).send({error: "missing files"});
+    }
+    
+    //loop through keys in req.files obj and move each file to public directory, push filepath to pathnames array
+    for(var key in req.files){
+        let photo = req.files[key];
+        photo.mv(path.join(__dirname, '../', 'public', 'images', 'post_img', photo.name));
+        pathNames.push(path.join('images', 'post_img', photo.name));
     }
 
-    let sql = "INSERT INTO Posting SET ?";
-
-
-    db.getConnection((err, connection) => {
-
-        db.query(sql, data, (err, res, fields) => {
-            console.log(req.query.query);
-
-            if(error){
-                console.log(error);
-            }
-            else{
-                res.status(201).send(`Post added with ID: ${res.ID}`);
-                res.redirect('/newPosting.html');
-            }
-           
-        })
-       
-    })
+    //send pathnames of all uploaded images back to client
+    res.send(pathNames);
 })
 
+// we are going to generate the ids of the post  by passing parameters here in the future
+router.post(`/newpost/12` ,(req, res) => {
 
-//grabbing th endpoint created by vue 
-app.post('', function(req,res){
-    console.log(req.body);
-    res.send('POST request received successfully');
-})
+        
+        // this dummy data we send
+        let data = { 
+                              
+            Title: req.body.Title,
+            category: req.body.category,
+            UserID: 91928395,
+            Desc: req.body.Comment,
+            Price: req.body.Price,
+        }
+  
 
+        let sql = "INSERT INTO Posting SET ?";
+        
+        db.query(sql, [data], (err, results) => {
+            
+            if (err){
+                console.log("Failed: " + err);
+                res.end();
+                return;
+            }
+              
+            console.log('Found database.... 1 Record inserted');
+        
+                // A simple "Your item has been submitted" Response Page.
+                // Setup Date: 11/14/2019
+            res.send(rows);
+            })
+
+  })    
 module.exports = router;
