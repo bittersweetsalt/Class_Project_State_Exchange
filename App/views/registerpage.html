@@ -67,7 +67,7 @@
                 <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Signup</button>
             </div>
             
-            <label class="form__label">{{message}}</label>
+            <div class="form__label" style="color: red;">{{message}}</div>
             <!-- <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Submit</button> -->
         
         </form>
@@ -94,6 +94,38 @@
         },
         methods: {
             sendData: function () {
+
+                app.message = "";
+                //validation
+                if(this.name == "") {
+
+                    app.message = app.message + "Name cannot be left blank";
+                    return;
+                   
+                }
+
+                if(this.email == "") {
+
+                    app.message = app.message + "Email cannot be left blank";
+                    return;
+                  
+                }
+
+                if(this.password == "") { 
+
+                    app.message = app.message + "Password cannot be left blank";
+                    return;
+                    
+                }
+
+                if(this.password != this.confirm_password) {
+
+                    app.message = app.message + "Password does not match";
+                    return;
+                }
+
+              
+
                 //ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql
                 axios.post('http://127.0.0.1:3000/users/register',
                     {

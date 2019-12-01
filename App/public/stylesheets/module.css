@@ -313,6 +313,19 @@ aspects of the website
     resize: none;
 }
 
+.message__textarea{
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+
+    border: 1px solid black;
+    border-radius: var(--border-radius);
+    outline: none;
+
+    font-size: 15px;
+    resize: none;
+}
+
 .form__select{
     text-align: left;
     padding: 5px;
@@ -487,4 +500,13 @@ input[type='file'] {
 .dev__card--body{
     margin-top: 5px;
     text-align: center;
+}
+
+
+hr {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #E3E3E3; /* old IE */
+    background-color:#E3E3E3; /* Modern Browsers */
 }

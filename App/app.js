@@ -12,6 +12,9 @@ const prototypeRouter = require('./routes/prototype');
 const testMySqlRouter = require('./routes/testmysql');
 
 var usersRouter = require('./routes/users');
+var messagingRouter = require('./routes/messaging');
+var postRouter = require('./routes/post');
+var messagesIndexRouter = require('./routes/messaging-index');
 
 const passport    = require('passport');
 require('./auth/passport');
@@ -39,9 +42,9 @@ app.use('/', prototypeRouter);
 app.use('/', testMySqlRouter);
 
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
-
-
-
+app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
+app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
+app.use('/post', postRouter); 
 //making a new post
 app.post('/newpost/12', function(req,res){
  

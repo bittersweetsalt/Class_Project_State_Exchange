@@ -25,7 +25,7 @@ passport.use(new LocalStrategy({
                     return cb(null, false, {message: 'Incorrect email or password.'});
                 }
 
-                //converting result into simple object for passing to cb 
+                //converting result into simple object for passing to cb
                 var user = {};
                 user.email = result[0]['email'];
                 user.id = result[0]['id'];
