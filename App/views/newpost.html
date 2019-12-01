@@ -150,8 +150,9 @@
 
                 axios.post(`/newpost/12`, this.formData)
 
-                    .then(function (response) {
-                        console.log(response);
+                    .then(function (formData) {
+                        Response.sendData(formData);
+                        console.log(formData);
                         if (res.data.status === 'success') {
                             console.log("data was posted successfully")
                         }
