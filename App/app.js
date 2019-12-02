@@ -57,7 +57,7 @@ app.use('/', newPostRouter);
 
 
 //making a new post
-app.post('/newpost/12', function(req,res){
+app.post('/newpost/12', function(req, res){
  
   // Prints post out in console 
   console.log('headersSent', res.headersSent);

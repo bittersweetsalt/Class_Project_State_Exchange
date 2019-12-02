@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const db = require("../db/connection");
+var mkdirp = require('mkdirp');
 
-router.post('/newpost', (req, res) => {
+router.post('/uploadphotos', (req, res) => {
     let pathNames = [];
 
     //check to make sure files are not empty
@@ -11,12 +12,15 @@ router.post('/newpost', (req, res) => {
         console.log("missing files")
         res.status(409).send({error: "missing files"});
     }
+
+    //create a directory with client UUID as foldername
+    mkdirp(path.join(__dirname, '../', 'public', 'images', 'post_img', req.body.posting_ID), function(err) { });
     
-    //loop through keys in req.files obj and move each file to public directory, push filepath to pathnames array
+    //loop through keys in req.files obj and move each file to newly created directory, push filepath to pathnames array
     for(var key in req.files){
         let photo = req.files[key];
-        photo.mv(path.join(__dirname, '../', 'public', 'images', 'post_img', photo.name));
-        pathNames.push(path.join('images', 'post_img', photo.name));
+        photo.mv(path.join(__dirname, '../', 'public', 'images', 'post_img', req.body.posting_ID, photo.name));
+        pathNames.push(path.join('images', 'post_img', req.body.posting_ID, photo.name));
     }
 
     //send pathnames of all uploaded images back to client
@@ -56,4 +60,7 @@ router.post(`/newpost/12` ,(req, res) => {
             })
 
   })    
+        
+
+
 module.exports = router;

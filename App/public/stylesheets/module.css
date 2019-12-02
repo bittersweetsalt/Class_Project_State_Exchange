@@ -91,8 +91,10 @@ aspects of the website
 }
 
 .burger-menu{
+    display: none;
+
     position: absolute;
-    top: 50;
+    top: 55;
     right: 0;
 
     display: flex;
@@ -198,6 +200,8 @@ aspects of the website
 }
 
 .topper__form--categories{
+    display: none;
+
     position: absolute;
     top: 40;
     left: 0;
@@ -358,7 +362,8 @@ aspects of the website
     padding: 20px 0;
 }
 
-.form__input{
+.form__input,
+.form__input--price{
     width: 100%;
     padding: 10px;
 
@@ -374,6 +379,10 @@ aspects of the website
     border-radius: var(--border-radius);
 }
 
+.form__input--price{
+    max-width: 150px;
+}
+
 .form__textarea{
     width: 100%;
     height: 200px;
@@ -385,6 +394,8 @@ aspects of the website
 
     font-size: 15px;
     resize: none;
+
+    color: var(--secondary-color);
 }
 .form__textarea:focus{
     border: 1px solid var(--yellow);
@@ -394,9 +405,8 @@ aspects of the website
 .form__select{
     text-align: left;
     padding: 5px;
-    height: 30px;
-    width: 100%;
-    max-width: 120px;
+    height: 35px;
+    max-width: 150px;
 
     border-radius: var(--border-radius);
     border: none;
@@ -404,7 +414,18 @@ aspects of the website
 
     -moz-appearance: none;
 	-webkit-appearance: none;
-	appearance: none;
+    appearance: none;
+    
+    background-image: url('../images/icons/select-arrow.png');
+    background-size: 13px;
+    background-repeat: no-repeat;
+    background-position: 95% center;
+
+    color: var(--secondary-color);
+
+}
+.form__select:focus{
+    border: 1px solid var(--yellow);
 }
 
 .form__submit--cancel,
@@ -451,7 +472,7 @@ aspects of the website
     justify-content: center;
     align-items: center;
 
-    margin-right: 40px;
+    margin:0 40px 0 0;
     width: 300px;
     height: 300px;
     border: 1px dashed var(--secondary-color);
