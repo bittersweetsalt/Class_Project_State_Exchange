@@ -36,6 +36,7 @@ h1 {
     font-family: var(--main-header-font);
     font-size: 40px;
     margin: 0;
+    margin-bottom: 10px;
 }
 
 h2 {
