@@ -77,8 +77,8 @@
                 <td>{{post.Category}}</td>
                 <td>{{post.Price}}</td>
                 <td class="buttons">
-                    <button>Approve</button>
-                    <button>Disapprove</button>
+                    <button v-on:click="status(post.ID,1)">Approve</button>
+                    <button v-on:click="status(post.ID,0)">Disapprove</button>
                 </td>
             </tr>
         </table>
@@ -129,10 +129,33 @@
             },
             logout: function () {
                 
-                //alert("ji");
-                localStorage.removeItem("__token");
+              ç
                 this.isLoggedin = false;
-            }
+            },
+
+            status: function(id,status) {
+            
+                if(localStorage.getItem("__token") != null) {
+                    const headers = {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + localStorage.getItem("__token")
+                            }
+
+                    axios.post('/post/setStatus',
+                                {id: id, status: status},
+                                {headers: headers})
+                    .then(res => {
+
+                        console.log(res);
+                        
+                    })
+
+                } else {
+                    alert("Please login first!")
+                }
+        }
+
+
         },
         watch: {
             query: function (newQuery, oldQuery) {
@@ -157,6 +180,9 @@
                 this.posts = res.data;
             })
         }
+
+
     });
+
 </script>
 </html>
