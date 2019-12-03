@@ -3,7 +3,9 @@
 <head>
     <title>State Exchange</title>
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="http://127.0.0.1:3000/stylesheets/bootstrap.min.css">
     <link rel='stylesheet' href='http://127.0.0.1:3000/stylesheets/global.css'>
+    
 </head>
 
 
@@ -68,31 +70,52 @@
             <p>SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only</p>
         </div>
     </div>
-    <div class="layout-body">
-        <h2>Manage Posts</h2>
-        <table class="table">
-            <tr v-for="post in posts">
-                <td>{{post.ID}}</td>
-                <td>{{post.Name}}</td>
-                <td>{{post.Category}}</td>
-                <td>{{post.Price}}</td>
-                <td class="buttons">
-                    <button v-on:click="status(post.ID,1)">Approve</button>
-                    <button v-on:click="status(post.ID,0)">Disapprove</button>
-                </td>
-            </tr>
-        </table>
+
+    <div class="container">
+
+        <h1 class="card-title">Post Detail</h1>
+        <div class="row">
+            
+            <div class="col-lg-12">
+                
+                <div class="card mt-4">
+                    <img class="card-img-top img-fluid" v-bind:src="'/' + post.image" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">{{post.name}}</h3>
+                        <h3 class="card-title">Category: {{post.categroy}}</h3>
+                        <h2 class="card-title">{{post.price}} $</h2>
+                        <p class="card-text"> {{post.comment}}</p>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
     </div>
 </div>
 
 
+
+</div>
+
+
+<script src="/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     var app = new Vue({
         el: '#app',
         data: {
-            posts: [],
+            post: {
+                image: '',
+                id: '',
+                categroy: '',
+                name: '',
+                price: '',
+                email: '',
+                comment: ''
+            },
             query: "",
             select: false,
             radius: 50,
@@ -107,55 +130,13 @@
                     this.radius = 50;
                 }
             },
-            trimComment: function (post) {
-                const length = 50;
-                let comment = post;
-                
-                if (post.length > length) {
-                    comment = post.substring(0, length) + "...";
-                }
-                
-                return comment;
-            },
-            trimTitle: function (post) {
-                const length = 15;
-                let title = post;
-                
-                if (post.length > length) {
-                    title = post.substring(0, length) + "...";
-                }
-                
-                return title;
-            },
+            
             logout: function () {
                 
-              ç
+                ç
                 this.isLoggedin = false;
             },
-
-            status: function(id,status) {
             
-                if(localStorage.getItem("__token") != null) {
-                    const headers = {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + localStorage.getItem("__token")
-                            }
-
-                    axios.post('/post/setStatus',
-                                {id: id, status: status},
-                                {headers: headers})
-                    .then(res => {
-
-                        console.log(res);
-                        
-                    })
-
-                } else {
-                    alert("Please login first!")
-                }
-        }
-
-
         },
         watch: {
             query: function (newQuery, oldQuery) {
@@ -175,15 +156,25 @@
                 this.query = sessionQuery;
             }
             var url = window.location.href;
-                var split = url.split('/');
-            axios.get('http://127.0.0.1:3000/post/'+split[split.length - 1])
+            var split = url.split('/');
+            
+            axios.get('http://127.0.0.1:3000/post/' + split[split.length - 1])
             .then(res => {
-                this.posts = res.data;
+                console.log(res.data[0]);
+                app.post.id = res.data[0]['ID'];
+                app.post.name = res.data[0]['Name'];
+                app.post.price = res.data[0]['Price'];
+                app.post.image = res.data[0]['image_name'];
+                app.post.categroy = res.data[0]['Category'];
+                app.post.email = res.data[0]['email'];
+                app.post.comment = res.data[0]['Comment'];
+                
             })
         }
-
-
+        
+        
     });
-
+    
 </script>
+
 </html>
