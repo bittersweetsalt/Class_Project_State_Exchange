@@ -29,17 +29,16 @@ router.post('/uploadphotos', (req, res) => {
 
 // we are going to generate the ids of the post  by passing parameters here in the future
 router.post(`/newpost/12` ,(req, res) => {
-
-        
-        // this dummy data we send
         let data = { 
                               
-            Title: req.body.Title,
+            title: req.body.title,
             category: req.body.category,
-            UserID: 91928395,
-            Desc: req.body.Comment,
-            Price: req.body.Price,
+            userID: 91928395,
+            desc: req.body.desc,
+            price: req.body.price,
         }
+
+        console.log(data)
   
 
         let sql = "INSERT INTO Posting SET ?";
