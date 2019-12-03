@@ -58,7 +58,8 @@
                 <p class="form__descriptor">Improve your buyer’s confidence by including as many as possible.</p>
                 <div class="form__image--select-container">
                     <div class="form__image-select">
-                        <input form="new-post" type="file" accept="image/*" id="addImage" @change="filesChange($event.target.files)" class="form__image--input">
+                        <input form="new-post" type="file" accept="image/*" id="addImage"
+                            @change="filesChange($event.target.files)" class="form__image--input">
                         </input>
                         <p class="form__image--text">Drag your file(s) here to upload<br> or click to browse
                         </p>
@@ -116,7 +117,6 @@
                 desc: '',
                 price: '',
                 category: 'Category',
-                posting_ID: ""
             },
             photoFilePaths: [],
             categories: ['Select Category', 'Electronics', 'Books', 'Furniture', 'Toys'],
@@ -149,13 +149,15 @@
                 const photo = document.querySelector('.form__image--input').files[0];
                 formDataRequest.append("photo", photo)
 
+                //create unique post identifier
+                const uuid = this.createUUID()
 
-                axios.post(`/newpost/12`, formDataRequest)
+                axios.post(`/newpost/${uuid}`, formDataRequest)
                     .then( res => {
                         console.log(res)
                     })
                     .catch(err => {
-                        console.log("This error was caught trying to send data: " + err);
+                        console.log(err);
                     })
             },
 
@@ -174,6 +176,16 @@
                     .catch(err => {
                         console.log("incompatible filetype uploaded")
                     });
+            },
+
+            createUUID: function() {
+                var dt = new Date().getTime();
+                var uuid = 'xxxxxxxx'.replace(/[xy]/g, function (c) {
+                    var r = (dt + Math.random() * 16) % 16 | 0;
+                    dt = Math.floor(dt / 16);
+                    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                });
+                return uuid;
             }
         },
         watch: {
@@ -188,15 +200,6 @@
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
-
-            //create unique UUID for new post on page load
-            var dt = new Date().getTime();
-            var uuid = 'xxxxxxxx'.replace(/[xy]/g, function (c) {
-                var r = (dt + Math.random() * 16) % 16 | 0;
-                dt = Math.floor(dt / 16);
-                return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-            });
-            this.formData.posting_ID = uuid;
         }
     })
 </script>
