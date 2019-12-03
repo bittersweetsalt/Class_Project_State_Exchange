@@ -14,8 +14,8 @@ const db = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root", //"dbuser", 
-    password: "root", //"password",
-    database: "sfsuDatabase"
+    password: "12345678", //"password",
+    database: "state_exchange"
   });
 
 module.exports = db;

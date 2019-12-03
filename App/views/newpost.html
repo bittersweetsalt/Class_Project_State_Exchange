@@ -120,7 +120,7 @@
         methods: {
             sendData: function () {
                 let id = Math.random() * 100;
-                Math.round.ciel(id);
+                Math.round(id);
 
                 axios.post(`/newpost/12`, this.formData)
                 .then(function (response) {
