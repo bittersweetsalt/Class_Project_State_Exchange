@@ -58,7 +58,7 @@
                 <p class="form__descriptor">Improve your buyer’s confidence by including as many as possible.</p>
                 <div class="form__image--select-container">
                     <div class="form__image-select">
-                        <input type="file" accept="image/*" multiple :disabled="isSaving" id="addImage"
+                        <input type="file" accept="image/*" multiple id="addImage"
                             @change="filesChange($event.target.files)" class="form__image--input">
                         </input>
                         <p class="form__image--text">Drag your file(s) here to upload<br> or click to browse
@@ -80,10 +80,11 @@
                 <label class="form__label">Details</label>
                 <p class="form__descriptor">Select a category for your item</p>
                 <select v-model='formData.categorySelected' class="form__select">
+                    <option selected disabled>Category</option>
                     <option v-for='category in categories'>{{ category }}</option>
                 </select>
                 <p class="form__descriptor">Set an amount that buyers can purchase your item for</p>
-                <input v-model='formData.price' type="number" class="form__input">
+                <input v-model='formData.price' class="form__input--price">
             </div>
 
             <div class="form__devider">
@@ -123,7 +124,8 @@
                 title: '',
                 desc: '',
                 price: '',
-                categorySelected: 'Select Category'
+                categorySelected: 'Category',
+                posting_ID: ""
             },
             photoFilePaths: [],
             categories: ['Select Category', 'Electronics', 'Books', 'Furniture', 'Toys'],
@@ -134,52 +136,57 @@
             selectedCategory: "All"
         },
         methods: {
-
-            changeMenuState: function(){
+            changeMenuState: function () {
                 this.menu = !this.menu;
             },
-            changeSelectState: function() {
-                this.select = ! this.select;
+            changeSelectState: function () {
+                this.select = !this.select;
             },
-            selected: function(event){
+            selected: function (event) {
                 this.selectedCategory = event.target.innerText;
             },
 
             sendData: function () {
-                
-
                 axios.post(`/newpost/12`, this.formData)
 
-                    .then((response )=> {
-                        console.log(response.data);
-                        console.log(response.status);
-                        console.log(response.statusText);
-                        console.log(response.headers);
-                        console.log(response.config);
-                        
+                    .then(function (formData) {
+                        Response.sendData(formData);
+                        console.log(formData);
+                        if (res.data.status === 'success') {
+                            console.log("data was posted successfully")
+                        }
                     })
                     .catch(err => {
                         console.log("This error was caught trying to send data: " + err);
                     })
             },
-            filesChange(fileList) {
+
+            filesChange: function (fileList) {
                 if (!fileList.length) return;
                 const formData = new FormData();
+                formData.append("posting_ID", this.formData.posting_ID);
 
                 //create a new form object and append all the files to be uploaded
                 for (let i = 0; i < fileList.length; i++) {
                     formData.append(`photo${i}`, fileList[i], fileList[i].name)
                 }
 
-                //send form object to server for upload
-                // axios.post('/newpost/12', formData)
-                //     .then(res => {
-                //         console.log(res.data)
-                //         this.photoFilePaths = this.photoFilePaths.concat(res.data);
-                //     })
-                //     .catch(err => {
-                //         console.log(err)
-            
+                axios.post('/uploadphotos', formData)
+                    .then(res => {
+                        console.log(res.data)
+                        this.photoFilePaths = this.photoFilePaths.concat(res.data);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            }
+        },
+        watch: {
+            //set query variable in sessionStorage when search field onChange event is fired
+            query: function (newQuery, oldQuery) {
+                sessionStorage.setItem('query', newQuery);
+            }
+
         },
         mounted() {
             //set search bar field to previously typed query if it exists
@@ -187,8 +194,16 @@
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
+
+            //create unique UUID for new post on page load
+            var dt = new Date().getTime();
+            var uuid = 'xxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = (dt + Math.random() * 16) % 16 | 0;
+                dt = Math.floor(dt / 16);
+                return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+            this.formData.posting_ID = uuid;
         }
     })
-
 </script>
 </html>
