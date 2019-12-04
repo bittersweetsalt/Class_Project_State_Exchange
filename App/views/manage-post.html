@@ -6,6 +6,7 @@
     <link rel='stylesheet' href='stylesheets/global.css'>
 </head>
 
+
 <div id="app">
 
     <div class="layout-header">
@@ -29,7 +30,7 @@
                 </form>
                 <div class="topper__links">
                     <a href="login" class="topper__links--login">Login</a>
-                    <a href="#" class="topper__links--signup">Signup</a>
+                    <a href="register" class="topper__links--signup">Signup</a>
                     <div class="nav--burger" v-on:click="changeMenuState">
                         <div class="burger-line"></div>
                         <div class="burger-line"></div>
@@ -45,25 +46,27 @@
     </div>
 
     <div class="layout-body">
-        <h1>Results for: {{showing}}</h1>
-        <div class="results">
-            <div class="results__post" v-for="post in posts">
-                <div class="results__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }">
-                </div>
-                <div class="results__post--body">
-                    <h3 class="results__post--title">{{post.Name}}</h3>
-                    <p class="results__post--category">{{post.Category}}</p>
-                    <p class="results__post--comment">{{trimComment(post.Comment)}}</p>
-                </div>
-                <div class="results__post--data">
-                    <p class="results__post--price">${{post.Price}}</p>
-                    <div class="results__post--button">Contact Seller</div>
-                </div>
-            </div>
+        <div class="disclaimer">
+            <p>SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only</p>
         </div>
     </div>
-
+    <div class="layout-body">
+        <h2>Manage Posts</h2>
+        <table class="table">
+            <tr v-for="post in posts">
+                <td>{{post.ID}}</td>
+                <td>{{post.Name}}</td>
+                <td>{{post.Category}}</td>
+                <td>{{post.Price}}</td>
+                <td class="buttons">
+                    <button>Approve</button>
+                    <button>Disapprove</button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -71,35 +74,23 @@
     var app = new Vue({
         el: '#app',
         data: {
-            select: false,
-            menu: false,
-            categories: ['Electronics', 'Textbooks', 'Furniture', 'Movies', 'Video Games', 'Supplies'],
-            selectedCategory: "All",
             posts: [],
             query: "",
-            showing: "",
+            select: false,
+            radius: 50,
+            isLoggedin: false
         },
         methods: {
-            changeMenuState: function(){
-                this.menu = !this.menu;
-            },
-            changeSelectState: function() {
-                this.select = ! this.select;
-            },
-            selected: function(event){
-                this.selectedCategory = event.target.innerText;
-            },
-            sendQuery: function () {
-                axios.post('/search_query', {
-                        query: this.query,
-                        category: this.selectedCategory
-                    })
-                    .then(res => {
-                        index.posts = res.data
-                    })
+            changeSelectState: function () {
+                this.select = !this.select;
+                if (this.radius == 50) {
+                    this.radius = 25;
+                } else {
+                    this.radius = 50;
+                }
             },
             trimComment: function (post) {
-                const length = 200;
+                const length = 50;
                 let comment = post;
 
                 if (post.length > length) {
@@ -107,6 +98,22 @@
                 }
 
                 return comment;
+            },
+            trimTitle: function (post) {
+                const length = 15;
+                let title = post;
+
+                if (post.length > length) {
+                    title = post.substring(0, length) + "...";
+                }
+
+                return title;
+            },
+            logout: function () {
+
+                //alert("ji");
+                localStorage.removeItem("__token");
+                this.isLoggedin = false;
             }
         },
         watch: {
@@ -115,21 +122,24 @@
             }
         },
         mounted() {
+
+            //alert( localStorage.getItem("__token") + " --- " + this.isLoggedin );
+            if (localStorage.getItem("__token") != null) {
+                this.isLoggedin = true;
+                //alert("logged in");
+            }
+
             const sessionQuery = sessionStorage.getItem('query');
             if (sessionQuery != null) {
                 this.query = sessionQuery;
-                this.showing = sessionQuery;
             }
 
-            axios.post('/search_query', {
-                    query: this.query,
-                    category: this.selectedCategory
-                })
+            axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
                 .then(res => {
-                    app.posts = res.data
+                    this.posts = res.data;
                 })
         }
-    })
+    });
 </script>
 
 </html>
