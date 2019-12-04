@@ -1,20 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
-var cors = require('cors');
-var db = require('../db/connection');
+var db = require("../db/connection");
 
-//Cors
-router.use(cors());
-
-//Body Parser
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false}));
-
-
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
 router.get('/details', function(req, res, next) {
 
@@ -23,30 +13,36 @@ router.get('/details', function(req, res, next) {
   
 });
 
-router.post('/register', function(req, res, next) {
+router.post('/register', function(req, res) {
 
-  var sql = "INSERT INTO `User`(`email`,`name`, `password`) VALUES('"+ req.body.email + "','" + req.body.name + "','" + req.body.password + "')";
+  let data = {   
+    email: req.body.email,
+    password: req.body.password,
+    name: req.body.name
+  }
   
-        db.connect(function(err) {
+  let sql = "INSERT INTO User SET ?";
 
-            db.query(sql, function (err, result) {
+  db.connect(function(err) {
 
-                var resObj = {status: "ok", message: ''};
+    db.query(sql, [data], function (err, result) {
 
-                if (err) {
-                  resObj.status = "error";
-                  resObj.message = err.message;
-                } else {
-                  resObj.status = "ok";
-                  resObj.message = "Registration successfull!";
-                }
+        var resObj = {status: "ok", message: ''};
 
-                res.send(resObj);
+        if (err) {
+          resObj.status = "error: user.js";
+          resObj.message = err.message;
+        } else {
+          resObj.status = "ok";
+          resObj.message = "Registration successfull!";
+        }
 
-            });
+        res.send(resObj);
 
-        });
+    })
 
 });
+
+})
 
 module.exports = router;
