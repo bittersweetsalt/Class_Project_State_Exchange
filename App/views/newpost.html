@@ -131,10 +131,10 @@
             },
             changeSelectState: function () {
                 this.select = !this.select;
+
             },
             selected: function (event) {
                 this.selectedCategory = event.target.innerText;
-<<<<<<< HEAD
             },
 
             sendData: function () {
@@ -159,18 +159,21 @@
                     .catch(err => {
                         console.log(err);
                     })
+
+            },
+            selected: function (event) {
+                this.selectedCategory = event.target.innerText;
+
             },
 
-<<<<<<< HEAD
+
             logout: function() {
                 
                 //alert("ji");
                 localStorage.removeItem("__token");
                 this.isLoggedin = false;
 
-=======
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-=======
+
             },
 
             sendData: function () {
@@ -197,45 +200,27 @@
                     })
             },
 
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
+
             filesChange: function (fileList) {
                 if (!fileList.length) return;
 
                 //create a new formData object and append image
                 const formData = new FormData();
-<<<<<<< HEAD
-<<<<<<< HEAD
-                formData.append("photo", fileList[0]);
+ formData.append("photo", fileList[0]);
 
 
                 axios.post('/uploadphotos', formData);
-=======
-                formData.append("photo", fileList[0])
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-=======
-                formData.append("photo", fileList[0])
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
+
 
                 //fake upload service to display image on frontend, code can be found in public/javascripts/upload.js
                 upload(formData)
                     .then(res => {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                         this.photoFilePaths = this.photoFilePaths.concat(res.url);
                     })
                     .catch(err => {
                         console.log("incompatible filetype uploaded");
-=======
-=======
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-                        this.photoFilePaths = this.photoFilePaths.concat(res.url)
-                    })
-                    .catch(err => {
-                        console.log("incompatible filetype uploaded")
-<<<<<<< HEAD
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-=======
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
+
                     });
             },
 
@@ -247,13 +232,7 @@
                     return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
                 });
                 return uuid;
-<<<<<<< HEAD
-<<<<<<< HEAD
-              
-=======
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-=======
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
+
             }
         },
         watch: {
@@ -269,37 +248,17 @@
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-=======
-
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
             //get categories
             axios.post('/categories')
                 .then(res => {
                     res.data.map(category => {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                         this.categories.push(category.Categories);
                     })
                 })
                 .catch(err => console.log(err))
-=======
-=======
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-                        this.categories.push(category.Categories)
-                    })
-                })
-                .catch(err => console.log(err))
 
-<<<<<<< HEAD
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-=======
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-        }
     })
 </script>
 </html>
