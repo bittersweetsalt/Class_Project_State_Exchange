@@ -89,7 +89,7 @@
             messages: ['Message1', 'Message2', 'Message3'],
             select: false,
             menu: false,
-            categories: ['Electronics', 'Textbooks', 'Furniture', 'Movies', 'Video Games', 'Supplies'],
+            categories: [],
             selectedCategory: "All"
         },
         watch: {
@@ -135,6 +135,14 @@
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
+
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map( category => {
+                        this.categories.push(category.Categories)
+                    })
+                })
+                .catch( err => console.log(err))
         }
 
     })

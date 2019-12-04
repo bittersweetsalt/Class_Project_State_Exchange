@@ -73,24 +73,24 @@
         data: {
             select: false,
             menu: false,
-            categories: ['Electronics', 'Textbooks', 'Furniture', 'Movies', 'Video Games', 'Supplies'],
+            categories: [],
             selectedCategory: "All",
             posts: [],
             query: "",
             showing: "",
         },
         methods: {
-            changeMenuState: function(){
+            changeMenuState: function () {
                 this.menu = !this.menu;
             },
-            changeSelectState: function() {
-                this.select = ! this.select;
+            changeSelectState: function () {
+                this.select = !this.select;
             },
-            selected: function(event){
+            selected: function (event) {
                 this.selectedCategory = event.target.innerText;
             },
             sendQuery: function () {
-                axios.post('/testmysql', {
+                axios.post('/search_query', {
                         query: this.query,
                         category: this.selectedCategory
                     })
@@ -121,13 +121,23 @@
                 this.showing = sessionQuery;
             }
 
-            axios.post('/testmysql', {
+            axios.post('/search_query', {
                     query: this.query,
                     category: this.selectedCategory
                 })
                 .then(res => {
                     app.posts = res.data
                 })
+
+            //get categories
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map(category => {
+                        this.categories.push(category.Categories)
+                    })
+                })
+                .catch(err => console.log(err))
+
         }
     })
 </script>

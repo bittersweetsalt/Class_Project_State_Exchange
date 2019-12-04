@@ -6,17 +6,22 @@ const logger = require('morgan');
 var db = require("./db/connection");
 const fileUpload = require('express-fileupload')
 
-//routes import
-const fileRouter = require('./routes/files');
-const testMySqlRouter = require('./routes/testmysql');
-const newPostRouter = require('./routes/insertPost');
-
+const passport    = require('passport');
+require('./auth/passport');
 
 const app = express();
 
+//routes import
+const fileRouter = require('./routes/files');
+const search_query = require('./routes/search_query');
+const newPostRouter = require('./routes/insertPost');
+const category_query = require('./routes/categories');
+var usersRouter = require('./routes/users');
+var messagingRouter = require('./routes/messaging');
+var messagesIndexRouter = require('./routes/messaging-index');
 
 var allowCrossDomain = function(req, res, next) {
-  // Website you wish to allow to connect
+// Website you wish to allow to connect
 res.setHeader('Access-Control-Allow-Origin', '*');
 
 // Request methods you wish to allow
@@ -30,6 +35,21 @@ res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 res.setHeader('Access-Control-Allow-Credentials', true);
 next();
 }
+
+const auth = require('./routes/auth');
+app.use('/auth', auth);
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
+
+//middleware
+// app.use(cors); // npm install --save cors
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // view engine setup
@@ -48,11 +68,9 @@ app.use(allowCrossDomain);
 // app.use(formidable());
 app.use(fileUpload({ createParentPath: true}));
 
-
-
 //routes setup
 app.use('/', fileRouter);
-app.use('/', testMySqlRouter);
+app.use('/', search_query);
 app.use('/', newPostRouter);
 
 
@@ -88,6 +106,11 @@ app.post('/newpost/12', function(req, res){
     
   // })
 })
+
+app.use('/', category_query);
+app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
+app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
+app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
 
 
 // catch 404 and forward to error handler

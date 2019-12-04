@@ -18,10 +18,11 @@
                 <form class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}">
                     <div class="topper__form--button-select" v-on:click="changeSelectState">
                         <p class="selected__category">{{selectedCategory}}</p>
-                        <img src = "images/icons/arrow-down.png">
+                        <img src="images/icons/arrow-down.png">
                         <div class="topper__form--categories" v-if="select">
                             <div class="category" v-on:click="selected">All</div>
-                            <div class = "category" v-for="category in categories" v-on:click="selected">{{category}}</div>
+                            <div class="category" v-for="category in categories" v-on:click="selected">{{category}}
+                            </div>
                         </div>
                     </div>
                     <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
@@ -40,61 +41,30 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <p class="disclaimer">SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only</p> -->
             </div>
         </div>
     </div>
 
     <div class="layout-body">
-        <div class="banner">
-            <h1>Banner Content Goes Here</h1>
+        <div class="disclaimer">
+            <p>SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only</p>
         </div>
     </div>
-
     <div class="layout-body">
-        <h2 class="slider__title">Recent Posts</h2>
-        <div class="slider">
-            <div class="slider__post" v-for="post in posts">
-                <div class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
-                <div class="slider__post--body">
-                    <h3 class="slider__post--title">{{trimTitle(post.Name)}}</h3>
-                    <p class="slider__post--comment">{{trimComment(post.Comment)}}</p>
-                </div>
-                <div class="slider__post--button">Contact Seller</div>
-            </div>
-        </div>
+        <h2>Manage Posts</h2>
+        <table class="table">
+            <tr v-for="post in posts">
+                <td>{{post.ID}}</td>
+                <td>{{post.Name}}</td>
+                <td>{{post.Category}}</td>
+                <td>{{post.Price}}</td>
+                <td class="buttons">
+                    <button>Approve</button>
+                    <button>Disapprove</button>
+                </td>
+            </tr>
+        </table>
     </div>
-
-    <div class="layout-body">
-            <h2>Popular Categories</h2>
-            <div class="pop__category-container">
-                <div class="pop__category">Electronics</div>
-                <div class="pop__category">Textbooks</div>
-                <div class="pop__category">Furniture</div>
-                <div class="pop__category">Movies</div>
-                <div class="pop__category">Video Games</div>
-                <div class="pop__category">Supplies</div>
-            </div>
-        </div>
-
-    <div class="layout-body">
-        <h2 class="slider__title">Popular Posts</h2>
-        <div class="slider">
-            <div class="slider__post" v-for="post in posts">
-                <div class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }"></div>
-                <div class="slider__post--body">
-                    <h3 class="slider__post--title">{{trimTitle(post.Name)}}</h3>
-                    <p class="slider__post--comment">{{trimComment(post.Comment)}}</p>
-                </div>
-                <div class="slider__post--button">Contact Seller</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="layout-footer"></div>
-
-
 </div>
 
 
@@ -105,20 +75,23 @@
         el: '#app',
         data: {
             posts: [],
+            query: "",
+            select: false,
+            radius: 50,
+            isLoggedin: false,
             select: false,
             menu: false,
             categories: [],
-            selectedCategory: "All",
-            query: "",
+            selectedCategory: "All"
         },
         methods: {
-            changeMenuState: function(){
+            changeMenuState: function () {
                 this.menu = !this.menu;
             },
-            changeSelectState: function() {
-                this.select = ! this.select;
+            changeSelectState: function () {
+                this.select = !this.select;
             },
-            selected: function(event){
+            selected: function (event) {
                 this.selectedCategory = event.target.innerText;
             },
             trimComment: function (post) {
@@ -140,6 +113,12 @@
                 }
 
                 return title;
+            },
+            logout: function () {
+
+                //alert("ji");
+                localStorage.removeItem("__token");
+                this.isLoggedin = false;
             }
         },
         watch: {
@@ -148,23 +127,30 @@
             }
         },
         mounted() {
+
+            //alert( localStorage.getItem("__token") + " --- " + this.isLoggedin );
+            if (localStorage.getItem("__token") != null) {
+                this.isLoggedin = true;
+                //alert("logged in");
+            }
+
             const sessionQuery = sessionStorage.getItem('query');
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
 
-            axios.post('/search_query', {query: ""})
-            .then(res => {
-                this.posts = res.data;
-            })
+            axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
+                .then(res => {
+                    this.posts = res.data;
+                })
 
             axios.post('/categories')
                 .then(res => {
-                    res.data.map( category => {
+                    res.data.map(category => {
                         this.categories.push(category.Categories)
                     })
                 })
-                .catch( err => console.log(err))
+                .catch(err => console.log(err))
         }
     });
 </script>

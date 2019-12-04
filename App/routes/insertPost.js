@@ -4,63 +4,55 @@ const path = require('path');
 const db = require("../db/connection");
 var mkdirp = require('mkdirp');
 
-router.post('/uploadphotos', (req, res) => {
-    let pathNames = [];
+//new post router, id is a unique id generated on frontend for each post
+router.post(`/newpost/:id`, (req, res) => {
 
-    //check to make sure files are not empty
-    if(!req.files){
-        console.log("missing files")
-        res.status(409).send({error: "missing files"});
+    //encapsulate req data into object
+    let data = {
+        Name: req.body.title,
+        Category: req.body.category,
+        UserID: 123456789, //needs to be changed later, this is a test value
+        posting_ID: req.params.id,
+        Comment: req.body.desc,
+        Price: req.body.price
     }
 
-    //create a directory with client UUID as foldername
-    mkdirp(path.join(__dirname, '../', 'public', 'images', 'post_img', req.body.posting_ID), function(err) { });
-    
-    //loop through keys in req.files obj and move each file to newly created directory, push filepath to pathnames array
-    for(var key in req.files){
-        let photo = req.files[key];
-        photo.mv(path.join(__dirname, '../', 'public', 'images', 'post_img', req.body.posting_ID, photo.name));
-        pathNames.push(path.join('images', 'post_img', req.body.posting_ID, photo.name));
+    //if photo was uploaded, move to public directory & add filepath to data object
+    if (req.files != null) {
+        let filePath = path.join(__dirname, '../', 'public', 'images', 'post_img', req.params.id)
+
+        //create new directory based on unique post id
+        mkdirp(filePath, (err) => {
+            if(err) {console.log("mkdirp error: " + err) }
+        });
+
+        //update filepath with photoname
+        filePath = path.join(filePath, req.files.photo.name)
+
+        //move photo from req into new directory
+        let photo = req.files.photo
+        photo.mv(filePath)
+
+        //add filepath to data object
+        data.image_name = filePath
     }
 
-    //send pathnames of all uploaded images back to client
-    res.send(pathNames);
-})
-
-// we are going to generate the ids of the post  by passing parameters here in the future
-router.post(`/newpost/12` ,(req, res) => {
-
+    let sql = "INSERT INTO Posting SET ?";
         
-        // this dummy data we send
-        let data = { 
-                              
-            Title: req.body.Title,
-            category: req.body.category,
-            UserID: 91928395,
-            Desc: req.body.Comment,
-            Price: req.body.Price,
+    db.query(sql, [data], (err, rows, results) => {
+        
+        if (err){
+            console.log("Failed: " + err);
+            res.end();
+            return;
         }
-  
+          
+        console.log('Found database.... 1 Record inserted');
 
-        let sql = "INSERT INTO Posting SET ?";
-        
-        db.query(sql, [data], (err, results) => {
-            
-            if (err){
-                console.log("Failed: " + err);
-                res.end();
-                return;
-            }
-              
-            console.log('Found database.... 1 Record inserted');
-        
-                // A simple "Your item has been submitted" Response Page.
-                // Setup Date: 11/14/2019
-            res.send(rows);
-            })
+        res.send(rows);
+        })
 
-  })    
-        
+})
 
 
 module.exports = router;

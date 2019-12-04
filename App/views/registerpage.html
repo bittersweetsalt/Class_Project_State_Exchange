@@ -1,7 +1,8 @@
+<!-- Assigned to : ImraN -->
 <html>
 
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <link rel='stylesheet' href='stylesheets/global.css'>
 </head>
 
@@ -44,14 +45,28 @@
     </div>
 
     <div class="layout-body">
-        <h1>Login</h1>
-        <form class="form signin">
-            <label for="username" class="form__label">Username</label>
-            <input v-model='username' type="input" class="title form__input--border">
+        <h1>Signup</h1>
+        <form class="form signin" v-if="isRegistered === false">
+            <label for="name" class="form__label">Name</label>
+            <input v-model='name' type="input" class="title form__input">
+            <label for="email" class="form__label">Email</label>
+            <input v-model='email' type="input" class="title form__input">
             <label for="password" class="form__label">Password</label>
-            <input v-model='password' type="input" class="title form__input--border">
-            <button v-on:click.prevent='sendData' type="submit" class="form__button--border">Submit</button>
+            <input v-model='password' type="password" class="title form__input">
+            <label for="confirm_password" class="form__label">Confirm Password</label>
+            <input v-model='confirm_password' type="password" class="title form__input">
+
+            <div class="form__submit">
+                <button type="button" class="form__submit--cancel">Cancel</button>
+                <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Signup</button>
+            </div>
+
+            <div class="form__label" style="color: red;">{{message}}</div>
+            <!-- <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Submit</button> -->
+
         </form>
+        <div v-if="isRegistered === true">Registration successfull. <a href="login" style="color: blue;">Click here to
+                login</a></div>
     </div>
 
 
@@ -64,16 +79,75 @@
     var app = new Vue({
         el: '#app',
         data: {
-            username: '',
-            student_id: '',
+            name: '',
+            email: '',
             password: '',
-            query: '',
+            confirm_password: '',
+            message: '',
+            isRegistered: false,
             select: false,
             menu: false,
             categories: [],
             selectedCategory: "All"
+
         },
         methods: {
+            sendData: function () {
+
+                app.message = "";
+                //validation
+                if (this.name == "") {
+                    app.message = app.message + "Name cannot be left blank";
+                    return;
+                }
+
+                if (this.email == "") {
+                    app.message = app.message + "Email cannot be left blank";
+                    return;
+                }
+
+                if (this.password == "") {
+                    app.message = app.message + "Password cannot be left blank";
+                    return;
+                }
+
+                if (this.password != this.confirm_password) {
+                    app.message = app.message + "Password does not match";
+                    return;
+                }
+
+                axios.post('/users/register', {
+                        name: this.name,
+                        email: this.email,
+                        password: this.password,
+                        confirm_password: this.confirm_password
+                    })
+                    .then(function (response) {
+                        // handle success
+                        console.log(response.data);
+                        if (response.data.status == "error: registerpage.html") {
+
+                            app.message = response.data.message;
+                        } else {
+                            app.isRegistered = true;
+                        }
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .finally(function () {
+                        // always executed
+                    });
+
+                //console.log(formData);
+            },
+            logout: function () {
+
+                //alert("ji");
+                localStorage.removeItem("__token");
+                this.isLoggedin = false;
+            },
             changeMenuState: function () {
                 this.menu = !this.menu;
             },
@@ -82,15 +156,6 @@
             },
             selected: function (event) {
                 this.selectedCategory = event.target.innerText;
-            },
-            sendData: function () {
-                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql',
-                    formData = {
-                        post_username: app.username,
-                        post_password: app.password,
-                        post_student_id: app.student_id
-                    });
-                console.log(formData);
             }
         },
         watch: {
@@ -104,13 +169,15 @@
                 this.query = sessionQuery;
             }
 
+            //get categories
             axios.post('/categories')
                 .then(res => {
-                    res.data.map( category => {
+                    res.data.map(category => {
                         this.categories.push(category.Categories)
                     })
                 })
-                .catch( err => console.log(err))
+                .catch(err => console.log(err))
+
         }
     })
 </script>
