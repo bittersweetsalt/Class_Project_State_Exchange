@@ -150,11 +150,13 @@
 
                 axios.post(`/newpost/12`, this.formData)
 
-                    .then(function (response) {
-                        console.log(response);
-                        if (res.data.status === 'success') {
-                            console.log("data was posted successfully")
-                        }
+                    .then((response )=> {
+                        console.log(response.data);
+                        console.log(response.status);
+                        console.log(response.statusText);
+                        console.log(response.headers);
+                        console.log(response.config);
+                        
                     })
                     .catch(err => {
                         console.log("This error was caught trying to send data: " + err);
@@ -170,21 +172,14 @@
                 }
 
                 //send form object to server for upload
-                axios.post('/newpost', formData)
-                    .then(res => {
-                        console.log(res.data)
-                        this.photoFilePaths = this.photoFilePaths.concat(res.data);
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-            }
-        },
-        watch: {
-            //set query variable in sessionStorage when search field onChange event is fired
-            query: function (newQuery, oldQuery) {
-                sessionStorage.setItem('query', newQuery);
-            }
+                // axios.post('/newpost/12', formData)
+                //     .then(res => {
+                //         console.log(res.data)
+                //         this.photoFilePaths = this.photoFilePaths.concat(res.data);
+                //     })
+                //     .catch(err => {
+                //         console.log(err)
+            
         },
         mounted() {
             //set search bar field to previously typed query if it exists
@@ -196,5 +191,4 @@
     })
 
 </script>
-
 </html>

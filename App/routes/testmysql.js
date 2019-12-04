@@ -32,7 +32,7 @@ router.post('/testmysql', (req, res, next) => {
 // Modification to obtain query data is needed.
 // Data ideally obtain from newpost.html via FORM
 // Setup date: 11/14/2019
-router.get('/insertPost', (req, res) => {
+router.get('/newpost/12', (req, res) => {
 
     // this dummy data we send
     let data = { 

@@ -61,7 +61,7 @@ app.post('/newpost/12', function(req,res){
  
   // Prints post out in console 
   console.log('headersSent', res.headersSent);
-  res.send('POST request has been made');
+  // res.send('POST request has been made');
   console.log(req.body);
 
   let data = { 
@@ -76,20 +76,17 @@ app.post('/newpost/12', function(req,res){
   let sql = "INSERT INTO Posting SET ?";
 
   // Makes connection to DB 
-  db.query(sql,[data],(err,results) =>{
+  // db.query(sql,[data],(err,results) =>{
 
-    if(err){
-      console.log("Insertion failed: " + err);
-      if (err.fatal) {
-        console.trace('fatal error: ' + err.message);
-      }
-      res.end();
-      return;
-    }else{
-      res.send(data)
-    }
+  //   if(err){
+  //     console.log("Insertion failed: " + err);
+  //     res.end();
+  //     return;
+  //   }else{
+  //     res.send(data)
+  //   }
     
-  })
+  // })
 })
 
 
