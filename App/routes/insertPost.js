@@ -38,21 +38,16 @@ router.post(`/newpost/:id`, (req, res) => {
     }
 
 
-    // let sql = "INSERT INTO Posting SET ?";
+     let sql = "INSERT INTO Posting SET ?";
 
-    // db.query(sql, [data], (err, results) => {
-    //     if (err) {
-    //         console.log("Failed: " + err);
-    //         res.end();
-    //         return;
-    //     }
+     db.query(sql, [data], (err, results) => {
+         if (err) {
+         console.log("Failed: " + err);
+            res.end();
+            return;
+        }
 
-    //     console.log('Found database.... 1 Record inserted');
-
-    //     // A simple "Your item has been submitted" Response Page.
-    //     // Setup Date: 11/14/2019
-    //     res.send(rows);
-    // })
+    })
 
     res.send("Success!")
 
