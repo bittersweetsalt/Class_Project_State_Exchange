@@ -36,8 +36,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', fileRouter);
 app.use('/', prototypeRouter);
 app.use('/', testMySqlRouter);
-
+//routes setup
+app.use('/', fileRouter);
+app.use('/', search_query);
+app.use('/', newPostRouter);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
+
 
 
 
@@ -55,11 +59,11 @@ app.post('/newpost/12', function(req,res){
     category: req.body.category,
     UserID: req.body.UserID,
     Desc: req.body.Comment,
-    Price: req.body.Price,
+
+
   }
 
   let sql = "INSERT INTO Posting SET ?";
-
   
   db.query(sql,[data],(err,results) =>{
 
@@ -71,6 +75,27 @@ app.post('/newpost/12', function(req,res){
     res.send(data)
   })
 })
+
+  // Makes connection to DB 
+  // db.query(sql,[data],(err,results) =>{
+
+  //   if(err){
+  //     console.log("Insertion failed: " + err);
+  //     res.end();
+  //     return;
+  //   }else{
+  //     res.send(data)
+  //   }
+    
+  // })
+})
+
+app.use('/', category_query);
+app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
+app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
+app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

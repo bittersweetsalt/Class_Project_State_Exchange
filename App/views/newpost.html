@@ -148,12 +148,43 @@
                 //alert("ji");
                 localStorage.removeItem("__token");
                 this.isLoggedin = false;
+
+            filesChange: function (fileList) {
+                if (!fileList.length) return;
+
+                //create a new formData object and append image
+                const formData = new FormData();
+                formData.append("photo", fileList[0]);
+
+
+                axios.post('/uploadphotos', formData);
+
+                //fake upload service to display image on frontend, code can be found in public/javascripts/upload.js
+                upload(formData)
+                    .then(res => {
+                        this.photoFilePaths = this.photoFilePaths.concat(res.url);
+                    })
+                    .catch(err => {
+                        console.log("incompatible filetype uploaded");
+                    });
+            },
+
+            createUUID: function() {
+                var dt = new Date().getTime();
+                var uuid = 'xxxxxxxx'.replace(/[xy]/g, function (c) {
+                    var r = (dt + Math.random() * 16) % 16 | 0;
+                    dt = Math.floor(dt / 16);
+                    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                });
+                return uuid;
+              
             }
         },
         watch: {
             query: function (newQuery, oldQuery) {
                 sessionStorage.setItem('query', newQuery);
             }
+
         },
         mounted() {
 
@@ -167,9 +198,16 @@
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
+            //get categories
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map(category => {
+                        this.categories.push(category.Categories);
+                    })
+                })
+                .catch(err => console.log(err))
         }
     })
 
 </script>
-
 </html>
