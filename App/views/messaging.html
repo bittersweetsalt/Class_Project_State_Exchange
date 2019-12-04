@@ -84,7 +84,11 @@
                 title: '',
                 price: '',
                 date_posted: '',
-                author: ''
+                author: '',
+                select: false,
+                menu: false,
+                categories: [],
+                selectedCategory: "All"
             },
 
             messages: [],
@@ -127,13 +131,14 @@
                     });
 
             },
+            changeMenuState: function () {
+                this.menu = !this.menu;
+            },
             changeSelectState: function () {
                 this.select = !this.select;
-                if (this.radius == 50) {
-                    this.radius = 20;
-                } else {
-                    this.radius = 50;
-                }
+            },
+            selected: function (event) {
+                this.selectedCategory = event.target.innerText;
             }
         },
         watch: {
@@ -200,6 +205,15 @@
                 .finally(function () {
                     // always executed
                 });
+
+            //get categories
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map(category => {
+                        this.categories.push(category.Categories)
+                    })
+                })
+                .catch(err => console.log(err))
 
         }
     })

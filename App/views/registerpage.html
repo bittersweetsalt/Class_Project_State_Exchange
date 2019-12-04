@@ -87,7 +87,7 @@
             isRegistered: false,
             select: false,
             menu: false,
-            categories: ['Electronics', 'Textbooks', 'Furniture', 'Movies', 'Video Games', 'Supplies'],
+            categories: [],
             selectedCategory: "All"
 
         },
@@ -97,28 +97,21 @@
                 app.message = "";
                 //validation
                 if (this.name == "") {
-
                     app.message = app.message + "Name cannot be left blank";
                     return;
-
                 }
 
                 if (this.email == "") {
-
                     app.message = app.message + "Email cannot be left blank";
                     return;
-
                 }
 
                 if (this.password == "") {
-
                     app.message = app.message + "Password cannot be left blank";
                     return;
-
                 }
 
                 if (this.password != this.confirm_password) {
-
                     app.message = app.message + "Password does not match";
                     return;
                 }
@@ -149,14 +142,6 @@
 
                 //console.log(formData);
             },
-            changeSelectState: function () {
-                this.select = !this.select;
-                if (this.radius == 50) {
-                    this.radius = 20;
-                } else {
-                    this.radius = 50;
-                }
-            },
             logout: function () {
 
                 //alert("ji");
@@ -183,6 +168,16 @@
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
+
+            //get categories
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map(category => {
+                        this.categories.push(category.Categories)
+                    })
+                })
+                .catch(err => console.log(err))
+
         }
     })
 </script>

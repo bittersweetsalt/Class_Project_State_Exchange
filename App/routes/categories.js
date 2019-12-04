@@ -7,7 +7,7 @@ var db = require("../db/connection");
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false}));
 
-router.get('/categories', (req, res) => {
+router.post('/categories', (req, res) => {
    
     const queryString = `SELECT * FROM Categories`
     db.query(queryString, (err, rows, fields) => {

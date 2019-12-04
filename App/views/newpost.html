@@ -119,11 +119,10 @@
                 category: 'Category',
             },
             photoFilePaths: [],
-            categories: ['Select Category', 'Electronics', 'Books', 'Furniture', 'Toys'],
             query: '',
             select: false,
             menu: false,
-            categories: ['Electronics', 'Textbooks', 'Furniture', 'Movies', 'Video Games', 'Supplies'],
+            categories: [],
             selectedCategory: "All"
         },
         methods: {
@@ -200,6 +199,16 @@
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
+
+            //get categories
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map(category => {
+                        this.categories.push(category.Categories)
+                    })
+                })
+                .catch(err => console.log(err))
+
         }
     })
 </script>

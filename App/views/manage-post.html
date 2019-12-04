@@ -78,16 +78,21 @@
             query: "",
             select: false,
             radius: 50,
-            isLoggedin: false
+            isLoggedin: false,
+            select: false,
+            menu: false,
+            categories: [],
+            selectedCategory: "All"
         },
         methods: {
+            changeMenuState: function () {
+                this.menu = !this.menu;
+            },
             changeSelectState: function () {
                 this.select = !this.select;
-                if (this.radius == 50) {
-                    this.radius = 25;
-                } else {
-                    this.radius = 50;
-                }
+            },
+            selected: function (event) {
+                this.selectedCategory = event.target.innerText;
             },
             trimComment: function (post) {
                 const length = 50;
@@ -138,6 +143,14 @@
                 .then(res => {
                     this.posts = res.data;
                 })
+
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map(category => {
+                        this.categories.push(category.Categories)
+                    })
+                })
+                .catch(err => console.log(err))
         }
     });
 </script>
