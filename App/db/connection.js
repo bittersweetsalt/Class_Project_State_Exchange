@@ -9,12 +9,14 @@ const mysql = require('mysql');
 //     port: '3306'
 // })
 
+
 const db = mysql.createConnection({
-    user: 'root',
-    password: 'Butter000',
-    database: 'test_db',
-    host: 'localhost',
-    port: '3306'
-})
+    host: "localhost",
+    port: 3306,
+    user: "root", //"dbuser", 
+    password: "csc648.07", //"password",
+    database: "database"
+  });
+
 
 module.exports = db;

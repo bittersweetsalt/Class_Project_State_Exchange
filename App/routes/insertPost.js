@@ -1,58 +1,51 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var app = express();
+var router = express.Router();
 const path = require('path');
-const db = require("../db/connection");
-var mkdirp = require('mkdirp');
+var db = require("../db/connection");
+const axios = require('axios');
 
-//new post router, id is a unique id generated on frontend for each post
-router.post(`/newpost/:id`, (req, res) => {
+// we are going to generate the ids of the post  by passing parameters here in the future
 
-    //encapsulate req data into object
-    let data = {
-        Name: req.body.title,
-        Category: req.body.category,
-        UserID: 123456789, //needs to be changed later, this is a test value
-        posting_ID: req.params.id,
-        Comment: req.body.desc,
-        Price: req.body.price
-    }
 
-    //if photo was uploaded, move to public directory & add filepath to data object
-    if (req.files != null) {
-        let filePath = path.join(__dirname, '../', 'public', 'images', 'post_img', req.params.id)
+router.post(`/newpost/12` ,(req, res) => {
 
-        //create new directory based on unique post id
-        mkdirp(filePath, (err) => {
-            if(err) {console.log("mkdirp error: " + err) }
-        });
-
-        //update filepath with photoname
-        filePath = path.join(filePath, req.files.photo.name)
-
-        //move photo from req into new directory
-        let photo = req.files.photo
-        photo.mv(filePath)
-
-        //add filepath to data object
-        data.image_name = filePath
-    }
-
-    let sql = "INSERT INTO Posting SET ?";
         
-    db.query(sql, [data], (err, rows, results) => {
-        
-        if (err){
-            console.log("Failed: " + err);
-            res.end();
-            return;
+        // this dummy data we send
+        let data = { 
+                              
+            Title: req.body.Title,
+            category: req.body.category,
+            UserID: 91928395,
+            Desc: req.body.Comment,
+            Price: req.body.Price,
         }
-          
-        console.log('Found database.... 1 Record inserted');
+  
 
-        res.send(rows);
-        })
+        let sql = "INSERT INTO Posting SET ?";
+        
+        db.query(sql, [data], (err, results) => {
+            
+            if (err){
+                console.log("Failed: " + err);
+                res.end();
+                return;
+            }
+              
+            console.log('Found database.... 1 Record inserted');
+        
+                // A simple "Your item has been submitted" Response Page.
+                // Setup Date: 11/14/2019
+            res.send(rows);
+            })
 
-})
+  })    
+        
 
+//grabbing th endpoint created by vue 
+// app.post('', function(req,res){
+//     console.log(req.body);
+//     res.send('POST request received successfully');
+// })
 
 module.exports = router;
