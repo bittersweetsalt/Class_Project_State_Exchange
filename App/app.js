@@ -20,6 +20,8 @@ const category_query = require('./routes/categories');
 const prototypeRouter = require('./routes/prototype');
 const search_query = require('./routes/search_query');
 
+const category_query = require('./routes/categories');
+
 var usersRouter = require('./routes/users');
 var messagingRouter = require('./routes/messaging');
 var messagesIndexRouter = require('./routes/messaging-index');
