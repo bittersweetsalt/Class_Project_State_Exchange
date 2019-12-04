@@ -90,7 +90,7 @@
                 this.selectedCategory = event.target.innerText;
             },
             sendQuery: function () {
-                axios.post('/testmysql', {
+                axios.post('/search_query', {
                         query: this.query,
                         category: this.selectedCategory
                     })
@@ -121,7 +121,7 @@
                 this.showing = sessionQuery;
             }
 
-            axios.post('/testmysql', {
+            axios.post('/search_query', {
                     query: this.query,
                     category: this.selectedCategory
                 })

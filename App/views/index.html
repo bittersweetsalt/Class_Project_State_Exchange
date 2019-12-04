@@ -29,7 +29,7 @@
                 </form>
                 <div class="topper__links">
                     <a href="login" class="topper__links--login">Login</a>
-                    <a href="#" class="topper__links--signup">Signup</a>
+                    <a href="register" class="topper__links--signup">Signup</a>
                     <div class="nav--burger" v-on:click="changeMenuState">
                         <div class="burger-line"></div>
                         <div class="burger-line"></div>
@@ -153,7 +153,7 @@
                 this.query = sessionQuery;
             }
 
-            axios.post('/testmysql', {query: ""})
+            axios.post('/search_query', {query: ""})
             .then(res => {
                 this.posts = res.data;
             })

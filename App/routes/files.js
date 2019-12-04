@@ -28,7 +28,10 @@ router.get('/login', (req, res, next) => {
 });
 
 
-
+/*------------------------------------------------ GET register page. */
+router.get('/register', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../views/registerpage.html'))
+});
 
 /*------------------------------------------------ GET newpost page. */
 router.get('/newpost', (req, res, next) => {
@@ -43,8 +46,19 @@ router.get('/dashboard', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../views/dashboard.html'));
 });
 
+/*------------------------------------------------ GET Manage post */
+router.get('/manage-post', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../views/manage-post.html'));
+});
 
 
+/*------------------------------------------------ GET Manage post */
+router.get('/contact/edit/:pid/:mid', function(req, res, next) {
+
+    //res.send(req.params['id']);
+    res.sendFile(path.join(__dirname, '../views/messaging.html'));
+  
+  });
 
 /*------------------------------------------------ GET about pages */
 router.get('/about', (req, res, next) => {
