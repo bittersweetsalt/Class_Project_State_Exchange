@@ -9,12 +9,12 @@ router.post(`/newpost/:id`, (req, res) => {
 
     //encapsulate req data into object
     let data = {
-        title: req.body.title,
-        category: req.body.category,
-        userID: 91928395, //needs to be changed later, this is a test value
-        postID: req.params.id,
-        desc: req.body.desc,
-        price: req.body.price
+        Name: req.body.title,
+        Category: req.body.category,
+        UserID: 123456789, //needs to be changed later, this is a test value
+        posting_ID: req.params.id,
+        Comment: req.body.desc,
+        Price: req.body.price
     }
 
     //if photo was uploaded, move to public directory & add filepath to data object
@@ -37,22 +37,22 @@ router.post(`/newpost/:id`, (req, res) => {
         data.image_name = filePath
     }
 
-
-     let sql = "INSERT INTO Posting SET ?";
-
-     db.query(sql, [data], (err, results) => {
-         if (err) {
-         console.log("Failed: " + err);
+    let sql = "INSERT INTO Posting SET ?";
+        
+    db.query(sql, [data], (err, rows, results) => {
+        
+        if (err){
+            console.log("Failed: " + err);
             res.end();
             return;
         }
+          
+        console.log('Found database.... 1 Record inserted');
 
-    })
-
-    res.send("Success!")
+        res.send(rows);
+        })
 
 })
-
 
 
 module.exports = router;
