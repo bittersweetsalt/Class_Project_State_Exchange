@@ -20,10 +20,14 @@ router.post('/login', function (req, res, next) {
                 res.send(err);
             }
 
+            //console.log("log user in auth");
+            //console.log(user);
+            //res.user = user; 
+
             const token = jwt.sign(user, 'your_jwt_secret', {
                 expiresIn: 604800 // 1 week
               });
-
+             
             return res.json({token});
         });
     })

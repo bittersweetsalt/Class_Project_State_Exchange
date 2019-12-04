@@ -52,7 +52,13 @@ router.get('/manage-post', (req, res, next) => {
 });
 
 
+/*------------------------------------------------ GET Manage post */
+router.get('/contact/edit/:pid/:mid', function(req, res, next) {
 
+    //res.send(req.params['id']);
+    res.sendFile(path.join(__dirname, '../views/messaging.html'));
+  
+  });
 
 /*------------------------------------------------ GET about pages */
 router.get('/about', (req, res, next) => {

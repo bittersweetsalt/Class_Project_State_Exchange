@@ -22,9 +22,8 @@ into sections and holds modules together.
     justify-content: space-between;
 
     width: 100%;
-    min-height: 100px;
-    max-height: 115px;
-    padding-top: 5px;
+    padding: 10px 0;
+    margin-bottom: 30px;
 
     color: white;
     background: URL("/images/Banner-wide.png");
@@ -39,6 +38,43 @@ into sections and holds modules together.
     padding: 5px 35px;
 }
 
+.layout-form{
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 1000px;
+    align-self: center;
+    padding: 5px 35px;
+}
+
+.banner{
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 200px;
+
+    border: 2px dashed var(--yellow);
+    border-radius: var(--border-radius);
+
+    color: var(--yellow);
+}
+
+.layout-footer{
+    flex-shrink: 0;
+
+    width: 100%;
+    height: 70px;
+    margin-top: 100px;
+
+    background-color: var(--purple);
+}
+
+
+
+
+
 @media only screen and (max-width: 1330px){
     .layout-body{
         max-width: 1115px;
@@ -46,35 +82,35 @@ into sections and holds modules together.
 }
 
 @media only screen and (max-width: 1125px){
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 910px;
     }
 }
 
 @media only screen and (max-width: 910px){
-    .layout-header{
-        max-height: 159px;
-    }
-    
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 800px;
     }
 }
 
 @media only screen and (max-width: 800px){
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 695px;
     }
 }
 
 @media only screen and (max-width: 695px){
-    .layout-header{
-        max-height: 150px;
-        /* overflow: hidden; */
-    }
-    
-    .layout-body{
+    .layout-body,
+    .layout-form{
         max-width: 480px;
+    }
+
+    .layout-form{
+        max-width: 100%;
+        padding: 5px 3px;
     }
 }
 
@@ -82,15 +118,4 @@ into sections and holds modules together.
     .layout-body{
         max-width: 315px;
     }
-}
-
-.table {
-    width: 100%;
-    border: 1px solid #000000;
-    border-collapse: collapse;
-}
-
-.table td {
-    border: 1px solid #000000;
-    border-collapse: collapse;
 }

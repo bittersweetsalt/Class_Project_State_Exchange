@@ -9,7 +9,6 @@
 
 <div id="app">
 
-
     <div class="layout-header">
         <div class="layout-body">
             <div class="topper">
@@ -17,58 +16,41 @@
                     <h1 class="topper__title">State Exchange</h1>
                 </a>
                 <form class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}">
-                    <div class="topper__form--button-select" v-on:click.prevent="changeSelectState"><img
-                            src="/images/icons/arrow-down.png"></div>
+                    <div class="topper__form--button-select" v-on:click="changeSelectState">
+                        <p class="selected__category">{{selectedCategory}}</p>
+                        <img src = "images/icons/arrow-down.png">
+                        <div class="topper__form--categories" v-if="select">
+                            <div class="category" v-on:click="selected">All</div>
+                            <div class = "category" v-for="category in categories" v-on:click="selected">{{category}}</div>
+                        </div>
+                    </div>
                     <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
                     <button type="submit" class="topper__form--button-go"><img src="images/icons/arrow.png"></button>
-                    <div class="topper__form--select" v-if="select">
-                        <input type="radio" class="topper__form--select-radio" id="electronics">
-                        <label for="electronics" class="topper__form--select-label">Electronics</label>
-
-                        <input type="radio" class="topper__form--select-radio" id="textbooks">
-                        <label for="textbooks" class="topper__form--select-label">Textbooks</label>
-
-                        <input type="radio" class="topper__form--select-radio" id="clothes">
-                        <label for="clothes" class="topper__form--select-label">Clothes</label>
-
-                        <input type="radio" class="topper__form--select-radio" id="movies">
-                        <label for="movies" class="topper__form--select-label">Movies</label>
-
-                        <input type="radio" class="topper__form--select-radio" id="furniture">
-                        <label for="furniture" class="topper__form--select-label">Furniture</label>
-
-                        <input type="radio" class="topper__form--select-radio" id="other">
-                        <label for="other" class="topper__form--select-label">Other</label>
-                    </div>
                 </form>
                 <div class="topper__links">
-                    <a href="login" class="topper__links--login" v-if="isLoggedin === false">Login</a>
-                    <a href="register" class="topper__links--signup" v-if="isLoggedin === false">Signup</a>
-                    <a href="#" v-on:click="logout()" class="topper__links" v-if="isLoggedin === true">Signout</a>
+                    <a href="login" class="topper__links--login">Login</a>
+                    <a href="register" class="topper__links--signup">Signup</a>
+                    <div class="nav--burger" v-on:click="changeMenuState">
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-menu" v-if="menu">
+                            <a href="/newpost">New Post</a>
+                            <a href="/dashboard">Dashboard</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="nav--burger">
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
-                </div>
-                <div class="nav">
-                    <a href="index" class="nav__item">Home</a>
-                    <a href="about" class="nav__item">About</a>
-                    <!-- <a href="#" class="nav__item">For Sale</a> -->
-                    <a href="newpost" class="nav__item" v-if="isLoggedin === true">New Post</a>
-                    <a href="dashboard" class="nav__item" v-if="isLoggedin === true">Dashboard</a>
-                    <a href="manage-post" class="nav__item">Manage post</a>
-                </div>
+
+                <!-- <p class="disclaimer">SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only</p> -->
             </div>
         </div>
     </div>
 
     <div class="layout-body">
-        <div class="disclaimer">
-            <p>SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only</p>
+        <div class="banner">
+            <h1>Banner Content Goes Here</h1>
         </div>
     </div>
-
 
     <div class="layout-body">
         <h2 class="slider__title">Recent Posts</h2>
@@ -85,6 +67,18 @@
     </div>
 
     <div class="layout-body">
+            <h2>Popular Categories</h2>
+            <div class="pop__category-container">
+                <div class="pop__category">Electronics</div>
+                <div class="pop__category">Textbooks</div>
+                <div class="pop__category">Furniture</div>
+                <div class="pop__category">Movies</div>
+                <div class="pop__category">Video Games</div>
+                <div class="pop__category">Supplies</div>
+            </div>
+        </div>
+
+    <div class="layout-body">
         <h2 class="slider__title">Popular Posts</h2>
         <div class="slider">
             <div class="slider__post" v-for="post in posts">
@@ -98,6 +92,8 @@
         </div>
     </div>
 
+    <div class="layout-footer"></div>
+
 
 </div>
 
@@ -109,19 +105,21 @@
         el: '#app',
         data: {
             posts: [],
-            query: "",
             select: false,
-            radius: 50,
-            isLoggedin: false
+            menu: false,
+            categories: [],
+            selectedCategory: "All",
+            query: "",
         },
         methods: {
-            changeSelectState: function () {
-                this.select = !this.select;
-                if (this.radius == 50) {
-                    this.radius = 25;
-                } else {
-                    this.radius = 50;
-                }
+            changeMenuState: function(){
+                this.menu = !this.menu;
+            },
+            changeSelectState: function() {
+                this.select = ! this.select;
+            },
+            selected: function(event){
+                this.selectedCategory = event.target.innerText;
             },
             trimComment: function (post) {
                 const length = 50;
@@ -142,12 +140,6 @@
                 }
 
                 return title;
-            },
-            logout: function() {
-                
-                //alert("ji");
-                localStorage.removeItem("__token");
-                this.isLoggedin = false;
             }
         },
         watch: {
@@ -156,22 +148,23 @@
             }
         },
         mounted() {
-
-            //alert( localStorage.getItem("__token") + " --- " + this.isLoggedin );
-            if(localStorage.getItem("__token") != null) {
-                this.isLoggedin = true;
-                //alert("logged in");
-            } 
-
             const sessionQuery = sessionStorage.getItem('query');
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
 
-            axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
+            axios.post('/search_query', {query: ""})
+            .then(res => {
+                this.posts = res.data;
+            })
+
+            axios.post('/categories')
                 .then(res => {
-                    this.posts = res.data;
+                    res.data.map( category => {
+                        this.categories.push(category.Categories)
+                    })
                 })
+                .catch( err => console.log(err))
         }
     });
 </script>
