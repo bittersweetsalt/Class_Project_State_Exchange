@@ -9,7 +9,7 @@ var db = require("./db/connection");
 //routes import
 const fileRouter = require('./routes/files');
 const prototypeRouter = require('./routes/prototype');
-const testMySqlRouter = require('./routes/testmysql');
+const search_query = require('./routes/search_query');
 var usersRouter = require('./routes/users');
 
 const passport    = require('passport');
@@ -42,52 +42,6 @@ app.use('/', search_query);
 app.use('/', newPostRouter);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
 
-
-
-
-//making a new post
-app.post('/newpost/12', function(req,res){
- 
-
-  console.log('headersSent', res.headersSent);
-  res.send('POST request has been made');
-  console.log(req.body);
-
-  let data = { 
-                              
-    Title: req.body.Title,
-    category: req.body.category,
-    UserID: req.body.UserID,
-    Desc: req.body.Comment,
-
-
-  }
-
-  let sql = "INSERT INTO Posting SET ?";
-  
-  db.query(sql,[data],(err,results) =>{
-
-    if(err){
-      console.log("Insertion failed: " + err);
-      res.end();
-      return;
-    }
-    res.send(data)
-  })
-})
-
-  // Makes connection to DB 
-  // db.query(sql,[data],(err,results) =>{
-
-  //   if(err){
-  //     console.log("Insertion failed: " + err);
-  //     res.end();
-  //     return;
-  //   }else{
-  //     res.send(data)
-  //   }
-    
-  // })
 })
 
 app.use('/', category_query);
