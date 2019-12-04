@@ -134,6 +134,7 @@
             },
             selected: function (event) {
                 this.selectedCategory = event.target.innerText;
+<<<<<<< HEAD
             },
 
             sendData: function () {
@@ -169,11 +170,40 @@
 
 =======
 >>>>>>> parent of 2a5ccf7... Combined with german-gen-express
+=======
+            },
+
+            sendData: function () {
+                //create new formData object and append all data entered by user
+                const formDataRequest = new FormData();
+                formDataRequest.append('title', this.formData.title)
+                formDataRequest.append('desc', this.formData.desc)
+                formDataRequest.append('price', this.formData.price)
+                formDataRequest.append('category', this.formData.category)
+
+                //get photo from image input and append to FormData object
+                const photo = document.querySelector('.form__image--input').files[0];
+                formDataRequest.append("photo", photo)
+
+                //create unique post identifier
+                const uuid = this.createUUID()
+
+                axios.post(`/newpost/${uuid}`, formDataRequest)
+                    .then( res => {
+                        console.log(res)
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            },
+
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
             filesChange: function (fileList) {
                 if (!fileList.length) return;
 
                 //create a new formData object and append image
                 const formData = new FormData();
+<<<<<<< HEAD
 <<<<<<< HEAD
                 formData.append("photo", fileList[0]);
 
@@ -182,20 +212,29 @@
 =======
                 formData.append("photo", fileList[0])
 >>>>>>> parent of 2a5ccf7... Combined with german-gen-express
+=======
+                formData.append("photo", fileList[0])
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
 
                 //fake upload service to display image on frontend, code can be found in public/javascripts/upload.js
                 upload(formData)
                     .then(res => {
+<<<<<<< HEAD
 <<<<<<< HEAD
                         this.photoFilePaths = this.photoFilePaths.concat(res.url);
                     })
                     .catch(err => {
                         console.log("incompatible filetype uploaded");
 =======
+=======
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
                         this.photoFilePaths = this.photoFilePaths.concat(res.url)
                     })
                     .catch(err => {
                         console.log("incompatible filetype uploaded")
+<<<<<<< HEAD
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
+=======
 >>>>>>> parent of 2a5ccf7... Combined with german-gen-express
                     });
             },
@@ -209,7 +248,10 @@
                 });
                 return uuid;
 <<<<<<< HEAD
+<<<<<<< HEAD
               
+=======
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
 =======
 >>>>>>> parent of 2a5ccf7... Combined with german-gen-express
             }
@@ -228,6 +270,10 @@
                 this.query = sessionQuery;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
 =======
 
 >>>>>>> parent of 2a5ccf7... Combined with german-gen-express
@@ -236,16 +282,22 @@
                 .then(res => {
                     res.data.map(category => {
 <<<<<<< HEAD
+<<<<<<< HEAD
                         this.categories.push(category.Categories);
                     })
                 })
                 .catch(err => console.log(err))
 =======
+=======
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
                         this.categories.push(category.Categories)
                     })
                 })
                 .catch(err => console.log(err))
 
+<<<<<<< HEAD
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
+=======
 >>>>>>> parent of 2a5ccf7... Combined with german-gen-express
         }
     })

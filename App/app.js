@@ -13,6 +13,7 @@ const app = express();
 
 //routes import
 const fileRouter = require('./routes/files');
+<<<<<<< HEAD
 
 const search_query = require('./routes/search_query');
 const newPostRouter = require('./routes/insertPost');
@@ -22,6 +23,11 @@ const search_query = require('./routes/search_query');
 
 const category_query = require('./routes/categories');
 
+=======
+const search_query = require('./routes/search_query');
+const newPostRouter = require('./routes/insertPost');
+const category_query = require('./routes/categories');
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
 var usersRouter = require('./routes/users');
 var messagingRouter = require('./routes/messaging');
 var messagesIndexRouter = require('./routes/messaging-index');
@@ -57,6 +63,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+<<<<<<< HEAD
 
 //routes setup
 app.use('/', fileRouter);
@@ -72,8 +79,14 @@ app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false})
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
+=======
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
 
+<<<<<<< HEAD
 //making a new post
 app.post('/newpost/12', function(req,res){
  
@@ -109,6 +122,20 @@ app.use(allowCrossDomain);
 app.use(fileUpload({ createParentPath: true}));
 
 
+=======
+//middleware
+// app.use(cors); // npm install --save cors
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(allowCrossDomain);
+
+// app.use(formidable());
+app.use(fileUpload({ createParentPath: true}));
+
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
 //routes setup
 app.use('/', fileRouter);
 app.use('/', search_query);
@@ -117,6 +144,7 @@ app.use('/', category_query);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
+<<<<<<< HEAD
 
   // Makes connection to DB 
   // db.query(sql,[data],(err,results) =>{
@@ -138,6 +166,8 @@ app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingR
 app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
 
 
+=======
+>>>>>>> parent of 2a5ccf7... Combined with german-gen-express
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
