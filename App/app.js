@@ -13,9 +13,13 @@ const app = express();
 
 //routes import
 const fileRouter = require('./routes/files');
+
 const search_query = require('./routes/search_query');
 const newPostRouter = require('./routes/insertPost');
 const category_query = require('./routes/categories');
+const prototypeRouter = require('./routes/prototype');
+const search_query = require('./routes/search_query');
+
 var usersRouter = require('./routes/users');
 var messagingRouter = require('./routes/messaging');
 var messagesIndexRouter = require('./routes/messaging-index');
@@ -51,7 +55,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-<<<<<<< HEAD
+
 //routes setup
 app.use('/', fileRouter);
 app.use('/', prototypeRouter);
@@ -62,14 +66,11 @@ app.use('/', search_query);
 app.use('/', newPostRouter);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
 
-=======
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
-<<<<<<< HEAD
+
 
 //making a new post
 app.post('/newpost/12', function(req,res){
@@ -92,7 +93,7 @@ app.post('/newpost/12', function(req,res){
   let sql = "INSERT INTO Posting SET ?";
   
   db.query(sql,[data],(err,results) =>{
-=======
+
 //middleware
 // app.use(cors); // npm install --save cors
 app.use(logger('dev'));
@@ -104,7 +105,7 @@ app.use(allowCrossDomain);
 
 // app.use(formidable());
 app.use(fileUpload({ createParentPath: true}));
->>>>>>> parent of 2a5ccf7... Combined with german-gen-express
+
 
 //routes setup
 app.use('/', fileRouter);
@@ -127,7 +128,7 @@ app.use('/messaging-index', passport.authenticate('jwt', {session: false}), mess
   //   }
     
   // })
-})
+
 
 app.use('/', category_query);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
