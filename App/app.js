@@ -10,6 +10,7 @@ var db = require("./db/connection");
 const fileRouter = require('./routes/files');
 const prototypeRouter = require('./routes/prototype');
 const search_query = require('./routes/search_query');
+const category_query = require('./routes/categories');
 var usersRouter = require('./routes/users');
 
 const passport    = require('passport');
