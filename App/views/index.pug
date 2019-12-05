@@ -1,0 +1,44 @@
+extends header
+
+block content
+    #app
+        .layout-body
+            .banner
+                h1 Banner Content Goes Here
+
+        .layout-body
+            h2.slider__title Recent Posts
+            .slider
+                div(class="slider__post" v-for="post in posts")
+                    div(class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }")
+                    .slider__post--body
+                        h3.slider__post--title {{trimTitle(post.Name)}}
+                        p.slider__post--comment {{trimComment(post.Comment)}}
+                    .slider__post--button Contact Seller
+
+        .layout-body
+            h2 Popular Categories
+            .pop__category-container
+                .pop__category Electronics
+                .pop__category Textbooks
+                .pop__category Furniture
+                .pop__category Movies
+                .pop__category Video Games
+                .pop__category Supplies
+
+        .layout-body
+            h2.slider__title Popular Posts
+            .slider
+                div(class="slider__post" v-for="post in posts")
+                    div(class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }")
+                    .slider__post--body
+                        h3.slider__post--title {{ trimTitle(post.Name) }}
+                        p.slider__post--comment {{ trimComment(post.Comment) }}
+                    .slider__post--button Contact Seller
+
+        .layout-footer
+
+
+    script(src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js")
+    script(src="https://unpkg.com/axios/dist/axios.min.js")
+    script(src="javascripts/vue/index.js")
