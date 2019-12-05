@@ -15,35 +15,30 @@
                     <h1 class="topper__title">State Exchange</h1>
                 </a>
                 <form class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}">
-                    <div class="topper__form--button-select" v-on:click.prevent="changeSelectState"><img
-                            src="/images/icons/arrow-down.png"></div>
+                    <div class="topper__form--button-select" v-on:click="changeSelectState">
+                        <p class="selected__category">{{selectedCategory}}</p>
+                        <img src="images/icons/arrow-down.png">
+                        <div class="topper__form--categories" v-if="select">
+                            <div class="category" v-on:click="selected">All</div>
+                            <div class="category" v-for="category in categories" v-on:click="selected">{{category}}
+                            </div>
+                        </div>
+                    </div>
                     <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
                     <button type="submit" class="topper__form--button-go"><img src="images/icons/arrow.png"></button>
-                    <div class="topper__form--select" v-if="select">
-                        <input type="radio" class="topper__form--select-radio" id="electronics">
-                        <label for="electronics" class="topper__form--select-label">Electronics</label>
-
-                        <input type="radio" class="topper__form--select-radio" id="textbooks">
-                        <label for="textbooks" class="topper__form--select-label">Textbooks</label>
-
-                        <input type="radio" class="topper__form--select-radio" id="other">
-                        <label for="other" class="topper__form--select-label">Other</label>
-                    </div>
                 </form>
                 <div class="topper__links">
                     <a href="login" class="topper__links--login">Login</a>
                     <a href="#" class="topper__links--signup">Signup</a>
-                </div>
-                <div class="nav--burger">
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
-                </div>
-                <div class="nav">
-                    <a href="index" class="nav__item">Home</a>
-                    <a href="about" class="nav__item">About</a>
-                    <a href="newpost" class="nav__item">New Post</a>
-                    <a href="dashboard" class="nav__item">Dashboard</a>
+                    <div class="nav--burger" v-on:click="changeMenuState">
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-menu" v-if="menu">
+                            <a href="/newpost">New Post</a>
+                            <a href="/dashboard">Dashboard</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,7 +51,7 @@
                 <div class="results__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }">
                 </div>
                 <div class="results__post--body">
-                    <h2 class="results__post--title">{{post.Name}}</h2>
+                    <h3 class="results__post--title">{{post.Name}}</h3>
                     <p class="results__post--category">{{post.Category}}</p>
                     <p class="results__post--comment">{{trimComment(post.Comment)}}</p>
                 </div>
@@ -76,28 +71,32 @@
     var app = new Vue({
         el: '#app',
         data: {
+            select: false,
+            menu: false,
+            categories: [],
+            selectedCategory: "All",
             posts: [],
             query: "",
             showing: "",
-            select: false,
-            radius: 50
         },
         methods: {
+            changeMenuState: function () {
+                this.menu = !this.menu;
+            },
+            changeSelectState: function () {
+                this.select = !this.select;
+            },
+            selected: function (event) {
+                this.selectedCategory = event.target.innerText;
+            },
             sendQuery: function () {
-                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
-                        query: this.query
+                axios.post('/search_query', {
+                        query: this.query,
+                        category: this.selectedCategory
                     })
                     .then(res => {
                         index.posts = res.data
                     })
-            },
-            changeSelectState: function () {
-                this.select = !this.select;
-                if (this.radius == 50) {
-                    this.radius = 20;
-                } else {
-                    this.radius = 50;
-                }
             },
             trimComment: function (post) {
                 const length = 200;
@@ -122,12 +121,23 @@
                 this.showing = sessionQuery;
             }
 
-            axios.post('/testmysql', {
-                query: this.query
-            })
-            .then(res => {
-                app.posts = res.data
-            })
+            axios.post('/search_query', {
+                    query: this.query,
+                    category: this.selectedCategory
+                })
+                .then(res => {
+                    app.posts = res.data
+                })
+
+            //get categories
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map(category => {
+                        this.categories.push(category.Categories)
+                    })
+                })
+                .catch(err => console.log(err))
+
         }
     })
 </script>

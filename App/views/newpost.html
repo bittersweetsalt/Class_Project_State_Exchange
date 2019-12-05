@@ -2,6 +2,7 @@
 
 <head>
     <title>New Post!</title>
+    <meta name="viewport" content="width=device-width">
     <link rel='stylesheet' href='stylesheets/global.css'>
 </head>
 
@@ -14,66 +15,89 @@
                     <h1 class="topper__title">State Exchange</h1>
                 </a>
                 <form class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}">
-                    <div class="topper__form--button-select" v-on:click.prevent="changeSelectState"><img
-                            src="/images/icons/arrow-down.png"></div>
+                    <div class="topper__form--button-select" v-on:click="changeSelectState">
+                        <p class="selected__category">{{selectedCategory}}</p>
+                        <img src="images/icons/arrow-down.png">
+                        <div class="topper__form--categories" v-if="select">
+                            <div class="category" v-on:click="selected">All</div>
+                            <div class="category" v-for="category in categories" v-on:click="selected">{{category}}
+                            </div>
+                        </div>
+                    </div>
                     <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
                     <button type="submit" class="topper__form--button-go"><img src="images/icons/arrow.png"></button>
-                    <div class="topper__form--select" v-if="select">
-                        <input type="radio" class="topper__form--select-radio" id="electronics">
-                        <label for="electronics" class="topper__form--select-label">Electronics</label>
-
-                        <input type="radio" class="topper__form--select-radio" id="textbooks">
-                        <label for="textbooks" class="topper__form--select-label">Textbooks</label>
-
-                        <input type="radio" class="topper__form--select-radio" id="other">
-                        <label for="other" class="topper__form--select-label">Other</label>
-                    </div>
                 </form>
                 <div class="topper__links">
                     <a href="login" class="topper__links--login">Login</a>
                     <a href="#" class="topper__links--signup">Signup</a>
-                </div>
-                <div class="nav--burger">
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
-                </div>
-                <div class="nav">
-                    <a href="index" class="nav__item">Home</a>
-                    <a href="about" class="nav__item">About</a>
-                    <!-- <a href="#" class="nav__item">For Sale</a> -->
-                    <a href="newpost" class="nav__item">New Post</a>
-                    <a href="dashboard" class="nav__item">Dashboard</a>
+                    <div class="nav--burger" v-on:click="changeMenuState">
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-menu" v-if="menu">
+                            <a href="/newpost">New Post</a>
+                            <a href="/dashboard">Dashboard</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="layout-body">
+    <div class="layout-form">
         <h1>Create a New Post</h1>
-        <form class="form newpost grid" method="POST">
-            <label for="title" class="form__label grid__col--1">Title</label>
-            <input v-model='formData.title' id="title" type="input" class="title form__input--border grid__col--8">
-            <label class="grid__col--3 form__input--border" for="addImage">Add Image</label>
-            <input accept="image/*" id="addImage" type="file" class="form__image-input grid__col--3"></input>
-            <label for="desc" class="form__label grid__col--1">Description</label>
-            <textarea v-model='formData.desc' class="desc form__textarea grid__col--11" form="newpost"></textarea>
-            <!--TODO: Pull list of categories from database-->
-            <label class="form__label grid__col--1">Category</label>
-            <select v-model='formData.categorySelected' class="form__select grid__col--3">
-                <option v-for='category in categories'>{{ category }}</option>
-                <!--
-                <option>Category 1</option>
-                <option>Category 2</option>
-                <option>Category 3</option>
-                <option>Category 4</option>
-                -->
-            </select>
-            <div class="grid__col--8"></div>
-            <label for="price" class="form__label grid__col--1">Price</label>
-            <input v-model='formData.price' type="number" class="form__input--border grid__col--2">
-            <button type="button" class="form__button--border grid__col--8">Cancel</button>
-            <button v-on:click.prevent='sendData' type="submit" class="form__button--border grid__col--1">Post</button>
+        <form id="new-post" class="form" enctype="multipart/form-data">
+            <div class="form__devider">
+                <label for="title" class="form__label">Title</label>
+                <p class="form__descriptor">Use words people would search for when looking for your item</p>
+                <input v-model='formData.title' id="title" type="input" class="title form__input">
+            </div>
+
+            <div class="form__devider">
+                <label for="addImage" class="form__label">Add a photo</label>
+                <p class="form__descriptor">Improve your buyer’s confidence by including as many as possible.</p>
+                <div class="form__image--select-container">
+                    <div class="form__image-select">
+                        <input form="new-post" type="file" accept="image/*" id="addImage"
+                            @change="filesChange($event.target.files)" class="form__image--input">
+                        </input>
+                        <p class="form__image--text">Drag your file(s) here to upload<br> or click to browse
+                        </p>
+                    </div>
+                    <div class="form__image--container">
+                        <div class="form__image" v-for="path in photoFilePaths">
+                            <img v-bind:src="path">
+                        </div>
+                        <div class="form__image--default">
+                            <img src="images/icons/plus-yellow.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form__devider">
+                <!--TODO: Pull list of categories from database-->
+                <label class="form__label">Details</label>
+                <p class="form__descriptor">Select a category for your item</p>
+                <select v-model='formData.category' class="form__select">
+                    <option selected disabled>Category</option>
+                    <option v-for='category in categories'>{{ category }}</option>
+                </select>
+                <p class="form__descriptor">Set an amount that buyers can purchase your item for</p>
+                <input v-model='formData.price' class="form__input--price">
+            </div>
+
+            <div class="form__devider">
+                <label for="desc" class="form__label">Description</label>
+                <p class="form__descriptor">Tell buyers about unique features, flaws, or why you are selling it!</p>
+                <textarea v-model='formData.desc' class="desc form__textarea" form="newpost"></textarea>
+            </div>
+
+
+            <div class="form__devider--submit">
+                <button type="button" class="form__submit--cancel">Cancel</button>
+                <button v-on:click.prevent='sendData' type="submit" class="form__submit--post">Post</button>
+            </div>
         </form>
     </div>
 
@@ -82,16 +106,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="javascripts/SearchResults.js"></script>
-<script>
-    function checkInp() {
-        var x = document.forms["myForm"]["age"].value;
-
-        if (isNaN(x)) {
-            alert("Must input numbers");
-            return false;
-        }
-    }
+<script type="module">
+    import { upload } from './javascripts/upload.js';
 
     var app = new Vue({
         el: '#app',
@@ -100,48 +116,149 @@
                 title: '',
                 desc: '',
                 price: '',
-                categorySelected: 'Select Category'
+                category: 'Category',
             },
-            categories: ['Select Category', 'Electronics', 'Books', 'Furniture', 'Toys'],
-            img: '',
+            photoFilePaths: [],
             query: '',
-            radius: 50,
-            select: false
+            select: false,
+            menu: false,
+            categories: [],
+            selectedCategory: "All"
         },
         methods: {
-            sendData: function () {
-                let id = Math.random() * 100;
-                Math.round.ciel(id);
-
-                axios.post(`localhost:3000/newpost/id:${id}`, this.formData)
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+            changeMenuState: function () {
+                this.menu = !this.menu;
             },
             changeSelectState: function () {
                 this.select = !this.select;
-                if (this.radius == 50) {
-                    this.radius = 20;
-                } else {
-                    this.radius = 50;
-                }
+
+            },
+            selected: function (event) {
+                this.selectedCategory = event.target.innerText;
+            },
+
+            sendData: function () {
+                //create new formData object and append all data entered by user
+                const formDataRequest = new FormData();
+                formDataRequest.append('title', this.formData.title)
+                formDataRequest.append('desc', this.formData.desc)
+                formDataRequest.append('price', this.formData.price)
+                formDataRequest.append('category', this.formData.category)
+
+                //get photo from image input and append to FormData object
+                const photo = document.querySelector('.form__image--input').files[0];
+                formDataRequest.append("photo", photo)
+
+                //create unique post identifier
+                const uuid = this.createUUID()
+
+                axios.post(`/newpost/${uuid}`, formDataRequest)
+                    .then( res => {
+                        console.log(res)
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+
+            },
+            selected: function (event) {
+                this.selectedCategory = event.target.innerText;
+
+            },
+
+
+            logout: function() {
+                
+                //alert("ji");
+                localStorage.removeItem("__token");
+                this.isLoggedin = false;
+
+
+            },
+
+            sendData: function () {
+                //create new formData object and append all data entered by user
+                const formDataRequest = new FormData();
+                formDataRequest.append('title', this.formData.title)
+                formDataRequest.append('desc', this.formData.desc)
+                formDataRequest.append('price', this.formData.price)
+                formDataRequest.append('category', this.formData.category)
+
+                //get photo from image input and append to FormData object
+                const photo = document.querySelector('.form__image--input').files[0];
+                formDataRequest.append("photo", photo)
+
+                //create unique post identifier
+                const uuid = this.createUUID()
+
+                axios.post(`/newpost/${uuid}`, formDataRequest)
+                    .then( res => {
+                        console.log(res)
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            },
+
+
+            filesChange: function (fileList) {
+                if (!fileList.length) return;
+
+                //create a new formData object and append image
+                const formData = new FormData();
+ formData.append("photo", fileList[0]);
+
+
+                axios.post('/uploadphotos', formData);
+
+
+                //fake upload service to display image on frontend, code can be found in public/javascripts/upload.js
+                upload(formData)
+                    .then(res => {
+
+                        this.photoFilePaths = this.photoFilePaths.concat(res.url);
+                    })
+                    .catch(err => {
+                        console.log("incompatible filetype uploaded");
+
+                    });
+            },
+
+            createUUID: function() {
+                var dt = new Date().getTime();
+                var uuid = 'xxxxxxxx'.replace(/[xy]/g, function (c) {
+                    var r = (dt + Math.random() * 16) % 16 | 0;
+                    dt = Math.floor(dt / 16);
+                    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                });
+                return uuid;
+
             }
         },
         watch: {
+            //set query variable in sessionStorage when search field onChange event is fired
             query: function (newQuery, oldQuery) {
                 sessionStorage.setItem('query', newQuery);
             }
+
         },
         mounted() {
+            //set search bar field to previously typed query if it exists
             const sessionQuery = sessionStorage.getItem('query');
             if (sessionQuery != null) {
                 this.query = sessionQuery;
             }
-        }
+
+            //get categories
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map(category => {
+
+                        this.categories.push(category.Categories);
+                    })
+                })
+                .catch(err => console.log(err))
+
     })
 </script>
-
 </html>

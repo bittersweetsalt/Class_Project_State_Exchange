@@ -1,0 +1,158 @@
+<html>
+
+<head>
+    <title>State Exchange</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel='stylesheet' href='stylesheets/global.css'>
+</head>
+
+
+<div id="app">
+
+    <div class="layout-header">
+        <div class="layout-body">
+            <div class="topper">
+                <a href="index">
+                    <h1 class="topper__title">State Exchange</h1>
+                </a>
+                <form class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}">
+                    <div class="topper__form--button-select" v-on:click="changeSelectState">
+                        <p class="selected__category">{{selectedCategory}}</p>
+                        <img src="images/icons/arrow-down.png">
+                        <div class="topper__form--categories" v-if="select">
+                            <div class="category" v-on:click="selected">All</div>
+                            <div class="category" v-for="category in categories" v-on:click="selected">{{category}}
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
+                    <button type="submit" class="topper__form--button-go"><img src="images/icons/arrow.png"></button>
+                </form>
+                <div class="topper__links">
+                    <a href="login" class="topper__links--login">Login</a>
+                    <a href="register" class="topper__links--signup">Signup</a>
+                    <div class="nav--burger" v-on:click="changeMenuState">
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-menu" v-if="menu">
+                            <a href="/newpost">New Post</a>
+                            <a href="/dashboard">Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layout-body">
+        <div class="disclaimer">
+            <p>SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only</p>
+        </div>
+    </div>
+    <div class="layout-body">
+        <h2>Manage Posts</h2>
+        <table class="table">
+            <tr v-for="post in posts">
+                <td>{{post.ID}}</td>
+                <td>{{post.Name}}</td>
+                <td>{{post.Category}}</td>
+                <td>{{post.Price}}</td>
+                <td class="buttons">
+                    <button>Approve</button>
+                    <button>Disapprove</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            posts: [],
+            query: "",
+            select: false,
+            radius: 50,
+            isLoggedin: false,
+            select: false,
+            menu: false,
+            categories: [],
+            selectedCategory: "All"
+        },
+        methods: {
+            changeMenuState: function () {
+                this.menu = !this.menu;
+            },
+            changeSelectState: function () {
+                this.select = !this.select;
+            },
+            selected: function (event) {
+                this.selectedCategory = event.target.innerText;
+            },
+            trimComment: function (post) {
+                const length = 50;
+                let comment = post;
+
+                if (post.length > length) {
+                    comment = post.substring(0, length) + "...";
+                }
+
+                return comment;
+            },
+            trimTitle: function (post) {
+                const length = 15;
+                let title = post;
+
+                if (post.length > length) {
+                    title = post.substring(0, length) + "...";
+                }
+
+                return title;
+            },
+            logout: function () {
+
+                //alert("ji");
+                localStorage.removeItem("__token");
+                this.isLoggedin = false;
+            }
+        },
+        watch: {
+            query: function (newQuery, oldQuery) {
+                sessionStorage.setItem('query', newQuery);
+            }
+        },
+        mounted() {
+
+            //alert( localStorage.getItem("__token") + " --- " + this.isLoggedin );
+            if (localStorage.getItem("__token") != null) {
+                this.isLoggedin = true;
+                //alert("logged in");
+            }
+
+            const sessionQuery = sessionStorage.getItem('query');
+            if (sessionQuery != null) {
+                this.query = sessionQuery;
+            }
+
+            axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql')
+                .then(res => {
+                    this.posts = res.data;
+                })
+
+            axios.post('/categories')
+                .then(res => {
+                    res.data.map(category => {
+                        this.categories.push(category.Categories)
+                    })
+                })
+                .catch(err => console.log(err))
+        }
+    });
+</script>
+
+</html>

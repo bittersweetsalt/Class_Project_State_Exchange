@@ -1,2 +1,4 @@
 node_modules
 package-lock.json
+post_img
+connection.js
