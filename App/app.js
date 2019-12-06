@@ -69,27 +69,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
 
-//making a new post
-app.post('/newpost/12', function(req,res){
- 
-
-  console.log('headersSent', res.headersSent);
-  res.send('POST request has been made');
-  console.log(req.body);
-
-  let data = { 
-                              
-    Title: req.body.Title,
-    category: req.body.category,
-    UserID: req.body.UserID,
-    Desc: req.body.Comment,
-
-
-  }
-
-  let sql = "INSERT INTO Posting SET ?";
-  
-  db.query(sql,[data],(err,results) =>{
 
 //middleware
 // app.use(cors); // npm install --save cors
@@ -128,26 +107,6 @@ app.use('/', category_query);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
-
-  // Makes connection to DB 
-  // db.query(sql,[data],(err,results) =>{
-
-  //   if(err){
-  //     console.log("Insertion failed: " + err);
-  //     res.end();
-  //     return;
-  //   }else{
-  //     res.send(data)
-  //   }
-    
-  // })
-
-
-app.use('/', category_query);
-app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
-app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
-app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
-
 
 
 

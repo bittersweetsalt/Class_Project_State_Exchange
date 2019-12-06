@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var router = express();
 var db = require('../db/connection');
 const jwt = require('jsonwebtoken');
 
