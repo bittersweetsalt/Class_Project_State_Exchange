@@ -1,0 +1,19 @@
+extends header
+
+block content
+    #app
+
+        .layout-body
+            h1 Login
+            .form.signin
+                label(for="username" class="form__label") Username
+                input(v-model='username' type="input" class="title form__input--border")
+
+                label(for="password" class="form__label") Password
+                input(v-model='password' type="input" class="title form__input--border")
+
+                button(v-on:click.prevent='sendData' type="submit" class="form__button--border") Submit
+
+    script(src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js")
+    script(src="https://unpkg.com/axios/dist/axios.min.js")
+    script(src="javascripts/vue/loginPage.js")

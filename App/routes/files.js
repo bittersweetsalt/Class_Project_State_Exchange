@@ -5,11 +5,11 @@ const path = require('path');
 
 /*------------------------------------------------ GET home page. */
 router.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/index.html'));
+    res.render('index')
 });
 
 router.get('/index', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/index.html'));
+    res.render('index')
 });
 
 
@@ -17,25 +17,25 @@ router.get('/index', (req, res, next) => {
 
 /*------------------------------------------------ GET search page. */
 router.get('/search', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/search.html'));
+    res.render("search")
 });
 
 
 
 /*------------------------------------------------ GET login page. */
 router.get('/login', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/loginpage.html'))
+    res.render("loginpage")
 });
 
 
 /*------------------------------------------------ GET register page. */
 router.get('/register', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/registerpage.html'))
+    res.render('registerpage')
 });
 
 /*------------------------------------------------ GET newpost page. */
 router.get('/newpost', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/newpost.html'));
+    res.render("newpost")
 });
 
 
@@ -43,12 +43,12 @@ router.get('/newpost', (req, res, next) => {
 
 /*------------------------------------------------ GET dashboard */
 router.get('/dashboard', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/dashboard.html'));
+    res.render('dashboard')
 });
 
 /*------------------------------------------------ GET Manage post */
 router.get('/manage-post', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/manage-post.html'));
+    res.render('manage-post')
 });
 
 
@@ -56,13 +56,14 @@ router.get('/manage-post', (req, res, next) => {
 router.get('/contact/edit/:pid/:mid', function(req, res, next) {
 
     //res.send(req.params['id']);
-    res.sendFile(path.join(__dirname, '../views/messaging.html'));
+    // res.sendFile(path.join(__dirname, '../views/messaging.html'));
+    res.render('messaging')
   
   });
 
 /*------------------------------------------------ GET about pages */
 router.get('/about', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../views/about.html'));
+    res.render('about')
 });
 
 router.get('/about/roderic', (req, res, next) => {

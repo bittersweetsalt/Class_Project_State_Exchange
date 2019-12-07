@@ -3,12 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-var db = require("./db/connection");
 const fileUpload = require('express-fileupload')
-
 const passport    = require('passport');
 require('./auth/passport');
-
 const app = express();
 
 //routes import
@@ -43,13 +40,6 @@ app.use('/auth', auth);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
-//middleware
-// app.use(cors); // npm install --save cors
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 //routes for the files
@@ -58,16 +48,10 @@ app.use('/', search_query);
 app.use('/', newPostRouter);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
-
 
 
 //middleware
@@ -84,16 +68,8 @@ app.use(fileUpload({ createParentPath: true}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
+app.set('view engine', 'pug');
 
-//middleware
-// app.use(cors); // npm install --save cors
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(allowCrossDomain);
 
 // app.use(formidable());
 app.use(fileUpload({ createParentPath: true}));
@@ -110,7 +86,6 @@ app.use('/messaging-index', passport.authenticate('jwt', {session: false}), mess
 
 
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -121,6 +96,8 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  console.log(err)
 
   // render the error page
   res.status(err.status || 500);

@@ -1,0 +1,25 @@
+extends header
+
+block content
+    #app
+        .layout-body
+            h1 {{ user }}'s Dasbhoard
+            div
+                div
+                    button(class="form__button--border" v-on:click="getPosts") Posts
+                    button(class="form__button--border" v-on:click="getMessages") Messages
+
+                    div(v-for="message in messages") {{  }}
+
+                    .results
+                        div(class="results__post" v-for="post in posts")
+                            div(class="results__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }")
+                            .results__post--body
+                                h3.results__post--title {{ post.Name }}
+                                p.results__post--comment {{ post.Comment }}
+                                p.results__post--price {{ post.Price }}
+                                p.results__post--category {{ post.Category }}
+
+    script(src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js")
+    script(src="https://unpkg.com/axios/dist/axios.min.js")
+    script(src="javascripts/vue/dashboard.js")
