@@ -61,9 +61,14 @@ different views, color variations, etc.
         height: auto;
         width: auto;
     }
+
+    .burger-auth--links{
+        display: flex;
+    }
 }
 
 @media only screen and (max-width: 800px){
+
     /*--------------------------------------------------------------------SLIDER--*/
     .slider__post{
         width: 200px;
@@ -71,6 +76,12 @@ different views, color variations, etc.
 }
 
 @media only screen and (max-width: 695px){
+
+    .shadow{
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
     /*---------------------------------------------------------------------TOPPER--*/
     .topper{
         grid-template-columns: 1fr;
@@ -93,6 +104,17 @@ different views, color variations, etc.
 
     .topper__form{
         max-width: 100%;
+    }
+
+    .burger-menu{
+        position: static;
+        padding: 0;
+        border: 3px solid var(--yellow);
+    }
+
+    .burger-menu a:hover{
+        background-color: var(--yellow);
+        color: white;
     }
 
     .form__image--select-container{

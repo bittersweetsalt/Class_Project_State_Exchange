@@ -40,14 +40,11 @@ router.post(`/newpost/:id`, (req, res) => {
     let sql = "INSERT INTO Posting SET ?";
         
     db.query(sql, [data], (err, rows, results) => {
-        
         if (err){
-            console.log("Failed: " + err);
+            console.log(err);
             res.end();
             return;
         }
-          
-        console.log('Found database.... 1 Record inserted');
 
         res.send(rows);
         })

@@ -17,3 +17,9 @@ Holds all main variables for easy configuration
 
     --border-radius: 3px;
 }
+
+.shadow{
+    -webkit-box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.15);
+    box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.15);
+}

@@ -13,7 +13,7 @@ head
                         div(class="topper__form--button-select" v-on:click="changeSelectState")
                             p.selected__category {{selectedCategory}}
                             img(src = "images/icons/arrow-down.png")
-                            .div(class="topper__form--categories" v-if="select")
+                            .div(class="topper__form--categories shadow" v-if="select")
                                 div(class="category" v-on:click="selected") All
                                 div(class = "category" v-for="category in categories" v-on:click="selected") {{category}}
                         input(type="text" placeholder="Search" class="topper__form--input" v-model="query")
@@ -27,9 +27,12 @@ head
                             .burger-line
                             .burger-line
                             .burger-line
-                            div(class="burger-menu" v-if="menu")
+                            div(class="burger-menu shadow" v-if="menu")
                                 a(href="/newpost") New Post
                                 a(href="/dashboard") Dashboard
+                                .burger-auth--links
+                                    a(href="login") Login
+                                    a(href="register") Signup
 
                     //- p.disclaimer SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only
 
