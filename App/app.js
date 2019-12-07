@@ -19,74 +19,43 @@ var usersRouter = require('./routes/users');
 var messagingRouter = require('./routes/messaging');
 var messagesIndexRouter = require('./routes/messaging-index');
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 var allowCrossDomain = function(req, res, next) {
-// Website you wish to allow to connect
-res.setHeader('Access-Control-Allow-Origin', '*');
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
-// Request methods you wish to allow
-res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-// Request headers you wish to allow
-res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-// Set to true if you need the website to include cookies in the requests sent
-// to the API (e.g. in case you use sessions)
-res.setHeader('Access-Control-Allow-Credentials', true);
-next();
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
 }
 
 const auth = require('./routes/auth');
 app.use('/auth', auth);
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
-
 //middleware
-// app.use(cors); // npm install --save cors
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(allowCrossDomain);
+app.use(fileUpload({ createParentPath: true}));
 
 //routes for the files
 app.use('/', fileRouter);
 app.use('/', search_query);
 app.use('/', newPostRouter);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
-
-//making a new post
-
-//middleware
-// app.use(cors); // npm install --save cors
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(allowCrossDomain);
-
-// app.use(formidable());
-app.use(fileUpload({ createParentPath: true}));
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
-//middleware
-// app.use(cors); // npm install --save cors
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(allowCrossDomain);
-
-// app.use(formidable());
-app.use(fileUpload({ createParentPath: true}));
-
 
 //routes setup
 app.use('/', fileRouter);
@@ -96,16 +65,10 @@ app.use('/', category_query);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
-
-
-
 app.use('/', category_query);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
-
-
-
 
 
 // catch 404 and forward to error handler
