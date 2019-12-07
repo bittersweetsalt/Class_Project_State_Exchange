@@ -15,9 +15,10 @@ const fileRouter = require('./routes/files');
 const search_query = require('./routes/search_query');
 const newPostRouter = require('./routes/insertPost');
 const category_query = require('./routes/categories');
-var usersRouter = require('./routes/users');
-var messagingRouter = require('./routes/messaging');
-var messagesIndexRouter = require('./routes/messaging-index');
+const usersRouter = require('./routes/users');
+const messagingRouter = require('./routes/messaging');
+const messagesIndexRouter = require('./routes/messaging-index');
+const auth = require('./routes/auth');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,9 +39,6 @@ var allowCrossDomain = function(req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 }
-
-const auth = require('./routes/auth');
-app.use('/auth', auth);
 
 //middleware
 app.use(logger('dev'));
@@ -69,6 +67,7 @@ app.use('/', category_query);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
+app.use('/auth', auth);
 
 
 // catch 404 and forward to error handler

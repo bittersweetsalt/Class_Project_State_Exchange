@@ -38,27 +38,72 @@ into sections and holds modules together.
     padding: 5px 35px;
 }
 
-.layout-form{
+.layout-form,
+.layout-form--auth{
     flex-shrink: 0;
     width: 100%;
     max-width: 1000px;
     align-self: center;
     padding: 5px 35px;
 }
+.layout-form--auth{
+    max-width: 700px;
+}
 
 .banner{
     flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+    display: grid;
+    grid-template-rows: 30px 1fr ;
+    justify-items: center;
 
     width: 100%;
     height: 200px;
+    padding: 5px 20px 10px 20px;
 
-    border: 2px dashed var(--yellow);
+    background: url('../images/icons/banner-bg.png');
+    background-size: 800px;
+    background-position: center center;
+    background-color: var(--yellow);
     border-radius: var(--border-radius);
 
-    color: var(--yellow);
+    color: white;
+}
+
+.disclaimer{
+    color: white;
+    font-family: var(--main-header-font);
+    font-size: 20px;
+    text-align: center;
+}
+
+.banner__content{
+    align-self: end;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 1295px;
+}
+.banner__content--div{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.banner__content--icon{
+    height: 100px;
+}
+.banner__content--desc{
+    color: white;
+    font-size: 20px;
+    font-family: var(--main-header-font);
+}
+.center{
+    border-right: 3px solid white;
+    border-left: 3px solid white;
 }
 
 .layout-footer{
@@ -100,6 +145,10 @@ into sections and holds modules together.
     .layout-form{
         max-width: 695px;
     }
+
+    .banner{
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 695px){
@@ -108,7 +157,8 @@ into sections and holds modules together.
         max-width: 480px;
     }
 
-    .layout-form{
+    .layout-form,
+    .layout-form--auth{
         max-width: 100%;
         padding: 5px 3px;
     }
