@@ -39,9 +39,6 @@ var allowCrossDomain = function(req, res, next) {
 }
 
 
-const auth = require('./routes/auth');
-app.use('/auth', auth);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');

@@ -11,9 +11,11 @@ var app = new Vue({
             .then(function (response) {
                 localStorage.setItem("__token", response.data.token); //response.data.success.token
                 window.location.href = "/"
+            
             })
             .catch(function (error) {
                 app.message = "Invalid credentias!";
+                console.log(error);
             })
             .finally(function () {
                 // always executed
