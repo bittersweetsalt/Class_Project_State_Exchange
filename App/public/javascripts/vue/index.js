@@ -28,6 +28,7 @@ var app = new Vue({
     mounted() {
         axios.post('/search_query', {query: ""})
             .then(res => {
+                console.log(res.data)
                 this.posts = res.data
             })
     }
