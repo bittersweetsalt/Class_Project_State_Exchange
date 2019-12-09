@@ -5,36 +5,28 @@ const db = require("../db/connection");
 var mkdirp = require('mkdirp');
 
 //new post router, id is a unique id generated on frontend for each post
-router.post(`/newpost/:id`, (req, res) => {
+router.post(`/newpost`, (req, res) => {
 
     //encapsulate req data into object
     let data = {
         Name: req.body.title,
         Category: req.body.category,
         UserID: 123456789, //needs to be changed later, this is a test value
-        posting_ID: req.params.id,
-        Comment: req.body.desc,
+        Comment: req.body.description,
         Price: req.body.price
     }
 
-    //if photo was uploaded, move to public directory & add filepath to data object
+    // //if photo was uploaded, move to public directory & add filepath to data object
     if (req.files != null) {
-        let filePath = path.join(__dirname, '../', 'public', 'images', 'post_img', req.params.id)
-
-        //create new directory based on unique post id
-        mkdirp(filePath, (err) => {
-            if(err) {console.log("mkdirp error: " + err) }
-        });
-
-        //update filepath with photoname
-        filePath = path.join(filePath, req.files.photo.name)
+        //create path to move photo to
+        let filePath = path.join(__dirname, '../', 'public', 'images', 'post_img', req.files.photo.name)
 
         //move photo from req into new directory
         let photo = req.files.photo
         photo.mv(filePath)
 
         //add filepath to data object
-        data.image_name = filePath
+        data.image_name = path.join('images', 'post_img', req.files.photo.name)
     }
 
     let sql = "INSERT INTO Posting SET ?";
@@ -46,7 +38,7 @@ router.post(`/newpost/:id`, (req, res) => {
             return;
         }
 
-        res.send(rows);
+        res.redirect('/index');
         })
 
 })

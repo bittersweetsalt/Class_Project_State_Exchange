@@ -28,6 +28,7 @@ var app = new Vue({
                 // category: this.selectedCategory
             })
             .then(res => {
+                console.log(res.data)
                 this.posts = res.data
             })
 

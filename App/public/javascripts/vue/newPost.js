@@ -11,30 +11,6 @@ var app = new Vue({
         photoFilePaths: [],
     },
     methods: {
-        sendData: function () {
-            //create new formData object and append all data entered by user
-            const formDataRequest = new FormData();
-            formDataRequest.append('title', this.formData.title)
-            formDataRequest.append('desc', this.formData.desc)
-            formDataRequest.append('price', this.formData.price)
-            formDataRequest.append('category', this.formData.category)
-
-            //get photo from image input and append to FormData object
-            const photo = document.querySelector('.form__image--input').files[0];
-            formDataRequest.append("photo", photo)
-
-            //create unique post identifier
-            const uuid = this.createUUID()
-
-            axios.post(`/newpost/${uuid}`, formDataRequest)
-                .then( res => {
-                    console.log(res)
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-
-        },
         logout: function() {
             
             //alert("ji");
@@ -59,17 +35,6 @@ var app = new Vue({
                     console.log("incompatible filetype uploaded");
 
                 });
-        },
-
-        createUUID: function() {
-            var dt = new Date().getTime();
-            var uuid = 'xxxxxxxx'.replace(/[xy]/g, function (c) {
-                var r = (dt + Math.random() * 16) % 16 | 0;
-                dt = Math.floor(dt / 16);
-                return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-            });
-            return uuid;
-
         }
     },
     mounted() {
