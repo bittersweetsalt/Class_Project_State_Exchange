@@ -56,7 +56,7 @@ router.get('/details/:id', function(req, res, next) {
   
   });
 
-  
+
 /*------------------------------------------------ GET Manage post */
 router.get('/manage-post', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../views/manage-post.html'));
@@ -64,7 +64,7 @@ router.get('/manage-post', (req, res, next) => {
 
 
 /*------------------------------------------------ GET Manage post */
-router.get('/contact/edit/:pid/:mid', function(req, res, next) {
+router.get('/contact/edit/:id', function(req, res, next) {
     res.render('messaging')
   });
 

@@ -92,6 +92,7 @@ aspects of the website
     position: absolute;
     top: 55;
     right: 0;
+    padding: 0;
 
     display: flex;
     flex-direction: column;
@@ -109,7 +110,8 @@ aspects of the website
 
 .burger-menu a{
     padding: 15px;
-    transition: .1s
+    transition: .1s;
+    margin: 0;
 }
 .burger-menu a:hover{
     background-color: white;
@@ -698,7 +700,12 @@ aspects of the website
     margin-top: 5px;
 }
 
- /*---------------------------------------------DEVELOPER CARDS-(about pages)--*/
+/*------------------------------------------------------------------MESSAGES--*/
+.message__container{
+    margin-bottom: 70px;
+}
+
+/*---------------------------------------------DEVELOPER CARDS-(about pages)--*/
 .dev{
     display: flex;
     justify-content: center;

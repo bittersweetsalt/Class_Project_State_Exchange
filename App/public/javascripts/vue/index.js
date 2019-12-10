@@ -34,11 +34,8 @@ var app = new Vue({
                 axios.post('/messaging-index/create',
                     {id: _id},
                     {headers: headers})
-                .then(res => {
-                    //get the id
-                    id = res.data.id;
-                    window.location.href = "/contact/edit/" + _id + "/" + id;// + "?token=" + localStorage.getItem("__token");
-                    console.log(res);
+                .then( res => {
+                    window.location.href = `/contact/edit/${_id}`;
                 })
 
             } else {

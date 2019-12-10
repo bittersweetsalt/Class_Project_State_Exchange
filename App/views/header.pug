@@ -7,7 +7,7 @@ head
     .layout-header
             .layout-body
                 .topper
-                    a(href="index")
+                    a(href="/index")
                         h1.topper__title State Exchange
                     form(class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}")
                         div(class="topper__form--button-select" v-on:click="changeSelectState")
@@ -21,9 +21,9 @@ head
                             img(src="images/icons/arrow.png")
 
                     div.topper__links
-                        a(href="login" class="topper__links--login" v-if="isLoggedin == false") Login
-                        a(href="register" class="topper__links--signup"  v-if="isLoggedin == false") Signup
-                        a(v-on:click="logout" class="topper__links--logout" v-if="isLoggedin == true") Logout
+                        a(href="/login" class="topper__links--login" v-if="isLoggedin == false") Login
+                        a(href="/register" class="topper__links--signup"  v-if="isLoggedin == false") Signup
+                        a(href="/index" v-on:click="logout" class="topper__links--logout" v-if="isLoggedin == true") Logout
                         div(class="nav--burger" v-on:click="changeMenuState")
                             .burger-line
                             .burger-line
