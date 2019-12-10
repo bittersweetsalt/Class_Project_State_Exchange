@@ -10,10 +10,12 @@ var app = new Vue({
             axios.post('/auth/login?email=' + this.email + '&password=' + this.password )
             .then(function (response) {
                 localStorage.setItem("__token", response.data.token); //response.data.success.token
-                window.location.href = "/"
+                window.location.href = "/";
+                console.log(repsonse);
             
             })
             .catch(function (error) {
+            
                 app.message = "Invalid credentias!";
                 console.log(error);
             })

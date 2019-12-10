@@ -12,7 +12,6 @@ passport.use(new LocalStrategy({
     },
     function (email, password, cb) {
 
-
         var sql = "SELECT id, email FROM User WHERE email='" + email + "' AND password='" + password + "'";
 
         db.connect(function(err) {

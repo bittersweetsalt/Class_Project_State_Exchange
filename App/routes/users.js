@@ -41,8 +41,16 @@ router.post('/register', function(req, res) {
 
     })
 
-});
+  });
+
+
 
 })
+
+// delete the session and log the user out
+router.post('/logout', funciton(req,res => {
+  req.logOut;
+  res.redirect('/');
+}))
 
 module.exports = router;

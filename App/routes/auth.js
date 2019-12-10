@@ -22,7 +22,7 @@ router.post('/login', function (req, res, next) {
             const token = jwt.sign(user, 'your_jwt_secret', {
                 expiresIn: 604800 // 1 week
               });
-             
+             cle
             return res.json({token});
         });
     })
