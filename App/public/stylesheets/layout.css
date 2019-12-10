@@ -169,3 +169,14 @@ into sections and holds modules together.
         max-width: 315px;
     }
 }
+
+.table {
+    width: 100%;
+    border: 1px solid #000000;
+    border-collapse: collapse;
+}
+
+.table td {
+    border: 1px solid #000000;
+    border-collapse: collapse;
+}

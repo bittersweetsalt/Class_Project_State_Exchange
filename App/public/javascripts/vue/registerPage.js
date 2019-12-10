@@ -61,8 +61,6 @@ var app = new Vue({
             //console.log(formData);
         },
         logout: function () {
-
-            //alert("ji");
             localStorage.removeItem("__token");
             this.isLoggedin = false;
         }

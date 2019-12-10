@@ -26,19 +26,14 @@ var app = new Vue({
                 'Authorization': 'Bearer ' + localStorage.getItem("__token")
             }
 
-
-            //'http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql'
-            axios.post('http://127.0.0.1:3000/messaging/store', {
-
+            axios.post('/messaging/store', {
                         MessagesIndexID: split[split.length - 1],
                         Message: this.new_message
-                    }, {
-                        headers: headers
-                    }
+                    }, 
+                    { headers: headers }
 
                 )
                 .then(function (response) {
-
                     location.reload();
                 })
                 .catch(function (error) {
@@ -59,7 +54,7 @@ var app = new Vue({
         var split = url.split('/');
 
         //######### fetch post details
-        axios.get('http://127.0.0.1:3000/post/' + split[split.length - 2])
+        axios.get('/post' + split[split.length - 2])
             .then(function (response) {
 
                 console.log(response.data[0]);
@@ -80,7 +75,7 @@ var app = new Vue({
             });
 
         //######### fetch previous messages
-        axios.post('http://127.0.0.1:3000/messaging/index', {
+        axios.post('messaging/index', {
                 MessagesIndexID: split[split.length - 1]
             }, {
                 headers: headers

@@ -28,15 +28,13 @@ app.get('/postings',(req,res) => {
 });
 
 // updating a post that the user already had 
-app.get('/update',(req,res) => {
-    
+app.get('/update',(req,res) => {})
     .then(() => {
         res.json();
     })
     .catch((e) => {
         res.json({status:'error'});
     })
-});
 
 // creating a new post , which redirects to newposting
 app.get('/create',(req,res) => {
@@ -45,7 +43,7 @@ app.get('/create',(req,res) => {
 
 // delete a post from the user
 app.get('/delete',(req,res) => {
-    const querystring = 
+    const querystring = ""
     .then(() => {
         res.json();
     })

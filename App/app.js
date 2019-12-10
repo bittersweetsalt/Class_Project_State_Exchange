@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload')
 
-const passport    = require('passport');
+const passport = require('passport');
 require('./auth/passport');
 
 const app = express();
@@ -19,6 +19,7 @@ const usersRouter = require('./routes/users');
 const messagingRouter = require('./routes/messaging');
 const messagesIndexRouter = require('./routes/messaging-index');
 const auth = require('./routes/auth');
+const postRouter = require('./routes/post');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +34,11 @@ var allowCrossDomain = function(req, res, next) {
 
     // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+
+
+const auth = require('./routes/auth');
+app.use('/auth', auth);
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
@@ -54,6 +60,7 @@ app.use('/', fileRouter);
 app.use('/', search_query);
 app.use('/', newPostRouter);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
+app.use('/post', postRouter); 
 
 //routes setup
 app.use('/', fileRouter);

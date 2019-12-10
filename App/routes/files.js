@@ -51,14 +51,19 @@ router.get('/manage-post', (req, res, next) => {
     res.render('manage-post')
 });
 
+router.get('/details/:id', function(req, res, next) {
+    res.sendFile(path.join(__dirname, '../views/detail.html'));
+  
+  });
+/*------------------------------------------------ GET Manage post */
+router.get('/manage-post', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../views/manage-post.html'));
+});
+
 
 /*------------------------------------------------ GET Manage post */
 router.get('/contact/edit/:pid/:mid', function(req, res, next) {
-
-    //res.send(req.params['id']);
-    // res.sendFile(path.join(__dirname, '../views/messaging.html'));
     res.render('messaging')
-  
   });
 
 /*------------------------------------------------ GET about pages */
