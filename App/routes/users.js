@@ -39,9 +39,9 @@ router.post('/register', function(req, res) {
 
         res.send(resObj);
 
-    })
+    });
 
-});
+  });
 
 })
 

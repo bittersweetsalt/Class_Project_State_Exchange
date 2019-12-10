@@ -7,36 +7,36 @@ const db = require("../db/connection");
 app.get('/postings',(req,res) => {
     
     // code needs to be retrofitted to specfic user id 
-    const queryString = `SELECT * FROM Posting `
-    db.query(queryString, (err, rows, fields) => {
-        if (err){
-            console.log("Failed: " + err);
-            res.end();
-            return;
-        }
-      
-        console.log('Found posting from specfic user...');
-        res.send(rows);
+    const queryString = `SELECT * FROM Posting`
+    db.connect(function(err) {
+        db.query(queryString, (err, rows, fields) => {
+            if (err){
+                console.log("Failed: " + err);
+                res.end();
+                return;
+            }
+        
+            console.log('Found posting from specfic user...');
+            res.send(rows);
 
-    })
-    .then(() => {
-        res.json();
-    })
-    .catch((e) => {
-        res.json({status:'error'});
+        })
+        .then(() => {
+            res.json();
+        })
+        .catch((e) => {
+            res.json({status:'error'});
+        })
     })
 });
 
 // updating a post that the user already had 
-app.get('/update',(req,res) => {
-    
+app.get('/update',(req,res) => {})
     .then(() => {
         res.json();
     })
     .catch((e) => {
         res.json({status:'error'});
     })
-});
 
 // creating a new post , which redirects to newposting
 app.get('/create',(req,res) => {
@@ -45,7 +45,7 @@ app.get('/create',(req,res) => {
 
 // delete a post from the user
 app.get('/delete',(req,res) => {
-    const querystring = 
+    const querystring = ""
     .then(() => {
         res.json();
     })
