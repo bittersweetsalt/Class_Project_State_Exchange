@@ -42,7 +42,8 @@ different views, color variations, etc.
         justify-content: flex-start;
     }
     .topper__links--login,
-    .topper__links--signup{
+    .topper__links--signup,
+    .topper__links--logout{
         display: none;
     }
 

@@ -23,6 +23,28 @@ var app = new Vue({
             }
 
             return title;
+        },
+        contactSeller: function(_id) {
+            if(localStorage.getItem("__token") != null) {
+                const headers = {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem("__token")
+                        }
+
+                axios.post('/messaging-index/create',
+                    {id: _id},
+                    {headers: headers})
+                .then(res => {
+                    //get the id
+                    id = res.data.id;
+                    window.location.href = "/contact/edit/" + _id + "/" + id;// + "?token=" + localStorage.getItem("__token");
+                    console.log(res);
+                })
+
+            } else {
+                alert("Please login first!")
+            }
+
         }
     },
     mounted() {

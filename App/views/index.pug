@@ -24,7 +24,7 @@ block content
                     .slider__post--body
                         h3.slider__post--title {{trimTitle(post.Name)}}
                         p.slider__post--comment {{trimComment(post.Comment)}}
-                    .slider__post--button Contact Seller
+                    .slider__post--button(v-on:click="contactSeller(post.ID)") Contact Seller
 
         .layout-body
             h2 Popular Categories

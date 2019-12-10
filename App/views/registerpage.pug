@@ -19,7 +19,8 @@ block content
                     input(v-model='confirm_password' type="password" class="title form__input")
 
                 .form__devider--submit
-                    button(type="button" class="form__submit--cancel") Cancel
+                    a(href="/index" )
+                        button(type="button" class="form__submit--cancel") Cancel
                     button(v-on:click.prevent='sendData' type="submit" class="form__submit--post") Signup
 
                 div(class="form__label" style="color: red;") {{message}}

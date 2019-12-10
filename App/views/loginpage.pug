@@ -10,10 +10,11 @@ block content
                     input(v-model='email' type="input" class="title form__input")
                     
                     label(for="password" class="form__label") Password
-                    input(v-model='password' type="input" class="title form__input")
+                    input(v-model='password' type="password" class="title form__input")
 
                 .form__devider--submit
-                    button(type="button" class="form__submit--cancel") Cancel
+                    a(href="/index" )
+                        button(type="button" class="form__submit--cancel") Cancel
                     button(v-on:click.prevent='sendData' type="submit" class="form__submit--post") Login
                     label.form__label {{message}}
 

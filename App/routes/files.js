@@ -55,6 +55,8 @@ router.get('/details/:id', function(req, res, next) {
     res.sendFile(path.join(__dirname, '../views/detail.html'));
   
   });
+
+  
 /*------------------------------------------------ GET Manage post */
 router.get('/manage-post', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../views/manage-post.html'));
