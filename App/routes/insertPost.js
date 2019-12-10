@@ -30,16 +30,17 @@ router.post(`/newpost`, (req, res) => {
     }
 
     let sql = "INSERT INTO Posting SET ?";
-        
-    db.query(sql, [data], (err, rows, results) => {
-        if (err){
-            console.log(err);
-            res.end();
-            return;
-        }
+    db.connect(function(err) {
+        db.query(sql, [data], (err, rows, results) => {
+            if (err){
+                console.log(err);
+                res.end();
+                return;
+            }
 
-        res.redirect('/index');
+            res.redirect('/index');
         })
+    })
 
 })
 

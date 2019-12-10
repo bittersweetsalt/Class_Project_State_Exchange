@@ -3,7 +3,8 @@ var app = new Vue({
     data: {
         posts: [],
         showing: "",
-        query: ""
+        query: "",
+        selectedCategory: ""
     },
     methods: {
         trimComment: function (post) {
@@ -19,13 +20,17 @@ var app = new Vue({
     },
     mounted() {
         const sessionQuery = sessionStorage.getItem('query');
+        const sessionCategory = sessionStorage.getItem('category');
+  
         if (sessionQuery != null) {
             this.query = sessionQuery;
         }
-
+        if (sessionCategory != null) {
+            this.selectedCategory = sessionCategory;
+        }
         axios.post('/search_query', {
-                query: this.query
-                // category: this.selectedCategory
+                query: this.query,
+                category: this.selectedCategory
             })
             .then(res => {
                 console.log(res.data)

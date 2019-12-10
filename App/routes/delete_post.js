@@ -8,15 +8,17 @@ router.post(`/delete_post`, (req, res) => {
 
     let sql = `DELETE FROM Posting WHERE ID = '${req.body.id}`;
         
-    db.query(sql, (err, rows, results) => {
-        if (err){
-            console.log(err);
-            res.end();
-            return;
-        }
+    db.connect(function(err) {
+        db.query(sql, (err, rows, results) => {
+            if (err){
+                console.log(err);
+                res.end();
+                return;
+            }
 
-        res.redirect('/index');
+            res.redirect('/index');
         })
+    })
 
 })
 
