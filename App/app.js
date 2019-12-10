@@ -18,6 +18,7 @@ const category_query = require('./routes/categories');
 const usersRouter = require('./routes/users');
 const messagingRouter = require('./routes/messaging');
 const messagesIndexRouter = require('./routes/messaging-index');
+const deletePostRouter = require('./routes/delete_post');
 const auth = require('./routes/auth');
 const postRouter = require('./routes/post');
 
@@ -67,6 +68,7 @@ app.use('/', fileRouter);
 app.use('/', search_query);
 app.use('/', newPostRouter);
 app.use('/', category_query);
+app.use('/', deletePostRouter);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
 app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
