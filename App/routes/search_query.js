@@ -11,7 +11,6 @@ router.use(bodyParser.urlencoded({ extended: false}));
 /*Able to only grab from Posting via ID only.*/
 router.post('/search_query', (req, res, next) => {
     
-    
     console.log("category: ", req.body.category);
     console.log("query: ", req.body.query);
 
