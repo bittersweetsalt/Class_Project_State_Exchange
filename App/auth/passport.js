@@ -10,12 +10,10 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
 }, (email, password, cb) => {
 
-    var sql = "SELECT password, email FROM User WHERE email='" + email + "' AND password='" + password + "'";
+    var sql = "SELECT password, email, id FROM User WHERE email='" + email + "' AND password='" + password + "'";
 
     db.connect(function (err) {
-
         db.query(sql, function (err, result) {
-
             if (err) return cb(err);
 
             if (!result || result.length != 1) {
@@ -44,7 +42,13 @@ passport.use(new JWTStrategy({
 
         //find the user in db if needed with jwtPayload.id
         // DB query goes here..
-
         return cb(null, {});
     }
 ));
+
+passport.serializeUser((user, done) => {
+    return done(null, user)
+})
+passport.deserializeUser((user, done) => {
+    return done(null, user)
+})

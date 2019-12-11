@@ -27,7 +27,7 @@ var app = new Vue({
             }
 
             axios.post('/messaging/store', {
-                        MessagesIndexID: split[split.length - 1],
+                        MessagesIndexID: split[5],
                         Message: this.new_message
                     }, {
                         headers: headers
@@ -35,7 +35,8 @@ var app = new Vue({
 
                 )
                 .then(function (response) {
-                    location.reload();
+                    console.log(response)
+                    // location.reload();
                 })
                 .catch((e) => {
                     console.log(e)
