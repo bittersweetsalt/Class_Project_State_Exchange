@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 var db = require("../db/connection");
+const jwt = require('jsonwebtoken');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false}));
@@ -41,8 +42,34 @@ router.post('/register', function(req, res) {
 
     })
 
-});
+    })
 
+})
+
+router.post('/getUserID', (req, res) => {
+    let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
+
+    if (token.startsWith('Bearer ')) {
+        // Remove Bearer from string
+        token = token.slice(7, token.length);
+    }
+
+    var decoded = jwt.decode(token, {
+        complete: true
+    });
+
+    let sql = `SELECT name from user where id = ${decoded.payload.id}`
+
+    db.connect( err => {
+        db.query(sql, (err, result) => {
+            if(err){ 
+                console.log(err)
+                res.end()
+            }
+            
+            res.send(result)
+        })
+    })
 })
 
 module.exports = router;

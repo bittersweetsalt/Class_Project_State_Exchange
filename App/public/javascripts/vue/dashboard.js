@@ -1,7 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
-        user: 'testUser',
+        user: '',
         posts: [],
         messages: [],
         postClicked: true,
@@ -43,10 +43,17 @@ var app = new Vue({
                 headers: headers
             })
             .then((response) => {
+                console.log(response.data)
                 this.posts = response.data
             })
             .catch((e) => {
                 console.log(e)
             })
+
+        axios.post('/users/getUserID', {}, {
+            headers: headers
+        }).then ( result => {
+            this.user = result.data[0].name
+        })
     }
 })
