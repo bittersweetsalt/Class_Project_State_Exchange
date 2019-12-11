@@ -10,18 +10,19 @@ router.use(bodyParser.urlencoded({ extended: false}));
 router.post('/categories', (req, res) => {
    
     const queryString = `SELECT * FROM Categories`
-    db.query(queryString, (err, rows, fields) => {
-        if (err){
-            console.log("Failed: " + err);
-            res.end();
-            return;
-        }
-        
-        console.log('Found database fetch');
-        res.send(rows);
+    db.connect(function(err) {
+        db.query(queryString, (err, rows, fields) => {
+            if (err){
+                console.log("Failed: " + err);
+                res.end();
+                return;
+            }
+            
+            console.log('Found database fetch');
+            res.send(rows);
 
-    })
-    
+        });
+    });
 });
    
 module.exports = router;
