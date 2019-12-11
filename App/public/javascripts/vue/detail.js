@@ -31,7 +31,7 @@ var app = new Vue({
         var url = window.location.href;
         var split = url.split('/');
         
-        axios.get('http://127.0.0.1:3000/post/' + split[split.length - 1])
+        axios.get('/post/' + split[split.length - 1])
         .then(res => {
             console.log(res.data[0]);
             app.post.id = res.data[0]['ID'];

@@ -8,19 +8,44 @@ var app = new Vue({
         messageClicked: false
     },
     methods: {
-        postClick: function(){
+        postClick: function () {
             this.postClicked = true
             this.messageClicked = false
         },
-        messageClick: function(){
+        messageClick: function () {
             this.messageClicked = true
             this.postClicked = false
+
+            this.posts.map( post => {
+                axios.post("/messaging/index", { MessagesIndexID: post.ID}, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem("__token")
+                    }
+                })
+                    .then(res => {
+                        res.data.map( message => {
+                            console.log(message)
+                            this.messages.push(message)
+                        })
+                    })
+            })
         }
     },
     mounted() {
-        axios.get('/postings')
-            .then(res => {
-                this.posts = res.data
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem("__token")
+        }
+
+        axios.post('/postings', {}, {
+                headers: headers
+            })
+            .then((response) => {
+                this.posts = response.data
+            })
+            .catch((e) => {
+                console.log(e)
             })
     }
 })

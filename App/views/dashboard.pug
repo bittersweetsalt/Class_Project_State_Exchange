@@ -25,7 +25,8 @@ block content
 
                 div(class="dashboard__messages" v-if="messageClicked")
                     div(class="dashboard__message" v-for="message in messages")
-                        p test
+                        h3 {{message.name}} 
+                        p {{message.Message}}
 
 
     script(src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js")

@@ -45,11 +45,7 @@ var app = new Vue({
         }
     },
     mounted() {
-<<<<<<< HEAD
-        axios.post('/search_query', {query: ""}, {category: ""})
-=======
         axios.post('/search_query', {query: "", category: ""})
->>>>>>> 81a95407ca983b5e80775ccac93a28609843aa4b
             .then(res => {
                 this.posts = res.data
             })

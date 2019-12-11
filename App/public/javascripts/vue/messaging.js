@@ -35,8 +35,7 @@ var app = new Vue({
 
                 )
                 .then(function (response) {
-                    console.log(response)
-                    // location.reload();
+                    location.reload();
                 })
                 .catch((e) => {
                     console.log(e)

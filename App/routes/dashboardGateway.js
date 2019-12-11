@@ -3,31 +3,34 @@ const app = express();
 app.use(express.json());
 const db = require("../db/connection");
 var router = express.Router();
+const jwt = require('jsonwebtoken');
 
 // getting the users postings 
-router.get('/postings',(req,res) => {
+router.post('/postings',( req, res)  => {
     
-    console.log(req.user)
-    res.end()
-    // code needs to be retrofitted to specfic user id 
-    // const queryString = `SELECT * FROM Posting `
-    // db.query(queryString, (err, rows, fields) => {
-    //     if (err){
-    //         console.log("Failed: " + err);
-    //         res.end();
-    //         return;
-    //     }
-      
-    //     console.log('Found posting from specfic user...');
-    //     res.send(rows);
+    let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
 
-    // })
-    // .then(() => {
-    //     // res.json();
-    // })
-    // .catch((e) => {
-    //     // res.json({status:'error'});
-    // })
+    if (token.startsWith('Bearer ')) {
+        // Remove Bearer from string
+        token = token.slice(7, token.length);
+    }
+
+    var decoded = jwt.decode(token, {
+        complete: true
+    });
+
+    let sql = `SELECT * FROM posting WHERE UserID = '${decoded.payload.id}'`
+
+    db.connect( err => {
+        db.query(sql, (err, result) => {
+            if(err){ 
+                console.log(err)
+                res.end()
+            }
+            
+            res.send(result)
+        })
+    })
 });
 
 // updating a post that the user already had 

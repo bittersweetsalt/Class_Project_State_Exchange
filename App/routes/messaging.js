@@ -5,7 +5,10 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 
 router.post('/index', function (req, res, next) {
-    var sql = "SELECT name, Message FROM Messages INNER JOIN `User` ON SenderID = `User`.ID WHERE MessagesIndexID=" + req.body.MessagesIndexID + " Order By Timestamp DESC";
+
+    var sql = `SELECT name, Message, MessagesIndexID FROM Messages INNER JOIN User ON SenderID = User.ID WHERE MessagesIndexID = ${req.body.MessagesIndexID} Order By Timestamp DESC `
+
+    console.log(sql)
 
     db.connect(function (err) {
         db.query(sql, function (err, result) {
@@ -29,10 +32,6 @@ router.post('/store', function (req, res, next) {
     var decoded = jwt.decode(token, {
         complete: true
     });
-
-    console.log(req.body.MessagesIndexID)
-    console.log(decoded.payload.id)
-    console.log(req.body.Message)
 
     var sql = `INSERT INTO Messages(MessagesIndexID, SenderID, Message) VALUES ('${req.body.MessagesIndexID}', '${decoded.payload.id}', '${req.body.Message}')`
 

@@ -625,6 +625,16 @@ aspects of the website
     color: white;
 }
 
+.dashboard__messages{
+    margin-top: 5px;
+}
+
+.dashboard__message{
+    background-color: var(--light-grey);
+    padding: 5px 15px;
+    margin-bottom: 5px;
+}
+
 /*-------------------------------------------------------------------RESULTS--*/
 .results{
     display: flex;
