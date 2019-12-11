@@ -33,14 +33,14 @@ var app = new Vue({
         
         axios.get('/post/' + split[split.length - 1])
         .then(res => {
-            console.log(res.data[0]);
-            app.post.id = res.data[0]['ID'];
-            app.post.name = res.data[0]['Name'];
-            app.post.price = res.data[0]['Price'];
-            app.post.image = res.data[0]['image_name'];
-            app.post.categroy = res.data[0]['Category'];
-            app.post.email = res.data[0]['email'];
-            app.post.comment = res.data[0]['Comment'];
+            console.log(res.data[0])
+            this.post.id = res.data[0].ID
+            this.post.name = res.data[0].Name
+            this.post.price = res.data[0].Price
+            this.post.image = res.data[0].image_name
+            this.post.categroy = res.data[0].Category
+            this.post.email = res.data[0].email
+            this.post.comment = res.data[0].Comment
             
         })
     }

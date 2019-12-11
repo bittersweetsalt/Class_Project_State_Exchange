@@ -52,7 +52,7 @@ router.get('/manage-post', (req, res, next) => {
 });
 
 router.get('/details/:id', function(req, res, next) {
-    res.sendFile(path.join(__dirname, '../views/detail.html'));
+    res.render('detail')
   
   });
 

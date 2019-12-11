@@ -19,12 +19,15 @@ block content
         .layout-body
             h2.slider__title Recent Posts
             .slider
-                div(class="slider__post" v-for="post in posts")
+                div(class="slider__post post__shadow" v-for="post in posts" v-on:click="contactSeller(post.ID)")
                     div(class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }")
                     .slider__post--body
                         h3.slider__post--title {{trimTitle(post.Name)}}
+                        p {{post.Category}}
                         p.slider__post--comment {{trimComment(post.Comment)}}
-                    .slider__post--button(v-on:click="contactSeller(post.ID)") Contact Seller
+                    p.slider__post--price ${{post.Price}}
+                    //-if you want the contact seller button again, uncomment this 
+                    //- .slider__post--button(v-on:click="contactSeller(post.ID)") Contact Seller
 
         .layout-body
             h2 Popular Categories
@@ -43,8 +46,10 @@ block content
                     div(class="slider__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }")
                     .slider__post--body
                         h3.slider__post--title {{ trimTitle(post.Name) }}
+                        p {{post.Category}}
                         p.slider__post--comment {{ trimComment(post.Comment) }}
-                    .slider__post--button Contact Seller
+                    p.slider__post--price ${{post.Price}}
+                    //- .slider__post--button Contact Seller
 
         .layout-footer
 

@@ -5,7 +5,7 @@ var app = new Vue({
     },
     methods: {
         trimComment: function (post) {
-            const length = 50;
+            const length = 80;
             let comment = post;
 
             if (post.length > length) {

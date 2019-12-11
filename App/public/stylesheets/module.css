@@ -306,6 +306,8 @@ aspects of the website
 
     background-color: var(--light-grey);
     border-radius: var(--border-radius);
+
+    cursor: pointer;
 }
 
 .slider__post--img{
@@ -354,6 +356,11 @@ aspects of the website
     background-color: var(--yellow);
     border: 1px solid var(--yellow);
     color: white;
+}
+
+.slider__post--price{
+    justify-self: end;
+    align-self: end;
 }
 
 /*-------------------------------------------------------------FORM ELEMENTS--*/
