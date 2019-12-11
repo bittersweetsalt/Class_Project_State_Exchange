@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload')
 const passport = require('passport');
+const session = require("express-session")
 require('./auth/passport');
 
 const app = express();
@@ -54,6 +55,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/contact/edit/:id',express.static(path.join(__dirname, 'public')));
 app.use(allowCrossDomain);
 app.use(fileUpload({ createParentPath: true}));
+app.use(session({secret: "secret",
+    resave: false,
+    saveUninitialized: false}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 //routes for the files
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
@@ -66,11 +72,10 @@ app.use('/', newPostRouter);
 app.use('/', category_query);
 app.use('/', deletePostRouter);
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),
-app.use('/messaging', passport.authenticate('jwt', {session: false}), messagingRouter); //passport.authenticate('jwt', {session: false}),
-app.use('/messaging-index', passport.authenticate('jwt', {session: false}), messagesIndexRouter);
+app.use('/messaging', passport.authenticate('jwt', {session: true}), messagingRouter); //passport.authenticate('jwt', {session: false}),
+app.use('/messaging-index', passport.authenticate('jwt', {session: true}), messagesIndexRouter);
 app.use('/auth', auth);
 app.use('/', dashboardGatewayRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

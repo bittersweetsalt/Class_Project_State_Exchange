@@ -30,20 +30,20 @@ router.post('/store', function (req, res, next) {
         complete: true
     });
 
-    console.log(decoded.payload)
-    console.log(req.body)
+    console.log(req.body.MessagesIndexID)
+    console.log(decoded.payload.id)
+    console.log(req.body.Message)
 
-    var sql = "INSERT INTO `Messages`(`MessagesIndexID`, `SenderID`, `Message`) VALUES(" + req.body.MessagesIndexID + ", " + decoded.payload.id + ",'" + req.body.Message + "')";
+    var sql = `INSERT INTO Messages(MessagesIndexID, SenderID, Message) VALUES ('${req.body.MessagesIndexID}', '${decoded.payload.id}', '${req.body.Message}')`
 
-    // db.connect(function (err) {
-    //     db.query(sql, function (err, result) {
-    //         if (err) {
-    //             console.log(err);
-    //         }
-
-    //         res.send(result);
-    //     });
-    // });
+    db.connect(function (err) {
+        db.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+            res.send(result);
+        });
+    });
 });
 
 
