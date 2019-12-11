@@ -15,6 +15,7 @@ var app = new Vue({
         messageClick: function () {
             this.messageClicked = true
             this.postClicked = false
+            this.messages = []
 
             this.posts.map( post => {
                 axios.post("/messaging/index", { MessagesIndexID: post.ID}, {
