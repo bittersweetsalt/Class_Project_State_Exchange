@@ -6,7 +6,7 @@ block content
         .layout-body
             h1 Results for: {{showing}} 
             .results
-                div(class="results__post" v-for="post in posts")
+                div(class="results__post" v-for="post in posts" v-on:click="contactSeller(post.ID)")
                     div(class="results__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }")
                     .results__post--body
                         h3.results__post--title {{post.Name}}

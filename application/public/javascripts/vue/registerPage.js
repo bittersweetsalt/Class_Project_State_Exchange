@@ -48,6 +48,7 @@ var app = new Vue({
                         app.message = response.data.message;
                     } else {
                         app.isRegistered = true;
+                        window.location.href = "/"
                     }
                 })
                 .catch(function (error) {

@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 router.post('/index', function (req, res, next) {
 
-    var sql = `SELECT name, Message, MessagesIndexID FROM Messages INNER JOIN User ON SenderID = User.ID WHERE MessagesIndexID = ${req.body.MessagesIndexID} Order By Timestamp DESC `
+    var sql = `SELECT Name, Message, MessagesIndexID FROM Messages INNER JOIN User ON SenderID = User.ID WHERE MessagesIndexID = ${req.body.MessagesIndexID} Order By Timestamp DESC `
 
     console.log(sql)
 

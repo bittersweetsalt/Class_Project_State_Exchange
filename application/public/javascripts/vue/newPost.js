@@ -19,6 +19,25 @@ var app = new Vue({
 
 
         },
+        sendData: function() {
+            const newPostFormData = new FormData()
+            newPostFormData.append('title', this.formData.title)
+            newPostFormData.append('category', this.formData.category)
+            newPostFormData.append('description', this.formData.desc)
+            newPostFormData.append('price', this.formData.price)
+
+            const photo = document.querySelector('.form__image--input').files[0];
+            newPostFormData.append("photo", photo)
+
+            axios.post('/newPost', newPostFormData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem("__token")
+                }
+            }).then( response => {
+                window.location.href = "/dashboard"
+            })
+        },
         filesChange: function (fileList) {
             if (!fileList.length) return;
 

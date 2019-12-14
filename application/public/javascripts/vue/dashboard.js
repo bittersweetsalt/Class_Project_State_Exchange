@@ -26,7 +26,7 @@ var app = new Vue({
                 })
                     .then(res => {
                         res.data.map( message => {
-                            console.log(message)
+                            console.log("dashboard.js", message)
                             this.messages.push(message)
                         })
                     })

@@ -1,0 +1,135 @@
+<html>
+
+<head>
+    <title>State Exchange</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel='stylesheet' href='stylesheets/global.css'>
+</head>
+
+<div id="app">
+
+    <div class="layout-header">
+        <div class="layout-body">
+            <div class="topper">
+                <a href="index">
+                    <h1 class="topper__title">State Exchange</h1>
+                </a>
+                <form class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}">
+                    <div class="topper__form--button-select" v-on:click.prevent="changeSelectState"><img
+                            src="/images/icons/arrow-down.png"></div>
+                    <input type="text" placeholder="Search" class="topper__form--input" v-model="query">
+                    <button type="submit" class="topper__form--button-go"><img src="images/icons/arrow.png"></button>
+                    <div class="topper__form--select" v-if="select">
+                        <input type="radio" class="topper__form--select-radio" id="electronics">
+                        <label for="electronics" class="topper__form--select-label">Electronics</label>
+
+                        <input type="radio" class="topper__form--select-radio" id="textbooks">
+                        <label for="textbooks" class="topper__form--select-label">Textbooks</label>
+
+                        <input type="radio" class="topper__form--select-radio" id="other">
+                        <label for="other" class="topper__form--select-label">Other</label>
+                    </div>
+                </form>
+                <div class="topper__links">
+                    <a href="login" class="topper__links--login">Login</a>
+                    <a href="#" class="topper__links--signup">Signup</a>
+                </div>
+                <div class="nav--burger">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </div>
+                <div class="nav">
+                    <a href="index" class="nav__item">Home</a>
+                    <a href="about" class="nav__item">About</a>
+                    <a href="newpost" class="nav__item">New Post</a>
+                    <a href="dashboard" class="nav__item">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layout-body">
+        <h1>Results for: {{showing}}</h1>
+        <div class="results">
+            <div class="results__post" v-for="post in posts">
+                <div class="results__post--img" v-bind:style="{ backgroundImage: 'url(' + post.image_name + ')' }">
+                </div>
+                <div class="results__post--body">
+                    <h2 class="results__post--title">{{post.Name}}</h2>
+                    <p class="results__post--category">{{post.Category}}</p>
+                    <p class="results__post--comment">{{trimComment(post.Comment)}}</p>
+                </div>
+                <div class="results__post--data">
+                    <p class="results__post--price">${{post.Price}}</p>
+                    <div class="results__post--button">Contact Seller</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            posts: [],
+            query: "",
+            showing: "",
+            select: false,
+            radius: 50
+        },
+        methods: {
+            sendQuery: function () {
+                axios.get('http://ec2-18-224-39-11.us-east-2.compute.amazonaws.com:3001/testmysql', {
+                        query: this.query
+                    })
+                    .then(res => {
+                        index.posts = res.data
+                    })
+            },
+            changeSelectState: function () {
+                this.select = !this.select;
+                if (this.radius == 50) {
+                    this.radius = 20;
+                } else {
+                    this.radius = 50;
+                }
+            },
+            trimComment: function (post) {
+                const length = 200;
+                let comment = post;
+
+                if (post.length > length) {
+                    comment = post.substring(0, length) + "...";
+                }
+
+                return comment;
+            }
+        },
+        watch: {
+            query: function (newQuery, oldQuery) {
+                sessionStorage.setItem('query', newQuery);
+            }
+        },
+        mounted() {
+            const sessionQuery = sessionStorage.getItem('query');
+            if (sessionQuery != null) {
+                this.query = sessionQuery;
+                this.showing = sessionQuery;
+            }
+
+            axios.post('/testmysql', {
+                query: this.query
+            })
+            .then(res => {
+                app.posts = res.data
+            })
+        }
+    })
+</script>
+
+</html>

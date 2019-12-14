@@ -3,6 +3,7 @@ var router = express.Router();
 const bodyParser = require('body-parser');
 var db = require("../db/connection");
 const jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false}));
@@ -16,34 +17,36 @@ router.get('/details', function(req, res, next) {
 
 router.post('/register', function(req, res) {
 
-  let data = {   
-    email: req.body.email,
-    password: req.body.password,
-    name: req.body.name
-  }
+  bcrypt.hash(req.body.password, 10).then( hash => {
+    let data = {   
+      email: req.body.email,
+      password: hash,
+      //password: req.body.password,
+      name: req.body.name
+    }
+    
+    let sql = "INSERT INTO User SET ?";
   
-  let sql = "INSERT INTO User SET ?";
-
-  db.connect(function(err) {
-
-    db.query(sql, [data], function (err, result) {
-
-        var resObj = {status: "ok", message: ''};
-
-        if (err) {
-          resObj.status = "error: user.js";
-          resObj.message = err.message;
-        } else {
-          resObj.status = "ok";
-          resObj.message = "Registration successfull!";
-        }
-
-        res.send(resObj);
-
+    db.connect(function(err) {
+  
+      db.query(sql, [data], function (err, result) {
+  
+          var resObj = {status: "ok", message: ''};
+  
+          if (err) {
+            resObj.status = "error: user.js";
+            resObj.message = err.message;
+          } else {
+            resObj.status = "ok";
+            resObj.message = "Registration successfull!";
+          }
+  
+          res.send(resObj);
+  
+      })
+  
     })
-
-    })
-
+  })
 })
 
 router.post('/getUserID', (req, res) => {
@@ -58,12 +61,12 @@ router.post('/getUserID', (req, res) => {
         complete: true
     });
 
-    let sql = `SELECT name from user where id = ${decoded.payload.id}`
+    let sql = `SELECT name from User where ID = ${decoded.payload.id}`
 
-    db.connect( err => {
+    db.connect(err => {
         db.query(sql, (err, result) => {
             if(err){ 
-                console.log(err)
+                console.log("/users/getUserID", err)
                 res.end()
             }
             

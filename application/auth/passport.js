@@ -4,32 +4,44 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = passportJWT.Strategy;
 var db = require('../db/connection');
+const bcryptjs = require("bcryptjs");
+
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, (email, password, cb) => {
 
-    var sql = "SELECT password, email, id FROM User WHERE email='" + email + "' AND password='" + password + "'";
-
+    var sql = `SELECT password, email, id FROM User WHERE email= '${email}'`;
+    
     db.connect(function (err) {
         db.query(sql, function (err, result) {
-            if (err) return cb(err);
-
-            if (!result || result.length != 1) {
-                return cb(null, false, {
-                    message: 'Incorrect email or password.'
-                });
+            //////
+            console.log("results", result[0]['password']);
+            try{
+                if(bcryptjs.compare(password, result[0]['password']))  {
+                    
+                    if (err) return cb(err);
+    
+                    //converting result into simple object for passing to cb
+                    var user = {};
+                    user.email = result[0]['email'];
+                    user.id = result[0]['id'];
+    
+                    return cb(null, user, {
+                        message: 'Logged In Successfully'
+                    });
+                  }
+                else {
+                    return cb(null, false, {
+                        message: 'Incorrect email or password.'
+                    });
+                }
             }
-
-            //converting result into simple object for passing to cb
-            var user = {};
-            user.email = result[0]['email'];
-            user.id = result[0]['id'];
-
-            return cb(null, user, {
-                message: 'Logged In Successfully'
-            });
+            catch(e){
+                console.log(e)
+            }
+            
         });
     });
 }));

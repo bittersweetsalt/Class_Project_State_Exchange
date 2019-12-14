@@ -52,7 +52,7 @@ var app = new Vue({
         var split = url.split('/');
 
         //######### fetch post details
-        axios.get('/post/' + split[split.length - 2])
+        axios.get('/post/' + split[5])
             .then((res) => {
                 this.post.id = res.data[0].ID;
                 this.post.title = res.data[0].Name;

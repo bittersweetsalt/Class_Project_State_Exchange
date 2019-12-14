@@ -43,7 +43,7 @@ block content
 
                 .form__devider--submit
                     button(type="button" class="form__submit--cancel") Cancel
-                    button(type="submit" class="form__submit--post") Post
+                    button(type="submit" class="form__submit--post" v-on:click.prevent="sendData") Post
 
     script(src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js")
     script(src="https://unpkg.com/axios/dist/axios.min.js")
