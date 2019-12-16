@@ -1,3 +1,4 @@
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -50,5 +51,4 @@ var app = new Vue({
                 this.posts = res.data
             })
     }
-
 });
