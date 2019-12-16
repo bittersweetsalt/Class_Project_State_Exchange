@@ -1,3 +1,4 @@
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -23,14 +24,31 @@ var app = new Vue({
             }
 
             return title;
+        },
+        contactSeller: function(_id) {
+            if(localStorage.getItem("__token") != null) {
+                const headers = {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem("__token")
+                        }
+
+                axios.post('/messaging-index/create',
+                    {id: _id},
+                    {headers: headers})
+                .then( res => {
+                    window.location.href = `/contact/edit/${_id}`;
+                })
+
+            } else {
+                alert("Please login first!")
+            }
+
         }
     },
     mounted() {
-        axios.post('/search_query', {query: ""})
+        axios.post('/search_query', {query: "", category: ""})
             .then(res => {
-                console.log(res.data)
                 this.posts = res.data
             })
     }
-
 });

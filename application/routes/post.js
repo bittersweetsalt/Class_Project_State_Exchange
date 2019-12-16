@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../db/connection');
 
 router.post('/setStatus', function(req, res, next) {
-  var sql = "Update Posting SET Status="+req.body.status+" WHERE id="+req.body.id;
+  var sql = "Update Posting SET Status="+req.body.status+" WHERE ID="+req.body.id;
         db.connect(function(err) {
 
             db.query(sql, function (err, result) {
@@ -30,8 +30,8 @@ router.get('/:id', function(req, res, next) {
 
   //console.log(req.params);
 
-  var sql = "SELECT Posting.* , `User`.name, `User`.email FROM Posting INNER JOIN `User` ON `Posting`.UserID = `User`.id WHERE `Posting`.ID=" + req.params['id'];
-
+  //var sql = "SELECT Posting.* , `User`.name, `User`.email FROM Posting INNER JOIN `User` ON `Posting`.UserID = `User`.id WHERE `Posting`.ID=" + req.params['id'];
+  var sql = `Select * FROM Posting WHERE Posting.ID = ${req.params['id']}`;
   db.connect(function(err) {
 
       db.query(sql, function (err, result) {

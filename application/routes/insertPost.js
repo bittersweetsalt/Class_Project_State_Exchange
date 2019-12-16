@@ -3,15 +3,27 @@ const router = express.Router();
 const path = require('path');
 const db = require("../db/connection");
 var mkdirp = require('mkdirp');
+const jwt = require('jsonwebtoken');
 
 //new post router, id is a unique id generated on frontend for each post
 router.post(`/newpost`, (req, res) => {
+
+    let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
+
+    if (token.startsWith('Bearer ')) {
+        // Remove Bearer from string
+        token = token.slice(7, token.length);
+    }
+
+    var decoded = jwt.decode(token, {
+        complete: true
+    });
 
     //encapsulate req data into object
     let data = {
         Name: req.body.title,
         Category: req.body.category,
-        UserID: 123456789, //needs to be changed later, this is a test value
+        UserID: decoded.payload.id,
         Comment: req.body.description,
         Price: req.body.price
     }

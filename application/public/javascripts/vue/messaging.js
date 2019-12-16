@@ -1,21 +1,22 @@
+
 var app = new Vue({
     el: '#app',
     data: {
         post: {
-            photo: '',
+            image_name: '',
             title: '',
+            description: '',
             price: '',
             date_posted: '',
             author: '',
+            id: 0
         },
 
         messages: [],
         new_message: ''
     },
     methods: {
-
         sendData: function () {
-
             if (this.new_message == "") return;
 
             var url = window.location.href;
@@ -27,21 +28,19 @@ var app = new Vue({
             }
 
             axios.post('/messaging/store', {
-                        MessagesIndexID: split[split.length - 1],
+                        MessagesIndexID: split[5],
                         Message: this.new_message
-                    }, 
-                    { headers: headers }
+                    }, {
+                        headers: headers
+                    }
 
                 )
                 .then(function (response) {
                     location.reload();
                 })
-                .catch(function (error) {
-
+                .catch((e) => {
+                    console.log(e)
                 })
-                .finally(function () {
-                    // always executed
-                });
 
         }
     },
@@ -54,51 +53,36 @@ var app = new Vue({
         var split = url.split('/');
 
         //######### fetch post details
-        axios.get('/post' + split[split.length - 2])
-            .then(function (response) {
-
-                console.log(response.data[0]);
-
-                app.post.id = response.data[0]['ID'];
-                //this.post.photo = response.data[0]['photo'];
-                app.post.title = response.data[0]['Title'];
-                app.post.price = response.data[0]['Price'];
-                app.post.date_posted = response.data[0]['date_posted'].replace("T", " ").replace("Z",
+        axios.get('/post/' + split[5])
+            .then((res) => {
+                this.post.id = res.data[0].ID;
+                this.post.title = res.data[0].Name;
+                this.post.description = res.data[0].Comment;
+                this.post.price = res.data[0].Price;
+                this.post.image_name = res.data[0].image_name
+                this.post.date_posted = res.data[0].date_posted.replace("T", " ").replace("Z",
                     "").replace(".000", "");
-                app.post.author = response.data[0]['name'];
-            })
-            .catch(function (error) {
 
+                this.post.author = res.data[0].name;
             })
-            .finally(function () {
-                // always executed
-            });
+            .catch((e) => {
+                console.log(e)
+            })
 
-        //######### fetch previous messages
-        axios.post('messaging/index', {
-                MessagesIndexID: split[split.length - 1]
+
+        //fetch previous messages
+        axios.post('/messaging/index', {
+                MessagesIndexID: split[split.length - 2]
             }, {
                 headers: headers
             })
-            .then(function (response) {
-
-                for (looper = 0; looper < response.data.length; looper++) {
-
-                    var msg = {};
-                    msg.from = response.data[looper].name;
-                    msg.message = response.data[looper].Message;
-                    msg.date = response.data[looper].Timestamp.replace("T", " ").replace("Z", "")
-                        .replace(".000", "");
-                    app.messages.push(msg);
-                }
-
+            .then(res => {
+                console.log(res.data)
+                this.messages = res.data
             })
-            .catch(function (error) {
-
+            .catch((e) => {
+                console.log(e)
             })
-            .finally(function () {
-                // always executed
-            });
 
     }
 })

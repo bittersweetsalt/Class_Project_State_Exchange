@@ -3,9 +3,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileupload');
 const passport = require('passport');
-const session = require("express-session")
+const session = require("express-session");
+const bcryptjs = require("bcryptjs");
 require('./auth/passport');
 
 const app = express();
@@ -61,6 +62,7 @@ app.use(session({secret: "secret",
     saveUninitialized: false}))
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 //routes for the files
 app.use('/users', usersRouter); //passport.authenticate('jwt', {session: false}),

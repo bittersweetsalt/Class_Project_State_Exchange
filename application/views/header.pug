@@ -1,3 +1,4 @@
+
 head
     title State Exchange
     meta(name="viewport" content="width=device-width")
@@ -7,7 +8,7 @@ head
     .layout-header
             .layout-body
                 .topper
-                    a(href="index")
+                    a(href="/index")
                         h1.topper__title State Exchange
                     form(class="topper__form" action="search" v-bind:style="{ borderRadius: this.radius + 'px'}")
                         div(class="topper__form--button-select" v-on:click="changeSelectState")
@@ -21,8 +22,9 @@ head
                             img(src="images/icons/arrow.png")
 
                     div.topper__links
-                        a(href="login" class="topper__links--login") Login
-                        a(href="register" class="topper__links--signup") Signup
+                        a(href="/login" class="topper__links--login" v-if="isLoggedin == false") Login
+                        a(href="/register" class="topper__links--signup"  v-if="isLoggedin == false") Signup
+                        a(href="/index" v-on:click="logout" class="topper__links--logout" v-if="isLoggedin == true") Logout
                         div(class="nav--burger" v-on:click="changeMenuState")
                             .burger-line
                             .burger-line
@@ -31,10 +33,9 @@ head
                                 a(href="/newpost") New Post
                                 a(href="/dashboard") Dashboard
                                 .burger-auth--links
-                                    a(href="login") Login
-                                    a(href="register") Signup
-
-                    //- p.disclaimer SFSU Software Engineering Project CSC 648-848 | Fall 2019 | For Demonstration Only
+                                    a(v-on:click="logout" v-if="isLoggedin") Logout
+                                    a(href="login" v-if="isLoggedin == false") Login
+                                    a(href="register" v-if="isLoggedin == false") Signup
 
 block content
 

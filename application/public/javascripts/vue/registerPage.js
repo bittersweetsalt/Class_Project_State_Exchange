@@ -1,3 +1,4 @@
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -15,22 +16,22 @@ var app = new Vue({
             app.message = "";
             //validation
             if (this.name == "") {
-                app.message = app.message + "Name cannot be left blank";
+                this.message = this.message + "Name cannot be left blank";
                 return;
             }
 
             if (this.email == "") {
-                app.message = app.message + "Email cannot be left blank";
+                this.message = this.message + "Email cannot be left blank";
                 return;
             }
 
             if (this.password == "") {
-                app.message = app.message + "Password cannot be left blank";
+                this.message = this.message + "Password cannot be left blank";
                 return;
             }
 
             if (this.password != this.confirm_password) {
-                app.message = app.message + "Password does not match";
+                this.message = this.message + "Password does not match";
                 return;
             }
 
@@ -48,6 +49,7 @@ var app = new Vue({
                         app.message = response.data.message;
                     } else {
                         app.isRegistered = true;
+                        window.location.href = "/"
                     }
                 })
                 .catch(function (error) {

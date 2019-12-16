@@ -1,3 +1,4 @@
+
 var app = new Vue({
     el: '#header',
     data: {
@@ -6,6 +7,7 @@ var app = new Vue({
         categories: [],
         selectedCategory: "All",
         query: "",
+        isLoggedin: false
     },
     methods: {
         changeMenuState: function(){
@@ -16,6 +18,10 @@ var app = new Vue({
         },
         selected: function(event){
             this.selectedCategory = event.target.innerText;
+        },
+        logout: function() {
+            localStorage.removeItem("__token")
+            this.isLoggedin = false
         }
     },
     watch: {
@@ -35,6 +41,11 @@ var app = new Vue({
         if (sessionCategory != null) {
             this.selectedCategory = sessionCategory;
         }
+
+        if(localStorage.getItem("__token") !== null){
+            this.isLoggedin = true;
+        }
+
         axios.post('/categories')
             .then(res => {
                 res.data.map( category => {

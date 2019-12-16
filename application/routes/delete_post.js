@@ -6,7 +6,7 @@ const db = require("../db/connection");
 //new delete post router
 router.post(`/delete_post`, (req, res) => {
 
-    let sql = `DELETE FROM Posting WHERE ID = '${req.body.id}`;
+    let sql = `DELETE FROM Posting WHERE ID = '${req.body.id}'`;
         
     db.connect(function(err) {
         db.query(sql, (err, rows, results) => {

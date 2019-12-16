@@ -19,7 +19,7 @@ router.post('/postings',( req, res)  => {
         complete: true
     });
 
-    let sql = `SELECT * FROM posting WHERE UserID = '${decoded.payload.id}'`
+    let sql = `SELECT * FROM Posting WHERE UserID = '${decoded.payload.id}'`
 
     db.connect( err => {
         db.query(sql, (err, result) => {
