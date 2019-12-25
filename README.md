@@ -1,13 +1,40 @@
-# S##TATE EXCHANGE##
+# STATE EXCHANGE
 
-## Please when ready add your teams application URL or IP to the repository description. This will help with grading. Teams are expected to keep this value up to date.
+## What is State Exchange?
+```State Exchange is a Full Stack Development Projects for senior students in San Francisco State University.```
 
-## Please do the following steps before completing Milestone 0.
-1. Change the name of the repository. All that needs to change is the NN to your respective team number. Team numbers whose value is less than 10, please pad with a 0. Ex team 1 is Team01 team 11 is Team11. Please make sure to also remove the username from the repository as well. Teams with incorrectly name repository will have points deducted from their milestone 0 grades.
-      - Please follow the naming convention assigned by your instructor.
+## Project Agenda
+```
+- To create a website to allow students to trade along with post messaging system, to create posts, and advertise things they wish to sell.
+- Utilize MySQL and queries to insert data in to the database, along with supporting photos.
+- Allow logins and registrations to enforce design patterns which follow lazy registrations software development.
+```
 
-1. PLEASE REMOVE THE USERNAME FROM THE REPOSITORY NAME!!!
+## Stack
+```
+Our project Stack uses:
+Front End:
+HTML/PUG
+CSS
 
-2. Add ALL members of your team to this repository. For it to count, they must ACCEPT the invite.
+Back End:
+Node.JS
+MySQL Database
 
-## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
+Middle-Ware:
+Express-JS
+Vue.JS
+```
+
+## About Our Team:
+```
+US Team:
+- Roderic Kong    -     Global Team Lead (US Team), Database and Server Manager
+- Chris Jol       -     Front End Lead
+- Kevin Venegas   -     Back End Lead
+- Deep Bhueller   -     Github Master
+
+German Team:
+- Imran Bhat      -     Global Team Lead (German Team)
+- Abubakur Mustafa-     Global Back End   
+```
